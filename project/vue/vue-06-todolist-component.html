@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件化做一个Todolist</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div id="app" class="app-wper">
+    <h2>任务清单</h2>
+    <input  
+      class="edit"
+      @keydown.enter="addTask"
+      type="text"
+      v-model="task.content"
+      placeholder="试试编写任务">
+    <div class="list">
+      <list-item 
+        v-for="(item, index) of list" 
+        :key="index"
+        :contents="item" 
+        :index="index" 
+        @status="changeStatus" 
+        @remove="removeTask">
+      </list-item>
+      <p v-if="list.length === 0" class="empty">暂无任务</p>
+    </div>
+  </div>
+
+
+  <script>
+    Vue.component('list-item', {
+      props: ['contents', 'index'],
+      template:`<div :class="{border: index > 0}" class="unit">
+                  <input @click="handleChange" type="checkbox">
+                  <span :class="{finished: contents.finished}">{{contents.content}}</span>
+                  <a class="dele" @click="handleRemove">删除</a>
+                </div>`,
+      methods: {
+        handleChange: function() {
+          this.$emit('status', this.index);
+        },
+        handleRemove: function() {
+          this.$emit('remove', this.index);
+        }
+      }
+    });
+    const app = new Vue({
+      el: "#app",
+      data: {
+        task: {
+          content: '',
+          finished: false,
+          deleted: false
+        },
+        list: []
+      },
+      methods: {
+        addTask: function() {
+          if(this.task.content !== '') {
+            this.list.push(this.task);
+            this.task = {
+              content: '',
+              finished: false,
+              deleted: false
+            }
+          }
+        },
+        changeStatus: function(index) {
+          let curState = this.list[index].finished;
+          this.list[index].finished = !curState;
+        },
+        removeTask: function(index) {
+          this.list.splice(index, 1);
+        }
+      }
+    })
+  </script>
+
+  <style>
+    .app-wper {
+      max-width: 480px;
+      margin: 30px auto;
+      border: 1px solid #f3f3f3;
+      border-radius: 6px;
+      padding: 15px;
+      box-shadow: 0px 2px 10px 4px #ccc;
+    }
+    h2{
+      font-weight: normal;
+      color: #777;
+      text-align: center;
+    }
+    .edit{
+      display:block ;
+      width:80%;
+      height: 35px;
+      line-height: 35px;
+      margin: 30px auto;
+      box-sizing: border-box;
+      padding: 0 10px;
+      border-radius: 4px;
+      border:1px solid #ccc;
+      outline: 0;
+      box-shadow: 0 0 5px #ccc;
+    }
+    .list {
+      width: 80%;
+      margin: 0 auto;
+    }
+    .unit {
+      padding: 15px 0;
+    }
+    .border {
+      border-top: 1px solid #f3f3f3;
+    }
+    .unit > span {
+      font-size: 16px;
+      color: #4a4a4a;
+    }
+    .unit > .finished {
+      text-decoration: line-through;
+      color: #ccc;
+    }
+    .dele {
+      float: right;
+      color: #fff;
+      background-color: red;
+      padding: 3px 10px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .empty {
+      font-size: 13px;
+      color: #ccc;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+
+</body>
+
+</html>

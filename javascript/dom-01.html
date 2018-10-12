@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DOM</title>
+</head>
+<body>
+  <h2 id="h2">DOM</h2>
+  <div id="listItem"><p>语文</p><p>数学</p><i>英语</i></div>
+  <form>
+    <input type="text">
+    <input type="radio" name="radio">a
+    <input type="radio" name="radio">b
+    <input type="radio" name="radio">c
+    
+    <button>按钮</button>
+  </form>
+  <a href="" name="mylink"></a>
+  <a href=""></a>
+  <a href=""></a>
+  <img src="" alt="">
+  <script>
+  
+  var obj = document.getElementById('h2');
+  // console.log(obj.nodeType);  //1
+  // console.log(obj.nodeName); // H2
+  // console.log(obj.nodeValue); //null（始终为null）
+
+  var listItem = document.getElementById('listItem');
+  // console.log(listItem.childNodes[0]); //<p>
+  // console.log(listItem.childNodes.item(1));  //<span>
+  // console.log(listItem.childNodes.length); //3
+  // console.log(listItem.parentNode);  //<body>
+  // console.log(listItem.childNodes[0].previousSibling); //null
+  // console.log(listItem.childNodes[1].previousSibling); //<p>
+  // console.log(listItem.childNodes[1].nextSibling); //<i>
+  // console.log(listItem.childNodes[2].nextSibling); //null
+  // console.log(listItem.firstChild); //<P>
+  // console.log(listItem.lastChild); //<i>
+  // console.log(listItem.childNodes[0].firstChild); //#text "语文"
+  // console.log(listItem.childNodes[0].lastChild);  //#text "语文"
+  // console.log(listItem.childNodes[0].lastChild.firstChild);  //null
+  
+  // 操作节点
+  // var newNode = document.createElement('p');
+  // var txtNode = document.createTextNode('生物');
+  // newNode.appendChild(txtNode);
+  // listItem.appendChild(newNode);
+  // listItem.insertBefore(newNode, listItem.firstChild);
+  // listItem.removeChild(listItem.childNodes.item(2));
+  // listItem.replaceChild(newNode, listItem.childNodes.item(2));
+  // var newListItem = listItem.cloneNode(true);
+  // var newListItem2 = listItem.cloneNode(false);  //默认浅复制
+  // document.getElementsByTagName('body')[0].appendChild(newListItem);
+  // document.getElementsByTagName('body')[0].appendChild(newListItem2);
+
+  // document
+  // var html = document.documentElement;
+  // var htmlNode1 = document.childNodes[1];
+  // var htmlNode0 = document.firstChild;
+  // var doctype = document.doctype;
+  // var body = document.body;
+  // var title = document.title;
+  // title = 'New Page Title';  //设置
+  // var url = document.URL; //页面完整的URL
+  // var domain = document.domain;  //只包含页面的域名
+  // var referrer = document.referrer;  //保存着链接到当前页面的那个页面的url
+  // console.log(html === htmlNode1);  // true
+  // console.log(html === htmlNode0);  //false
+  // console.log(htmlNode0 === doctype); //true
+  // console.log(body);
+  // console.log(title); 
+  // console.log(url,domain,referrer);
+
+  // 查找元素
+  // var anchors = document.anchors;
+  // var links = document.links;
+  // var images = document.images;
+  // var forms = document.forms;
+  // console.log(anchors,links,images,forms);
+
+  </script>
+</body>
+</html>

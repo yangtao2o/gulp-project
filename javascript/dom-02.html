@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM扩展</title>
+</head>
+<body>
+	<h2>DOM扩展</h2>
+	<p id="para" class="para">使用HTML5DOM扩展</p>
+	<div id="box_1" class="boxs">对DOM的两个主要扩展是Selectors API和HTML5</div>
+	<div id="box_2" class="boxs">对DOM的两个主要扩展是Selectors API和HTML5</div>
+
+<script type="text/javascript">
+// querySelector()
+// querySelectorAll()
+var body = document.querySelector('body');
+var para = document.querySelector('#para');
+var box = document.querySelector('.box');  //null
+var boxs = document.querySelector('.boxs');  //box_1
+var boxAll = document.querySelectorAll('.box'); //Nodelist []
+var boxsAll = document.querySelectorAll('.boxs');  //box_1,box_2
+// console.log(body);
+// console.log(para);
+// console.log(box);
+// console.log(boxs);
+// console.log(boxAll);
+// console.log(boxsAll);
+
+// var i,len;
+// var child = element.firstChild;
+// while(child != element.lastChild) {
+// 	if(child.nodeType == 1) {
+// 		processChild(child);
+// 	}
+// 	child = child.nextSibling;
+// }
+// var i,len;
+// var child = element.firstChild;
+// while(child != element.lastElementChild) {
+// 	processChild(child);
+// 	child = child.nextElementSibling;
+// }
+
+// HTML5
+</script>
+</body>
+</html>

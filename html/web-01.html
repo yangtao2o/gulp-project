@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES基础知识点和高频专题</title>
+</head>
+<body>
+<script type="text/javascript">
+	// 变量类型：String Number Boolean Null Undefined Symbol
+	// typeof 
+	// instanceof --- 用于实例和构造函数的对应
+	// 值类型 VS 引用类型
+	var obj = {
+		a: 1,
+		b: [1,2]
+	};
+	var a = obj.a;
+	var b = obj.b;
+	a = 2;
+	b.push(3);
+	console.log(obj); //obj={ a: 1, b: [1,2,3]}
+	console.log(a); //2
+	console.log(b); //[1,2,3]
+
+	//虽然obj本身是个引用类型的变量（对象），但是内部的a和b一个是值类型一个是引用类型，a的赋值不会改变obj.a，但是b的操作却会反映到obj对象上。
+
+	// 原型和原型链
+
+	// 要点一：自由扩展属性
+	// 所有的引用类型（数组、对象、函数），都具有对象特性
+	var obj = {}; obj.a = 100;
+	var arr = []; arr.a = 100;
+	function fn() {}
+	fn.a = 100;
+
+	// 要点二：__proto__
+	// 所有的引用类型（数组、对象、函数），都有一个__proto__属性
+	console.log(obj.__proto__);
+	console.log(arr.__proto__);
+	console.log(fn.__proto__);
+
+	// 要点三：函数有 prototype
+	// 所有的函数，都有一个prototype属性
+	console.log(fn.prototype);
+	console.log(obj.prototype);  //undefinded
+	console.log(arr.prototype);  //undefinded
+
+	// 要点四：引用类型的 __proto__ 属性值指向它的构造函数的 prototype 属性值
+	console.log(obj.__proto__ === Object.prototype);  // true
+	console.log(Object.__proto__ === Function.prototype) // true
+	console.log(arr.__proto__ === Array.prototype);  // true
+	console.log(Array.__proto__ === Function.prototype); // true
+	console.log(Array.__proto__ === Function.prototype)  // true
+	console.log(Function.__proto__ === Function.prototype) // true
+
+	console.log(Object.__proto__ === Array.__proto__) // true
+	console.log(Object.__proto__ === Function.__proto__) //true
+	console.log(Array.__proto__ === Function.__proto__) //true
+	console.log(Object.__proto__ === Array.__proto__ === Function.__proto__) // false
+
+	console.log(Object.prototype.__proto__ === null)   // true
+	console.log(Function.prototype.__proto__ === Object.prototype); //true
+	console.log(Function.prototype.__proto__.__proto__  === Object.prototype.__proto__);  //true
+	
+	//自由变量将从作用域链中去寻找，但是 依据的是函数定义时的作用域链，而不是函数执行时
+
+	// 闭包
+	// 函数作为返回值
+	function F1() {
+		var a=100;
+		return function() {
+			console.log(a);
+		}
+	}
+	var a = 200;
+	var f1 = F1();
+	f1();  //100
+	// 函数作为参数传递
+	function F2(f1) {
+		var a = 200;
+		f1();
+	}
+	F2(f1);  // 100
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>移动web开发适配秘籍Rem</title>
+  <style>
+    /*
+      1rem = 16px = (html的font-size)
+      170/16 = 170px
+
+      scss:(计算rem值)
+      @function px2rem($px) {
+        $rem: 37.5px;
+        $return ($px / $rem) + rem;
+      }
+    */
+    html {
+      font-size: 15px;
+    }
+    .box {
+      background: #999;
+      font-size: 18px;
+      width: 1em;
+      height: 1em;
+    }
+    h2 {
+      font-size: 1rem;
+      background: #ccc;
+    }
+    p {
+      font-size: .5rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>em and rem</h2>
+  <p>write less, do more</p>
+  <div class="box"></div>
+  
+
+  <script>
+    window.addEventListener('resize', (e) => {
+      // 获取视窗宽度
+      let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      console.log(htmlWidth);
+
+      // 获取视窗高度
+      let htmlDom = document.getElementsByTagName('html')[0];
+      htmlDom.style.fontSize = htmlWidth / 10 + 'px';
+
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS3图片动态提示效果</title>
+  <style>
+    body,figure,figcaption,h2,p,img {
+      margin: 0;
+      padding: 0;
+    }
+    figure {
+      height: 350px;
+      overflow: hidden;
+      position: relative;
+      float: left;
+    }
+    figure img {
+      opacity: .8;
+      transform: all 2s;
+    }
+    figure p {
+      transform: all 1s;
+    }
+    figcaption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-family: '微软雅黑';
+    }
+
+    @media screen and (min-width: 1001px) {
+      figure {
+        width: 33.3%;
+      }
+    }
+    @media screen and (max-width: 1000px) {
+      figure {
+        width: 50%;
+      }
+    }
+    @media screen and (max-width: 600px) {  
+      figure {
+        width: 100%;
+      }
+    }
+    .box-1:hover img {
+      transform: translate(-100px, 0);
+    }
+  </style>
+</head>
+<body>
+  <figure class="box-1">
+    <img src="img/photo-01.jpg" alt="">
+    <figcaption>
+      <h2>图片标题</h2>
+      <p>图片注释1</p>
+      <p>图片注释2</p>
+      <p>图片注释3</p>
+    </figcaption>
+  </figure>
+  <figure class="box-2">
+    <img src="img/photo-02.jpg" alt="">
+    <figcaption>
+      <h2>图片标题</h2>
+      <p>图片注释</p>
+    </figcaption>
+  </figure>
+  <figure  class="box-3">
+    <img src="img/photo-03.jpg" alt="">
+    <figcaption>
+      <h2>图片标题</h2>
+      <p>图片注释</p>
+    </figcaption>
+  </figure>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Set_cookie_message</title>
+</head>
+
+<body>
+  <table border="1" width="600" align="center" bgcolor="#ccc" cellspacing="10" cellpadding="20">
+    <tr>
+      <td>语文</td>
+      <td>数学</td>
+      <td>英语</td>
+    </tr>
+    <tr>
+      <td>语文</td>
+      <td>数学</td>
+      <td>英语</td>
+    </tr>
+    <tr>
+      <td>语文</td>
+      <td>数学</td>
+      <td>英语</td>
+    </tr>
+  </table>
+
+<!--网站维护提示START-->
+<style>
+  .tips-modal { display:none;position: fixed; top: 0; left: 0; width: 100%; min-height: 40px; z-index: 10000; padding: 2% 0; background-color: #000; font-size: 18px; color: #fff; text-align: center; opacity: .8; filter: alpha(opacity=80) }
+  .tips-wper{padding-left:5px;padding-right:5px;}
+  .tips-close-btn { display: inline-block; font-size: 20px; color: #999; position: absolute; top: 5px; right: 0; width: 35px; height: 35px; cursor: pointer }
+  .tips-close-btn:hover { color: #eee; text-decoration: none }
+  @media (max-width: 640px) {
+    .tips-modal { padding: 15px 0;font-size: 12px; }
+    .tips-wper{padding-left:15px;padding-right:15px;}
+    .tips-close-btn { font-size: 15px; top: 2px; right: -3px; width: 30px; height: 30px; cursor: pointer }
+  }
+</style>
+<div class="tips-modal" id="newsTipsModal">
+  <div class="tips-wper">
+    受台风影响，原定于周一（9月17日）举办的STM32深圳研讨会将改至9月20日13：30于深圳大中华喜来登酒店6楼宴会厅举行，敬请谅解！<br>STM32研讨会详情请见: <a href="http://www.stmcu.com.cn/roadshow"
+      target="_blank">www.stmcu.com.cn/roadshow</a>
+  </div>
+  <span class="tips-close-btn" onclick="closeModal()">X</span>
+</div>
+
+
+<script type="text/javascript">
+
+  // 设置cookie，同一域名都可获取
+  function setCookie(name, value, exdays) {
+    var exdays = exdays || 1;
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    document.cookie = name + "=" + escape(value) + ";path=/;expires=" + d.toGMTString();
+  }
+  // 读取cookies，判断是否存在设置的name
+  function getCookie(name) {
+    var name = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i].trim();
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function checkCookie() {
+    var user = getCookie("msgCookie");
+    if (user != "") {
+      msgHide();
+    } else {
+      msgShow();
+      // 如果只出现一次，可设置一下cookie
+      // if (user == "" && user == null) {
+      //   setCookie("msgCookie", user, 0.5);
+      // }
+    }
+  }
+
+  // 关闭时设置cookie
+  function closeModal() {
+    msgHide();
+    setCookie("msgCookie", 'msgCookie', 0.5);
+  }
+  function msgHide() {
+    document.getElementById('newsTipsModal').style.display = 'none';
+  }
+  function msgShow() {
+    document.getElementById('newsTipsModal').style.display = 'block';
+  }
+
+  // init
+  checkCookie();
+
+</script>
+<!--网站维护提示END-->
+</body>
+
+</html>

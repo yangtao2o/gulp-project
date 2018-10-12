@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>做一个Todolist</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- import Vue before Element -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<body>
+  <div id="app" class="app-wper">
+    <h2>任务清单</h2>
+    <input  
+      class="edit"
+      @keydown.enter="addTask"
+      type="text"
+      v-model="task.content"
+      placeholder="试试编写任务">
+    <div class="list">
+      <p v-if="list.length === 0" class="empty">
+        暂无任务
+      </p>
+      <div :class="{border: list.length > 1}" class="unit" v-for="(item, index) of list">
+        <input 
+          @click="changeStatus(index)"
+          :checked="item.finished"
+          type="checkbox">
+        <span :class="{'finished': item.finished}">{{item.content}}</span>
+        <a @click="removeTask(index)" class="dele">删除</a>
+      </div>
+    </div>
+  </div>
+  <div id="appStep">
+      <el-steps :active="0" align-center>
+      <el-step title="步骤1" description="利用vue的mvvm的特性，绑定用户输入的内容和展示在列表的内容"></el-step>
+      <el-step title="步骤2" description="用户勾选表示已完成，通过动态修改样式来标识已完成"></el-step>
+      <el-step title="步骤3" description="用户点击按钮“delete”，通过v-show来控制任务隐藏"></el-step>
+    </el-steps>
+
+  </div>
+
+  <script>
+    new Vue().$mount('#appStep');
+    const app = new Vue({
+      el: "#app",
+      data: {
+        task: {
+          content: '',
+          finished: false,
+          deleted: false
+        },
+        list: []
+      },
+      methods: {
+        addTask: function() {
+          if(this.task.content !== '') {
+            this.list.push(this.task);
+            this.task = {
+              content: '',
+              finished: false,
+              deleted: false
+            }
+          }
+        },
+        changeStatus: function(index) {
+          let curState = this.list[index].finished;
+          this.list[index].finished = !curState;
+        },
+        removeTask: function(index) {
+          this.list.splice(index, 1);
+        }
+      }
+    })
+  </script>
+
+  <style>
+    .app-wper {
+      max-width: 480px;
+      margin: 30px auto;
+      border: 1px solid #f3f3f3;
+      border-radius: 6px;
+      padding: 15px;
+      box-shadow: 0px 2px 10px 4px #ccc;
+    }
+    h2{
+      font-weight: normal;
+      color: #777;
+      text-align: center;
+    }
+    .edit{
+      display:block ;
+      width:80%;
+      height: 35px;
+      line-height: 35px;
+      margin: 30px auto;
+      box-sizing: border-box;
+      padding: 0 10px;
+      border-radius: 4px;
+      border:1px solid #ccc;
+      outline: 0;
+      box-shadow: 0 0 5px #ccc;
+    }
+    .list {
+      width: 80%;
+      margin: 0 auto;
+    }
+    .unit {
+      padding: 15px 0;
+    }
+    .border {
+      border-top: 1px solid #f3f3f3;
+    }
+    .unit > span {
+      font-size: 16px;
+      color: #4a4a4a;
+    }
+    .unit > .finished {
+      text-decoration: line-through;
+      color: #ccc;
+    }
+    .dele {
+      float: right;
+      color: #fff;
+      background-color: red;
+      padding: 3px 10px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .empty {
+      font-size: 13px;
+      color: #ccc;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+
+</body>
+
+</html>

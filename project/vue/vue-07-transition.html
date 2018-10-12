@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>用transition组件轻松实现过渡效果</title>
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <!-- <pre>
+    1.v-enter：进入过渡效果（enter）刚刚开始那一刻。在元素被插入或者show的时候生效，在下一个帧就会立刻移除，一瞬间的事。
+    2.v-enter-active: 表示进入过渡（entering）的结束状态。在元素被插入时生效，在 transition/animation 完成之后移除。
+    3.v-leave: 离开过渡（leave）的开始那一刻。在离开过渡被触发时生效，在下一个帧移除，也是一瞬间的事。
+    4.v-leave-active：离开过渡（leaving）的结束状态。在离开过渡被触发时生效，在 transition/animation 完成之后移除。
+  </pre> -->
+  <div id="app" class="app-wper">
+    <button 
+      @click="showBox = !showBox"
+      class="btn btn-primary btn-sm"
+    >切换</button>
+    <div class="wper">
+      <transition name="box">
+        <div v-show="showBox" class="box">I am the box</div>
+      </transition>
+    </div>
+  </div>
+
+
+  <script>
+    
+    const app = new Vue({
+      el: "#app",
+      data: {
+        showBox: false
+      }
+    })
+  </script>
+
+  <style>
+    .app-wper {
+      max-width: 500px;
+      margin: 30px auto;
+    }
+    .wper {
+      margin: 20px 0;
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+      background: #f3f3f3;
+    }
+    .box {
+      height: 100%;
+      text-align: center;
+      line-height: 200px;
+      background: #ff8282;
+      color: #fff;
+      /*以下两个默认值，可不写*/
+      /*写上只是为了便于讲解，记住这两个*/
+      opacity: 1;
+      margin-left: 0;
+    }
+    .box-enter-active,
+    .box-leave-active {
+      transition: all .8s;
+    }
+    .box-enter {
+      opacity: 0;
+      margin-left: 100%;
+    }
+    .box-leave-active {
+      opacity: 0;
+      margin-left: 100%;
+    }
+    
+  </style>
+
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue-router10分钟快速入门</title>
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/vue/2.5.3/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue-router/2.5.3/vue-router.min.js"></script>
+</head>
+
+<body>
+  <div id="app" class="app-wper">
+    <!--Left-->
+    <div class="nav">
+      <router-link to="/vue">Vue.js</router-link>
+      <router-link to="/es6">趣味ES6</router-link>
+      <router-link to="/career">Node.js</router-link>
+    </div>
+
+    <!--Right-->
+    <div class="box">
+      <transition name="box">
+        <router-view v-show="showBox"></router-view>
+      </transition>
+    </div>
+  </div>
+
+  <script>
+    const vueComponent = {
+      template: `<div>组件化、数据驱动</div>`
+    };
+    const es6Component = {
+      template: `<div>ES6新特性，你值得拥有</div>`
+    };
+    const careerComponent = {
+      template: `<div>node.js前端工程化必备</div>`
+    };
+
+    const router = new VueRouter({
+      // config about routes
+      routes:[
+        {
+          path: '/vue',
+          component: vueComponent
+        },
+        {
+          path: '/es6',
+          component: es6Component
+        },
+        {
+          path: '/career',
+          component: careerComponent
+        }
+      ]
+    });
+
+    const app = new Vue({
+      el: '#app',
+      router,
+      data: {
+        showBox: true
+      }
+    })
+  </script>
+
+  <style>
+    .app-wper {
+      max-width: 500px;
+      margin: 30px auto;
+      border: 1px solid #f3f3f3;
+      padding: 15px;
+      box-shadow: 0 0 10px 2px #ccc;
+    }
+    .nav {
+      width: 100%;
+    }
+    .nav a {
+      display: inline-block;
+      width: 32.3%;
+      color: #666;
+      padding: 5px 20px;
+      background: #f3f3f3;
+      margin-left: .5%;
+      margin-right: .5%;
+      text-align: center;
+      border-bottom: 2px solid transparent;
+    }
+    .nav a:hover,
+    .nav a:focus {
+      text-decoration: none;
+      color: #000;
+      border-color: #888;
+    }
+    .box {
+      background-color: #f3f3f3;
+      margin-top: 4px;
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      color: #666;
+      overflow: hidden;
+    }
+    .box-enter-active,
+    .box-leave-active {
+      transition: margin-left .8s;
+    }
+    .box-enter {
+      margin-left: 100%;
+    }
+    .box-leave-active {
+      margin-left: 100%;
+    }
+    
+  </style>
+
+</body>
+
+</html>

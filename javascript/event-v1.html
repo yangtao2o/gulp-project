@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>event</title>
+</head>
+<body>
+<button id="clickBtn">点我</button>
+<script type="text/javascript">
+// EventUtil
+// var EventUtil = {
+// 	addHandler: function(element, type, handler) {
+// 		if(element.addEventListener) {
+// 			element.addEventListener(type, handler, false);
+// 		} else if(element.attachEvent) {
+// 			element.attachEvent('on'+type, handler);
+// 		} else {
+// 			element['on'+type] = handler;
+// 		}
+// 	},
+// 	removeHandler: function(element, type, handler) {
+// 		console.log(this);
+// 		if(element.removeEventListener) {
+// 			element.removeEventListener(type, handler, false);
+// 		} else if(element.detachEvent) {
+// 			element.detachEvent('on'+type, handler);
+// 		} else {
+// 			element['on'+type] = null;
+// 		}
+// 	}
+// }
+// var clickBtn = document.getElementById('clickBtn');
+// var handler = function() {
+// 	console.log('hahhah');
+// }
+// EventUtil.addHandler(clickBtn, 'click', handler);
+// EventUtil.removeHandler(clickBtn, 'click', handler);
+
+//事件对象
+
+// var clickBtn = document.getElementById('clickBtn');
+// clickBtn.onclick = function(event) {
+// 	console.log(event);
+// 	console.log(this);
+// 	console.log(event.target);
+// 	console.log(event.currentTarget);
+// 	console.log(this === event.target);
+// 	console.log(event.type);
+// }
+// 跨浏览器的事件对象
+var EventUtil = {
+	addHandler: function(element, type, handler) {
+		if(element.addEventListener) {
+			element.addEventListener(type, handler, false);
+		} else if(element.attachEvent) {
+			element.attachEvent('on'+type, handler);
+		} else {
+			element['on'+type] = handler;
+		}
+	},
+	getEvent: function(event) {
+		return event ? event : window.event;
+	},
+	getTarget: function(event) {
+		return event.target || event.srcElement;
+	},
+	preventDefault: function(event) {
+		if(event.preventDefault) {
+			event.preventDefault();
+		} else {
+			event.returnValue = false;
+		}
+	},
+	removeHandler: function(element, type, handler) {
+		if(element.removeEventListener) {
+			element.removeEventListener(type, handler, false);
+		} else if(element.detachEvent) {
+			element.detachEvent('on'+type, handler);
+		} else {
+			element['on'+type] = null;
+		}
+	},
+	stopPropagation: function(event) {
+		if(event.stopPropagation) {
+			event.stopPropagation();
+		} else {
+			event.cancelBubble = true;
+		}
+	}
+}
+var clickBtn = document.getElementById('clickBtn');
+clickBtn.onclick = function(e) {
+	var eve = EventUtil.getEvent(e);
+	var target = EventUtil.getTarget(eve);
+	EventUtil.preventDefault(eve);
+	EventUtil.stopPropagation(eve);
+}
+</script>
+</body>
+</html>
