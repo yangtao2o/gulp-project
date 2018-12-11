@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单脚本</title>
+	<style lang="css">
+		.border-test {
+			width: 200px;
+			height: 200px;
+			position: relative;
+			border: 4px solid transparent;
+			background-color: #fff;
+			border-top-right-radius: 50px;
+			background-clip: padding-box;
+		}
+		.border-test::after {
+			content: "";
+			display: block;
+			position: absolute;
+			top: -4px;
+			right: -4px;
+			bottom: -4px;
+			left: -4px;
+			border-top-right-radius: 50px;
+			background: linear-gradient(155deg,red, blue);
+			z-index: -1;
+		}
+	</style>
+</head>
+<body>
+	<div class="border-test"></div>
+	<form>
+		<!-- 通用提交按钮 -->
+		<input type="submit" value="提交">
+		<!-- 自定义提交按钮 -->
+		<button type="submit">Submit</button>
+		<!--图像按钮-->
+		<input type="image" src="../html5+css3/img/wx-chat.jpg"> 
+	</form>
+
+
+<script type="text/javascript">
+	// 数组去重
+	var array = [2,1,2,1,'1','1',2,'A','a'];
+
+	// 双层循环
+	// function unique(array) {
+	// 	var res = [];
+	// 	for(var i = 0, arrLen = array.length; i<arrLen; i++) {
+	// 		for(var j = 0, resLen = res.length; j<resLen; j++) {
+	// 			if(array[i] === res[j]) {
+	// 				break;
+	// 			}
+	// 		}
+	// 		if(j === resLen) {
+	// 			res.push(array[i]);
+	// 		}
+	// 	}
+	// 	return res;
+	// }
+
+	// indexOf
+	// function unique(array) {
+	// 	var res = [];
+	// 	for(var i = 0, arrLen = array.length; i<arrLen; i++) {
+	// 		var current = array[i];
+	// 		if(res.indexOf(current) === -1) {
+	// 			res.push(current);
+	// 		}
+	// 	}
+	// 	return res;
+	// }
+
+	// 排序后去重
+	// function unique(array) {
+	// 	var res = [];
+	// 	var sortedArrary = array.concat().sort();
+	// 	var seen;
+	// 	for(var i=0, l=sortedArrary.length; i<l; i++) {
+	// 		var current = sortedArrary[i];
+	// 		if(!i || seen !== current) {
+	// 			res.push(current);
+	// 		}
+	// 		seen = current;
+	// 	}
+	// 	return res;
+	// }
+
+	// unique API
+	// function unique(array, isSorted, iteratee) {
+	// 	var res = [];
+	// 	var seen = [];
+
+	// 	for(var i = 0, len = array.length; i < len; i++) {
+	// 		var value = array[i];
+	// 		var computed = iteratee ? iteratee(value, i, array) : value;
+	// 		if(isSorted) {
+	// 			if(!i || seen !== computed) {
+	// 				res.push(value);
+	// 			}
+	// 			seen = computed;
+	// 		} else if(iteratee) {
+	// 			if(seen.indexOf(computed) === -1) {
+	// 				seen.push(computed);
+	// 				res.push(value);
+	// 			}
+	// 		} else if(res.indexOf(value) === -1) {
+	// 			res.push(value);
+	// 		}
+	// 	}
+	// 	return res;
+	// }
+	// console.log(unique(array, true));
+	// console.log(unique(array, false, function(item) {
+	// 	return typeof item == 'string' ? item.toLowerCase() : item;
+	// }));
+
+	// ES5 filter()
+	// function unique(array) {
+	// 	var res = array.filter(function(item, index, array) {
+	// 		console.log(item,index,array);
+	// 		return array.indexOf(item) === index;
+	// 	});
+	// 	return res;
+	// }
+
+	// function unique(array) {
+	// 	return array.concat().sort().filter(function(item, index, array) {
+	// 		return !index || item !== array[index-1];
+	// 	});
+	// }
+	// console.log(unique(array));
+
+	// 箭头函数
+	let func = ({value, name}) => ({total: value * name});
+	console.log(func({value: 10, name: 10}));
+	// 没有this
+	var value = 1;
+	var result = (() => this.value).bind({value: 2})();
+	console.log(result); // 1
+	// 没有arguments
+	// 没有[[Construct]]方法，不能通过new关键字调用
+	// 没有 new.target
+	// 没有原型 prototype
+	// 没有super
+	// 总结：不能用作构造函数
+	var i = 0;
+	var obj = {
+		i: 10,
+		b: () => console.log(this.i, this),
+		c: function() {
+			console.log(this.i, this);
+		}
+	}
+	obj.b();  // 0, Window
+	obj.c();  // 10, {i: 10, b: ƒ, c: ƒ}
+</script>
+</body>
+</html>
