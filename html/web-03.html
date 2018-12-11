@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS-HTML 知识点与高频考题解析</title>
+	<style type="text/css">
+		.container {
+			height: 300px;
+			border: 1px solid #ccc;
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: flex-start;
+			align-items: center;
+		}
+		.item {
+			height: 100px;
+			border: 1px solid #cacaca;
+			flex: 1;
+			margin: 15px;
+			text-align: center;
+		}
+
+
+
+	</style>
+</head>
+<body>
+	<h2>CSS-HTML 知识点与高频考题解析</h2>
+	<h3>Flex布局</h3>
+	<div class="container">
+		<div class="item">aaa</div>
+		<div class="item" style="flex: 2;">bbb</div>
+		<div class="item">ccc</div>
+		<div class="item">ddd</div>
+		<div class="item">eee</div>
+
+	</div>
+	<h4>重绘</h4>
+	<p>指的是当页面中的元素不脱离文档流，而简单地进行样式的变化，比如颜色、背景等，浏览器重新绘制样式</p>
+	<h4>回流</h4>
+	<p>指的是处于文档流中 DOM 的尺寸大小、位置或者某些属性发生变化时，导致浏览器重新渲染部分或全部文档的情况</p>
+	<p>回流要比重绘消耗性能开支更大</p>
+<script type="text/javascript">
+
+</script>
+
+</body>
+</html>

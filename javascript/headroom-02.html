@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Headroom使用</title>
+  <link rel="stylesheet" href="../src/css/normalize-v2.1.0.css">
+  <style>
+
+    .headroom {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #000;
+      color: #fff;
+      font-size: 24px;
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    section {
+      margin: 0 auto;
+      width: 300px;
+      font-size: 300px;
+      color: #cacaca;
+    }
+  </style>
+</head>
+<body>
+  <header class="headroom animated">HeadRoom</header>
+  <section>
+    测试区域
+  </section>
+  <script src="learn-headroom-v1.js"></script>
+  <script>
+    var obj1={
+      names: 'yangtao',
+      ages: '26'
+    };
+    var obj2 = {
+      name: 'yangming',
+      age: 24
+    }
+    var obj = extend(obj1,obj2);
+    console.log(obj);
+    console.log(normalizeTolerance(obj));
+  </script>
+</body>
+</html>

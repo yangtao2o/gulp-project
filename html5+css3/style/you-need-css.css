@@ -1,0 +1,21 @@
+@charset "utf-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.border-wper {
+	padding: 12px;
+	margin: 0 auto;
+	background-clip: padding-box;
+	background: #fff;
+	border: 10px solid rgba(0, 0, 0, .1);
+}
+
+.clear::after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}

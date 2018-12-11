@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>You need to know css</title>
+	<link rel="stylesheet" href="style/you-need-css.css">
+	<style type="text/css">
+		.border-wper > div {
+			float: left;
+		}
+		.shadow {
+			float: left;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: #fafafa;
+			margin: 105px;
+			box-shadow: 0 0 0 10px #e8e2d6, 0 0 0 20px #e1d9c9,
+			0 0 0 30px #D9CFBB, 0 0 0 40px #D2C6AE,
+			0 0 0 50px #CABCA0, 0 0 0 60px #C3B393,
+			0 0 0 70px #BBA985, 0 0 0 80px #B4A078;
+		}
+		.outline {
+			width: 200px;
+			height: 120px;
+			background: #efebe9;
+			border: 5px solid #b4a078;
+			outline: 1px dashed #b4a078;
+			outline-offset: -10px;
+			margin-top: 50px;
+		}
+		.border {
+			width: 209px;
+			padding: 8px 16px;
+			background: #f4f0ea;
+			border-radius: 8px;
+			outline: 6px solid #b4a078;
+			margin-top: 50px;
+			margin-left: 15px;
+			box-shadow: 0 0 0 2px #b4a078;
+		}
+		.position {
+			margin-left: 15px;
+		}
+		.position div {
+			float: left;
+			margin: 15px;
+			width: 130px;
+			height: 89px;
+			color: #f4f0ea;
+			padding: 16px 29px 28px 20px;
+			background: #b4a078 url('img/photo-08.jpg') no-repeat bottom right / 70px 30px;
+		}
+		.position div:nth-of-type(1) {
+			background-position: right 29px bottom 28px;
+		}
+		.position div:nth-of-type(2) {
+			background-origin: content-box;
+		}
+		.position div:nth-of-type(3) {
+			background-position: calc(100% - 29px) calc(100% - 28px);
+		}
+		.progress-outer {
+			margin: 20px;
+			width: 300px;
+			height: 12px;
+			border-radius: 8px;
+			overflow: hidden;
+			position: relative;
+		}
+		.progress-enter {
+			height: inherit;
+			background: rgba(180, 160, 120, .2);
+		}
+		@keyframes panoramic{
+		  to {
+		    background-position: 200% 0;
+		  }
+		}
+		.progress-bg {
+			width: 60%;
+			height: inherit;
+			border-radius: 6px;
+			background: repeating-linear-gradient(-45deg, #d9cfbb 25%, #c3b393 0, #c3b393 50%, #d9cfbb 0, #d9cfbb 75%, #c3b393 0);
+			background-size: 16px 16px;
+			animation: panoramic 20s linear infinite;
+		}
+		.coupon-card {
+			margin: 20px;
+			width: 200px;
+			height: 120px;
+			background-image: radial-gradient(circle at 100px -8px, transparent 20px, #b4a078 21px);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="border-wper clear">
+		<div class="shadow"></div>
+		<div class="outline"></div>
+		<div class="border">
+			A paragraph of filler text. La la la de dah de dah de dah de la.
+		</div>
+		<div class="position clear">
+			<div>background-position方案</div>
+			<div>background-origin方案</div>
+			<div>calc方案</div>
+		</div>
+		<div class="progress-outer">
+			<div class="progress-enter">
+				<div class="progress-bg"></div>
+			</div>
+		</div>
+		<div class="coupon-card"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS-Web-API 知识点与高频考题解析</title>
+</head>
+<body>
+	<h2>JS-Web-API 知识点与高频考题解析</h2>
+	<h3>BOM</h3>
+	<h3>DOM</h3>
+	<h3>事件绑定</h3>
+	<h3>Ajax</h3>
+	<h3>存储</h3>
+	<div id="div1">
+		<p>html</p>
+		<p>DOM</p>
+		<p>HTTP</p>
+	</div>
+	<p id="p2">ccc</p>
+	<pre>
+		xhr.readyStatus的状态码：
+		0:代理被创建，但尚未调用open()方法
+		1:open()已经被调用
+		2:send()已经被调用，并且头部和状态已经可获得
+		3:下载中，responseText属性已经包含部分数据
+		4:下载操作已经完成
+	</pre>
+
+<script type="text/javascript">
+//BOM
+
+// UA
+var ua = navigator.userAgent;
+var isChrome = ua.indexOf('Chrome');
+console.log(ua,'\n',isChrome);
+
+console.log('屏幕宽度：',window.screen.width);
+console.log('屏幕高度：',window.screen.height);
+
+console.log('网址：',location.href);
+console.log('协议：',location.protocol);
+console.log('path：',location.pathname);
+console.log('参数：',location.search);
+console.log('hash：',location.hash);
+
+// prev next
+// history.back();
+// history.forward();
+
+//DOM
+
+// 获取节点
+// property \ attribute
+// DOM树操作
+// 新增
+var div1 = document.getElementById('div1');
+var p1 = document.createElement('p');
+p1.innerHTML = 'This is a p1';
+div1.appendChild(p1);
+
+var p2 = document.getElementById('p2');
+div1.appendChild(p2);
+
+// 获取父元素
+console.log(p2.parentNode);
+
+// 获取子元素
+console.log(div1.childNodes);
+
+// 删除
+var chidlds = div1.childNodes;
+div1.removeChild(chidlds[0]);
+
+// 事件
+function bindEvent(elem, type, selector, fn) {
+	if(fn == null) {
+		fn = selector;
+		selector = null;
+	}
+	// 绑定事件
+	elem.addEventListener(type, function(e) {
+		var target;
+		if(selector) {
+			target = e.target;
+			if(target.matches(selector)) {
+				fn.call(target, e);
+			}
+		} else {
+			fn(e);
+		}
+	})
+}
+// bindEvent(div1, 'click', function(e) {
+// 	console.log(this);
+// });
+bindEvent(div1, 'click', 'p', function(e) {
+	console.log(this);
+});
+
+// Ajax
+// 题目：手写 XMLHttpRequest 不借助任何库
+var xhr = new XMLHttpRequest();
+console.log(xhr);
+xhr.onreadystatechange = function() {
+	if(xhr.readyState == 4) {
+		if(xhr.status == 200) {
+			console.log(xhr.responseText);
+		}
+	}
+}
+// xhr.open("GET", "/api", false);
+// xhr.send(null);
+
+/*
+xhr.readyStatus的状态码：
+0:代理被创建，但尚未调用open()方法
+1:open()已经被调用
+2:send()已经被调用，并且头部和状态已经可获得
+3:下载中，responseText属性已经包含部分数据
+4:下载操作已经完成
+*/
+
+// 题目：HTTP 协议中，response 的状态码，常见的有哪些？
+/*
+xhr.status即HTTP状态码，有2xx,3xx,4xx,5xx
+* 200:正常
+* 3xx
+* 301：永久重定向，302：临时重定向
+* 304：资源找不到，但是不符合请求条件，不会返回任何主体
+* 404：找不到资源
+* 5xx 服务端出错了，如505
+*/
+
+// 跨域
+
+// 题目：如何实现跨域？
+// 同源策略：协议、域名、端口要一致
+// img script link 标签的src/href可以加载其他域的资源、不受同源策略限制
+// 解决跨域 - JSONP
+// 解决跨域 - 服务端设置http header
+
+// 存储
+
+// 题目：cookie 和 localStorage 有何区别？
+// cookie 本身不是用来做服务端存储的，是用来在服务器和客户端进行信息传递的，因为每个HTTP请求都带着cookie，但是cookie也具备浏览器端存储的能力
+// cookie存储大小为4kb
+// localStorage 存储量增大到5MB，不会带到HTTP请求中
+// localStorage.setItem(key, value)
+// localStorage.getItem(key)
+</script>
+</body>
+</html>

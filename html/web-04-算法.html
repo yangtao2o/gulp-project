@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>从容应对算法题目</title>
+</head>
+<body>
+  <h2>从容应对算法题目</h2>
+  <p>题目：使用 ECMAScript（JS）代码实现一个事件类Event，包含下面功能：绑定事件、解绑事件和派发事件。</p>
+
+  <script>
+    class Event {
+      constructor() {
+        // 存储事件的数据结构
+        this._cache = {};
+        console.log('this',this._cache);
+      }
+      // 绑定
+      on(type, callback) {
+        let fns = (this._cache[type] = this._cache[type] || []);
+        if(fns.indexOf(callback) === -1) {
+          fns.push(callback);
+        }
+        return this;
+      }
+      // 触发
+      trigger(type, data) {
+        let fns = this._cache[type];
+        if(Array.isArray(fns)) {
+          fns.forEach((fn) => {
+            fn(data);
+          });
+        }
+        return this;
+      }
+      // 解绑
+      off(type, callback) {
+        let fns = this._cache[type];
+        if(Array.isArray(fns)) {
+          if(callback) {
+            let index = fns.indexOf(callback);
+            if(index !== -1) {
+              fns.splice(index, 1);
+            }
+          } else {
+            fns.length = 0;
+          }
+        }
+        return this;
+      }
+    }
+
+    const event = new Event();
+    event.on('test', a => {
+      console.log(a);
+    });
+    event.trigger('test','hello world');
+    event.off('test');
+    event.trigger('test','hello world');
+  </script>
+</body>
+</html>

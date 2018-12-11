@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>经典布局——圣杯</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			min-width: 600px;
+		}
+		p {
+			padding: 15px;
+			margin: 20px 0;
+		}
+		header, footer {
+			height: 30px;
+			line-height: 30px;
+			color: #000;
+			text-align: center;
+			background-color: #999;
+		}
+		.bd {
+			padding: 0 200px;
+			height: 250px;
+			line-height: 250px;
+			background-color: #ccc;
+		}
+		.bd:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+		.text {
+			font-size: 24px;
+			color: #fff;
+			text-align: center;
+		}
+		.main, .left, .right {
+			float: left;
+		}
+		.left, .right {
+			width: 200px;
+			position: relative;
+			top: 0;
+		}
+		.main {
+			box-sizing: border-box;
+			width: 100%;
+		}
+		.left {
+			left: -200px;
+			margin-left: -100%;
+			background-color: #d36f6f;
+		}
+		.right {
+			left: 200px;
+			margin-left: -200px;
+			background-color: #6b6aae;
+		}
+	</style>
+</head>
+<body>
+	<header>圣杯布局</header>
+	<div class="bd">
+		<div class="main text">Main</div>
+		<div class="left text">Left</div>
+		<div class="right text">Right</div>
+	</div>
+	<footer>footer</footer>
+	<p>问题：由于设置了相对定位，所以当left原来的位置和right的位置产生重叠时，由于浮动的原因一行放不下就会换行。所以布局就被打乱了。使用双飞翼布局就可以避免这个问题。</p>
+</body>
+</html>

@@ -17,9 +17,9 @@
     
     <button>按钮</button>
   </form>
-  <a href="" name="mylink"></a>
-  <a href=""></a>
-  <a href=""></a>
+  <a href="" name="mylink">fsdfad</a>
+  <a href="">dfafd</a>
+  <a href="">dfaeag</a>
   <img src="" alt="">
   <script>
   
@@ -80,7 +80,71 @@
   // var images = document.images;
   // var forms = document.forms;
   // console.log(anchors,links,images,forms);
+  let debounce = function(fn, context, timeout) {
+  let timer;
+  // 使用闭包将内容传递出去
+  return function() {
+    if(timer) {
+      clearTimeout(timer);
+    } else {
+      timer = setTimeout(function() {
+        fn.apply(context, arguments);
+      }, timeout);
+    }
+  }
+}
 
+var throttle = function(fn, delay, mustRunDelay) {
+  var timer = null;
+  var t_start;
+  return function() {
+    var context = this;
+    var args = arguments;
+    var t_curr = +new Date();
+    clearTimeout(timer);
+    // 初始化
+    if(!t_start) {
+      t_start = t_curr;
+    } 
+    // 超时判断
+    if(t_curr - t_start >= mustRunDelay) {
+      fn.apply(context, args);
+      t_start = t_curr;
+    } else {
+
+    }
+  }
+}
+
+var elems = document.getElementsByTagName('a');
+for (var i = 0, l = elems.length; i < l; i++) {
+  (function(index) {
+    elems[index].addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log(index);
+    }, 'false');
+  })(i);
+}
+var cardTimer = null;
+var $mCard = $('#rightNav .wx-wper');
+var $mProfile = $('#rightNav .wx-outer');
+$mCard.get(0).onmouseover = $mProfile.get(0).onmouseover = function() {
+  clearCardTime();
+}
+$mCard.get(0).onmouseout = $mProfile.get(0).onmouseout = function() {
+  cardTime();
+}
+
+function cardTime() {
+  cardTimer = setTimeout(function() {
+    $mProfile.hide();
+  }, 400);
+}
+
+function clearCardTime() {
+  clearTimeout(cardTimer);
+  $mProfile.show();
+}
   </script>
 </body>
 </html>
