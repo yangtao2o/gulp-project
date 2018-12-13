@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>数据与方法</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+</head>
+<body>
+  <div id="example"></div>
+  <script>
+    /**
+     * 当一个 Vue 实例被创建时，视图才会产生 “响应”
+    */
+    // 数据对象
+    var data = { a: 1 }
+    // Vue实例
+    var vm = new Vue({
+      el: '#example',
+      data: data,
+      created: function () {
+        console.log('a is:' + this.a)
+      }
+    })
+    // 实例上的属性、数据源中对应的字段
+    console.log('vm.a === data.a:', vm.a === data.a) //true
+    // 设置属性会影响到原始数据
+    vm.a = 2
+    console.log('config vm:',data.a)
+    // 反之亦然
+    data.a = 3
+    console.log('config data:', vm.a)
+
+    /**
+     * 实例属性和方法，如：$data, $el, $watch
+    */
+
+    console.log('vm.$data === data:', vm.$data === data)
+    console.log('vm.$el === document.getElementById("example")', vm.$el === document.getElementById('example'));
+
+    vm.$watch('a', function(newValue, oldValue) {
+      // 回调函数将会在 ‘vm.a’ 改变后调用
+    })
+
+    /**
+     * 实例生命周期钩子
+     * this 上下文指向调用它的 Vue 实例
+     * 其它钩子，在实例生命周期的不同阶段被调用，如：
+     * mounted updated destroyed
+     * 不要使用箭头函数
+    */
+
+
+    
+  </script>
+</body>
+</html>

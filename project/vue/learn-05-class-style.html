@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Class 与 Style 绑定</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+</head>
+<body>
+  <div id="app" :class="classObj">hahha</div>
+  
+  <script>
+    /**
+     * 对象语法
+    */
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        isActive: true,
+        error: null
+      },
+      computed: {
+        classObj: function () {
+          return {
+            active: this.isActive && !this.error,
+            'text-danger': this.error && this.error.type === 'fatal'
+          }
+        }
+      }
+    })
+
+    /**
+     * v-if 是真正的条件渲染，适用于条件很少改变的情况
+     * v-show 不管初始条件是什么，元素总会被渲染，适用于非常频繁地切换
+    */
+  </script>
+</body>
+</html>

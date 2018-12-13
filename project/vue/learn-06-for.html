@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>列表渲染</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="(value, key, index) of object" :key="index">{{ index }} : {{ key }} : {{ value }}</li>
+  </ul>
+</div>
+
+<div id="todoDemo">
+  <form v-on:submit.prevent="addNewTodo">
+    <label>Add a todo</label>
+    <input 
+      v-model="newTodoText"
+      id="new-todo"
+      placeholder="E.g. Feed the cat"
+    >
+    <button>Add</button>
+  </form>
+  <ul>
+    <li
+      is="todo-item"
+      v-for="(todo, index) in todos" 
+      :key="todos.id"
+      :title="todo.title"
+      @remove="todos.splice(index, 1)"
+      ></li>
+  </ul>
+</div>
+<script>
+/**
+ * v-if 是真正的条件渲染，适用于条件很少改变的情况
+ * v-show 不管初始条件是什么，元素总会被渲染，适用于非常频繁地切换
+*/  
+
+/**
+ * v-for 数组、对象
+ * v-for 的优先级比 v-if 更高
+*/
+var vm = new Vue({
+  el: '#app',
+  data: {
+    object: {
+      name: 'yangtao',
+      age: 26,
+      job: 'font-developer'
+    }
+  }
+})
+
+/**
+ * TodoList
+*/
+Vue.component('todo-item', {
+  template: '\
+    <li> \
+      {{ title }} \
+      <button @click="$emit(\'remove\')">Delete</button> \
+    </li> \
+  ',
+  props: ['title']
+})
+var todoListVM = new Vue({
+  el: '#todoDemo',
+  data: {
+    newTodoText: '',
+    todos: [
+      {
+        id: 1,
+        title: 'Do the dishes'
+      },
+      {
+        id: 2,
+        title: 'Take out the trash'
+      },
+      {
+        id: 3,
+        title: 'Mow the lawn'
+      },
+    ],
+    nextTodoId: 4
+  },
+  methods: {
+    addNewTodo: function () {
+      this.todos.push({
+        id: this.nextTodoId++,
+        title: this.newTodoText
+      })
+      this.newTodoText = ''
+    }
+  }
+})
+
+
+
+</script>
+  
+</body>
+</html>

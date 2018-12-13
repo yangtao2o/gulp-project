@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计算属性和侦听器</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+</head>
+<body>
+  <div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>  
+  </div>
+
+
+  <script>
+    var vm = new Vue({
+      el: '#example',
+      data: {
+        message: 'Hello',
+        firstName: 'Foo',
+        lastName: 'Bar'
+      },
+      computed: {
+        // getter
+        reversedMessage: function () {
+          return this.message.split('').reverse().join('')
+        },
+        fullName: {
+          get: function () {
+            return this.firstName + ' ' + this.lastName
+          },
+          set: function (newValue) {
+            var name = newValue.split(' ')
+            this.firstName = name[0]
+            this.lastName = name[name.length - 1]
+          }
+        }
+        
+      }
+    })
+    console.log(vm.reversedMessage) // olleH
+    vm.message = 'he' 
+    console.log(vm.reversedMessage)  //eh
+
+    /**
+     * 计算属性缓存 vs 方法
+     * 计算属性是基于它们的依赖进行缓存的
+     * 如果不希望有缓存，使用方法替代
+    */
+
+    /**
+     * 计算属性 vs 侦听属性
+     * 观察和响应 Vue 实例上的数据变动
+    */
+
+    // 计算属性默认只有 getter，不过在需要时也可以提供一个 setter
+    console.log(vm.fullName = 'John Doe')
+
+
+  </script>
+</body>
+</html>

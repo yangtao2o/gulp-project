@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>call apply bind等的模拟</title>
+</head>
+
+<body>
+
+
+
+  <script type="text/javascript">
+    // 检测是否支持required属性
+    var isRequiredSupported = 'required' in document.createElement('input');
+
+    Function.prototype.mycall = function(context) {
+      var context = context || window;
+      //获取调用call的函数，用this可以获取
+      context.fn = this;
+      var args = [];
+      for (var i = 1, l = arguments.length; i < l; i++) {
+        args.push('arguments[' + i + ']');
+      }
+      // 把传给call的参数传递给了context.fn函数
+      var result = eval('context.fn(' + args + ')');
+      delete context.fn;
+      return result;
+    }
+
+    Function.prototype.myapply = function(context, arr) {
+      var context = Object(context) || window;
+      context.fn = this;
+      var result;
+      if (!arr) {
+        result = context.fn();
+      } else {
+        var args = [];
+        for (var index = 0; index < arr.length; index++) {
+          args.push('arr[' + index + ']');
+        }
+        result = eval('context.fn(' + args + ')');
+      }
+      delete context.fn;
+      return result;
+    }
+
+    var value = 1;
+    var foo = {
+      value: 2
+    };
+
+    function bar(name, age) {
+      console.log(this.value);
+      return {
+        value: this.value,
+        name: name,
+        age: age
+      }
+    }
+    // bar.mycall(null);
+    bar.myapply(null); //undefined
+    // console.log(bar.mycall(foo, 'yang', 25));
+
+    // bind
+  </script>
+</body>
+
+</html>

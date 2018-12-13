@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>利用计算属性、指令等知识开发购物车</title>
+  <link href="https://cdn.bootcss.com/normalize/8.0.0/normalize.css" rel="stylesheet">
+</head>
+<body>
+  <h2>我的购物车</h2>
+  <div id="app" v-cloak>
+    <template v-if="list.length">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>商品名称</th>
+            <th>商品单价</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in list">
+            <td>
+              <input type="checkbox" :checked="item.check" @click="handleCheckStatus(index)">
+            </td>
+            <td>{{ index + 1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+              <button
+                @click="handleReduce(index)"
+                :disabled="item.count === 1">-</button>
+              <span class="count">{{ item.count }}</span>
+              <button
+                @click="handleAdd(index)">+</button>
+            </td>
+            <td>
+              <button
+                @click="handleRemove(index)">移除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="total-wper">
+        <div class="check-box">
+          <input 
+            type="checkbox"
+            @click="handleCheckAll"
+            :checked="checkAllStatus"
+            id="checkAll">
+          <label for="checkAll">全选</label>
+        </div>
+        <div class="total">总价：￥ {{ totalPrice }}</div>
+      </div>
+    </template>
+    <div v-else class="tips">购物车为空哦</div>
+  </div>
+  
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        checkAllStatus: true,
+        list: [
+          {
+            id: 1,
+            name: 'iPhone 7',
+            price: 6188,
+            check: true,
+            count: 1
+          },
+          {
+            id: 2,
+            name: 'iPad Pro',
+            price: 5888,
+            check: true,
+            count: 1
+          },
+          {
+            id: 3,
+            name: 'MacBook Pro',
+            price: 21488,
+            check: true,
+            count: 1
+          }
+        ]
+      },
+      computed: {
+   
+        totalPrice: function () {
+          var total = 0;
+          for (var i = 0; i < this.list.length; i++) {
+            var item = this.list[i];
+            if(this.list[i].check) {
+              total += item.price * item.count;
+            }
+          }
+          return total.toString().replace(/\B(?=(\d{3})+$)/g, ',');
+        
+        } 
+      },
+      methods: {
+        handleCheckStatus: function (index) {
+          this.list[index].check = !this.list[index].check;
+        },
+        handleReduce: function (index) {
+          if(this.list[index].count === 1) return;
+          this.list[index].count--;
+        },
+        handleAdd: function (index) {
+          this.list[index].count++;
+        },
+        handleRemove: function (index) {
+          this.list.splice(index, 1);
+        },
+        handleCheckAll: function() {
+          console.log('dfsf');
+          this.checkAllStatus = !this.checkAllStatus;
+          for (var i = 0; i < this.list.length; i++) {
+            this.list[i].check = this.checkAllStatus;
+          }
+        }
+      }
+    });
+  </script>
+  <style>
+    h2 {
+      margin-top: 40px;
+      text-align: center;
+    }
+    [v-cloak] {
+      display: none;
+    }
+    #app {
+      width: 960px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+    }
+    table {
+      width: 100%;
+      border: 1px solid #e9e9e9;
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+    }
+    th, td {
+      padding: 8px 16px;
+      border: 1px solid #e9e9e9;
+      text-align: center;
+    }
+    th {
+      background: #f7f7f7;
+      color: #5c6b77;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tips {
+      text-align: center;
+      margin: 50px auto;
+    }
+    .count {
+      display: inline-block;
+      min-width: 30px;
+    }
+    .total-wper {
+      margin: 20px 0;
+    }
+    .check-box {
+      float: left;
+      margin-left: 35px;
+    }
+    .total {
+      text-align: right;
+      padding-right: 20px;
+    }
+  </style>
+</body>
+</html>
