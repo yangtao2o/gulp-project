@@ -60,7 +60,7 @@ gulp.task('concat', function() {
 gulp.task('browser-sync', function() {
   browserSync.init({
     server: {
-      baseDir: ['./'],
+      baseDir: ['./src'],
       directory: true
     },
     notify: false // 开启静默模式
