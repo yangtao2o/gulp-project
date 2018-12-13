@@ -70,4 +70,4 @@ gulp.task('browser-sync', function() {
 });
 
 //默认
-gulp.task('test', ['browser-sync']);
+gulp.task('browserSync', ['browser-sync']);
