@@ -36,11 +36,12 @@
   <script>
     Vue.component('list-item', {
       props: ['contents', 'index'],
-      template:`<div :class="{border: index > 0}" class="unit">
-                  <input @click="handleChange" type="checkbox">
-                  <span :class="{finished: contents.finished}">{{contents.content}}</span>
-                  <a class="dele" @click="handleRemove">删除</a>
-                </div>`,
+      template:`
+        <div :class="{border: index > 0}" class="unit">
+          <input @click="handleChange" type="checkbox">
+          <span :class="{finished: contents.finished}">{{contents.content}}</span>
+          <a class="dele" @click="handleRemove">删除</a>
+        </div>`,
       methods: {
         handleChange: function() {
           this.$emit('status', this.index);
