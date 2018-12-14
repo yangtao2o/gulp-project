@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件上使用v-model</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+</head>
+<body>
+<!-- <div id="app">
+  <input 
+    :value="searchText" 
+    @input="searchText = $event.target.value">
+  <p>{{ searchText }}</p>
+</div> -->
+
+<div id="app">
+  <custom-input v-model="searchText">
+    <p>分发内容区域</p>
+  </custom-input>
+  <p>{{ searchText }}</p>
+</div>
+
+<script>
+/**
+ * 自定义事件也可以用于创建支持 v-model 的自定义组件  
+ * 通过插槽分发内容 <slot></slot>: 向一个组件传递内容
+*/
+Vue.component('custom-input', {
+  props: ['value'],
+  template: `
+    <div>
+      <input
+        :value="value"
+        @input="$emit('input', $event.target.value)"
+      >
+      <slot></slot>
+    </div>
+  `
+})
+
+new Vue({
+  el: '#app',
+  data: {
+    searchText: '试试'
+  }
+})
+
+</script>
+</body>
+</html>

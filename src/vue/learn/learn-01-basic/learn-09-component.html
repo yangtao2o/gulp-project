@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>组件基础</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+</head>
+<body>
+<div id="app" :style="{fontSize: postFontSize + 'em'}">
+  <blog-post 
+    v-for="post in posts"
+    :key="post.id"
+    :post="post"
+    @enlarge-tex="postFontSize += $event">
+  </blog-post>
+</div>
+
+<script>
+/**
+* 组件的复用，data 必须是一个函数
+* 通过 Prop 向子组件传递数据，一个 prop 被注册之后，就可以将数据作为一个自定义特性传递进来
+* 每个组件必须只有一个根元素
+* 通过事件向父级组件发送消息：$emit('parentEvent') -> @parentEvent="handlerEvent"
+* 使用事件抛出一个值（使用 $emit 的第二个参数）: 通过 $event 访问被抛出的这个值，如果是一个方法，可作为第一个参数传入此方法
+*/
+
+Vue.component('blog-post', {
+  props: ['post'],
+  template: `
+    <div class="blog-post">
+      <h3>{{ post.title }}</h3>
+        <button @click="$emit('enlarge-tex', 0.1)">
+          Enlarge text
+        </button>
+      <div v-html="post.content"></div>
+    </div>
+  `
+})
+
+var vm = new Vue({
+  el: '#app',
+  data: {
+    posts: [
+      { id: 1, title: 'My journey with Vue', content: '...content...' },
+      { id: 2, title: 'Blogging with Vue', content: '...content...' },
+      { id: 3, title: 'Why Vue is so fun', content: '...content...' }
+    ],
+    postFontSize: 1
+  }
+})
+
+</script>
+</body>
+</html>

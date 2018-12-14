@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>动态组件之Tab切换</title>
+  <style lang="">
+    .tab-button {
+      padding: 6px 10px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background: #f0f0f0;
+      margin-bottom: -1px;
+      margin-right: -1px;
+    }
+    .tab-button:hover {
+      background: #e0e0e0;
+    }
+    .tab-button.active {
+      background: #e0e0e0;
+    }
+    .tab {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+</head>
+<body>
+  <div id="tab-demo" class="demo">
+    <button
+      v-for="tab in tabs"
+      :key="tab"
+      :class="['tab-button', { active: currentTab === tab}]"
+      @click="currentTab = tab"
+    >{{ tab }}</button>
+    <component
+      :is="currentTabComponent"
+      class="tab">
+    </component>
+  </div>
+  
+  <script>
+    Vue.component('tab-home', {
+      template: '<div>Home component</div>'
+    })
+    Vue.component('tab-posts', {
+      template: '<div>Posts component</div>'
+    })
+    Vue.component('tab-archive', {
+      template: '<div>Archive component</div>'
+    })
+
+    new Vue({
+      el: '#tab-demo',
+      data: {
+        currentTab: 'Home',
+        tabs: ['Home', 'Posts','Archive']
+      },
+      computed: {
+        currentTabComponent: function () {
+          return 'tab-' + this.currentTab.toLowerCase()
+        }
+      }
+    })
+  </script>
+</html>
