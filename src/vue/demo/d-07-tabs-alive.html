@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>动态组件之Tab切换</title>
+  <title>动态组件之Tab切换keep-alive</title>
   <style lang="">
     .tab-button {
       padding: 6px 10px;
@@ -66,28 +66,75 @@
       :class="['tab-button', { active: currentTab === tab}]"
       @click="currentTab = tab"
     >{{ tab }}</button>
-    <component
-      :is="currentTabComponent"
-      class="tab">
-    </component>
+    <keep-alive>
+      <component
+        :is="currentTabComponent"
+        class="tab">
+      </component>
+    </keep-alive>
   </div>
   
+  
   <script>
-    Vue.component('tab-home', {
-      template: '<div>Home component</div>'
-    })
     Vue.component('tab-posts', {
-      template: '<div>Posts component</div>'
+      data: function () {
+        return {
+          posts: [
+            {
+              id: 1,
+              title: 'html',
+              content: 'HTML权威指南'
+            },
+            {
+              id: 2,
+              title: 'css',
+              content: 'CSS权威指南'
+            },
+            {
+              id: 3,
+              title: 'JavaScript',
+              content: 'JavaScript高级程序设计'
+            }
+          ],
+          selectedPost: null
+        }
+      },
+      template: `
+        <div class="posts-tab">
+          <ul class="posts-sidebar">
+            <li
+              v-for="post in posts"
+              v-bind:key="post.id"
+              v-bind:class="{ selected: post === selectedPost }"
+              v-on:click="selectedPost = post"
+            >
+              {{ post.title }}
+            </li>
+          </ul>
+          <div class="selected-post-container">
+            <div 
+              v-if="selectedPost"
+              class="selected-post"
+            >
+              <h3>{{ selectedPost.title }}</h3>
+              <div v-html="selectedPost.content"></div>
+            </div>
+            <strong v-else>
+              Click on a blog title to the left to view it.
+            </strong>
+          </div>
+        </div>
+      `
     })
     Vue.component('tab-archive', {
-      template: '<div>Archive component</div>'
+      template: '<div>Archive</div>'
     })
 
     new Vue({
       el: '#tab-demo',
       data: {
-        currentTab: 'Home',
-        tabs: ['Home', 'Posts', 'Archive']
+        currentTab: 'Posts',
+        tabs: ['Posts', 'Archive']
       },
       computed: {
         currentTabComponent: function () {
