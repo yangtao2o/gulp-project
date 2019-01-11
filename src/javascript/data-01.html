@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>数据处理</title>
+  <script src="assets/js/lodash.js"></script>
+  <!-- Moment.js 专门处理 Date 类型数据的工具库 -->
+  <script src="assets/js/moment.js"></script>
+  <script src="assets/js/zh-cn.js"></script>
+</head>
+<body>                         
+
+  <script>
+    // insert
+    const array = [1, 2, 6, 7];
+    array.splice(2, 0, 3);
+    console.log(array);
+    array.splice(3,1);
+    console.log(array);
+    
+    // 查找
+    const array1 = [1,2,3,4,5,6]
+    const evenNumbers = array1.filter(x => x % 2 === 0)
+    console.log(evenNumbers, array1);
+
+    // 封装数组操作工具
+    const arrayUtils = {
+      
+      append(array, ...elements) {
+        array.push(...elements)
+        return array
+      },
+
+      prepend(array, ...elements) {
+        array.unshift(...elements)
+        return array
+      },
+
+      insert(array, index, ...elements) {
+        array.splice(index, 0, ...elements)
+        return array
+      },
+
+      remove(array, index) {
+        array.splice(index, 1)
+        return array
+      }
+    }
+
+    const arr = []
+    arrayUtils.append(arr, 3)
+    arrayUtils.prepend(arr, 1)
+    arrayUtils.insert(arr, 1, 2)
+    console.log(arr)
+
+    // 聚合
+    const numarr = [1,2,3,4,5]
+    const sumResult = numarr.reduce((left, right) => left + right)
+    console.log(sumResult);
+
+    function reduceFn(callback) {
+      return array => array.reduce(callback)
+    }
+    const sum = reduceFn((left, right) => left + right)
+    const sum2 = reduceFn((left, right) => left * right)
+    console.log(sum(numarr))
+    console.log(sum2(numarr))
+  </script>
+</body>
+</html>
