@@ -30,10 +30,110 @@
         }
       }(i))
     }
-
-
     // funcs[0]();
-    arr[0]();
+    // arr[0]();
+
+    // Class
+    class Person {
+      constructor(name, age, job){
+        this.name = name
+        this.age = age
+        this.job = job
+      }
+
+      hello() {
+        return 'Hi, I am ' + this.name + '.'
+      }
+    }
+    class Actor extends Person {
+      hello() {
+        return super.hello() + 'I am a actor.'
+      }
+    }
+    const myname = new Actor('Yangtao')
+    console.log(myname.hello())
+
+    // 需定义一个最小值和一个最大值之间的随机数
+    const randomFn = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    console.log(randomFn(1, 9));
+    
+    // 计算一个整数的阶乘
+    function factorialize(num) {
+      if(num <= 1) {
+        return 1;
+      } else {
+        console.log(num);
+        return num * factorialize(num-1);
+      }
+    }
+
+    // 在句子中找出最长的单词，并返回他的长度
+    function findLongestWord(str) {
+      const strArr = str.split(' ');
+      const newArr = [];
+
+      for (let i = 0; i < strArr.length; i++) {
+        const element = strArr[i];
+        newArr.push(element.length);
+      }
+      newArr.sort((a, b) => b - a);
+      return newArr[0];
+    }
+
+    // 找出多个数组中的最大数
+    function largestOfArr(arr) {
+      const newArr = [];
+      let num = [];
+      for (let i = 0; i < arr.length; i++) {
+        num = arr[i].sort((a, b) => b - a);
+        console.log('num:', num);
+        newArr.push(num[0]);
+      }
+      return newArr;
+    }
+    const largestNum = largestOfArr([[2,3,4], [90,33]]);
+
+    // 判断一个字符串是否是以指定的字符串结尾
+    function confirmEnding(str, target) {
+      const len = target.length;
+      if(str.substr(-len) === target) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    console.log(confirmEnding('target', 't'))
+
+    // 指定字符串的长度多余的内容使用‘...’代替
+    function truncate(str, num) {
+      let newStr = '';
+      if(num >= str.length) {
+        newStr = str.slice(0)
+      } else if(num > 3) {
+        newStr = str.slice(0, num-3) + '...';
+      } else {
+        newStr = str.slice(0, num) + '...';
+      }
+
+      return newStr;
+    }
+    console.log(truncate('helloworld', 2))
+
+    // 摧毁
+    function destroyed(arr) {
+      var newArr = []
+      var arg = arguments
+      console.log(arg)
+      for (let i = 1; i < arg.length; i++) {
+        newArr.push(arg[i]);
+      }
+
+      arr = arr.filter(val => newArr.indexOf(val) < 0)
+
+      return arr;
+    }
+
+    console.log(destroyed([1,2,3,4,5,3,2,3], 2, 3))
   </script>
 </body>
 
