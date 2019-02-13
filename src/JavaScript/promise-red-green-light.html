@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>红绿灯问题</title>
+  <style>
+    .wrapper {
+      width: 1140px;
+      margin: 0 auto;
+    }
+    .times-box {
+      font-size: 16px;
+      text-align: center;
+    }
+    .ligter-box {
+      margin: 30px auto;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h2>题目：</h2>
+    <p>红灯三秒亮一次，绿灯一秒亮一次，黄灯2秒亮一次；如何让三个灯不断交替重复亮灯？（用 Promse 实现）</p>
+    <div class="ligter-box" id="ligter"></div>
+    <div class="times-box" id="timesBox">0</div>
+  </div>
+  <script>
+    var times = 0;
+    function red() {
+      colorToggle('red');
+    }
+    function green() {
+      colorToggle('green');
+    }
+    function yellow() {
+      colorToggle('yellow');
+    }
+    function colorToggle(target) {
+      const ligterTarget = document.getElementById('ligter');
+      const timersTarget = document.getElementById('timesBox');
+  
+      ligterTarget.style.backgroundColor = target;
+      ligterTarget.style.borderColor = target;
+      timersTarget.innerText = times;
+    }
+   
+
+    const light = (timer, cb) => new Promise((resolve, reject) => {
+      setTimeout(() => {
+        times = timer;
+        cb();
+        resolve();
+      }, timer);
+    });
+
+    const step = () => {
+      Promise.resolve()
+      .then(() => light(3000, red))
+      .then(() => light(2000, green))
+      .then(() => light(1000, yellow))
+      .then(() => {
+        step();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+    step();
+  </script>
+</body>
+</html>
