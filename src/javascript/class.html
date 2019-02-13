@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Class</title>
+</head>
+<body>
+
+<script>
+class Point {
+  constructor(name, age) {
+    this.name = name,
+    this.age = age
+  }
+  getName() {
+    return `This is ${this.name}, and ${this.age} years old.`;
+  }
+}
+let myPoint = new Point('yangtao', 27);
+console.log(myPoint.getName())
+console.log(myPoint.constructor === Point.prototype.constructor)
+console.log(Point.prototype.constructor === Point)
+console.log(myPoint.hasOwnProperty('name'))  // true
+console.log(myPoint.hasOwnProperty('getName'))  // false
+console.log(myPoint.__proto__.hasOwnProperty('getName'))  //true
+// 类的所有实例共享一个原型对象
+
+
+</script>
+</body>
+</html>
