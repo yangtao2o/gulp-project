@@ -48,19 +48,22 @@
 })()
 
 var Zepto = (function() {
+  var $,
+    zepto = {};
 
+  zepto.init = function(selector, context) {
+    var dom;
+    return zepto.Z(dom, selector);
+  }
+
+  $ = function(selector, context) {
+    return zepto.init(selector, context);
+  }
+
+  return $;
 })();
 
 window.Zepto = Zepto;
-'$' in window || (window.$ = Zepto);
+window.$ = undefined && (window.$ = Zepto);
 
-;(function($) {
 
-})(Zepto)
-
-/* 
-事件处理部份
- */
-;(function($) {
-  
-})(Zepto)
