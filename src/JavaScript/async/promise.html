@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Promise</title>
+  <script src="../assets/js/jquery-v3.3.1.js"></script>
+</head>
+<body>
+  <h2>Promise</h2>
+  <script>
+    function loadImg(src) {
+      var promise = new Promise(function(resolve, reject) {
+        var img = document.createElement('img')
+        img.onload = function() {
+          resolve(img)
+        }
+        img.onerror = function() {
+          reject()
+        }
+        img.src = src
+      })
+      return promise
+    }
+    $(function() {
+      var src1 = 'https://img3.mukewang.com/5c611772085966af06000338-240-135.jpg'
+      var src2 = 'https://img2.mukewang.com/5c6b7cff08d6895906000338-240-135.jpg'
+      var result1 = loadImg(src1)
+      var result2 = loadImg(src2)
+      result1.then(function(img) {
+        console.log('第一张图片', img.src)
+        return result2  //串联操作
+      }).then(function(img) {
+        console.log('第二张图片', img.src)
+      }).catch(function(ex) {  // 统一捕获错误信息
+        console.log(ex)
+      })
+
+      // Promise.all 接受一个 promise 对象的数组，待全部完成之后，统一执行 success
+      
+      var result3 = loadImg(src1)
+      var result4 = loadImg(src2)
+      Promise.all([result3, result4]).then(function(data) {
+        console.log(data)
+      })
+
+      // Promise.race 接受一个包含多个 promise 对象的数组，只要有一个完成，就执行 success
+      Promise.race([result3,result4]).then(function(data) {
+        console.log('race:', data)
+      })
+
+      /**
+       * 谈“标准”
+       * 任何技术推广使用都需要一套标准来支撑
+       * 无规矩不成方圆，如 html js css http等
+       * 任何不符合标准的东西，终将会被用户抛弃
+       * 不要挑战标准，不要自造标准
+      ** /
+
+      /**
+       * Promise 标准-状态变化
+       * 三种状态 pending fulfilled rejected
+       * 初始状态为 pending
+       * 不可逆 只能是 pending->fulfilled pending->rejected
+      **/ 
+
+      /**
+       * Promise标准-then
+       * Promise实例必须实现then这个方法
+       * then()必须可以接受两个函数作为参数
+       * then()返回的必须是一个 Promise 实例
+      **/
+
+    })
+  </script>
+</body>
+</html>

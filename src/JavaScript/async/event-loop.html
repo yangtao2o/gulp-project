@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event Loop</title>
+  <script src="../assets/js/jquery-v3.3.1.js"></script>
+  <script src="index.js"></script>
+</head>
+<body>
+  <h2>事件轮询，JS实现异步操作的具体解决方案</h2>
+  <ul>
+    <li>`事件轮询` --- JS实现异步操作的具体解决方案</li>
+    <li>同步代码，直接执行</li>
+    <li>异步函数，先放在`异步队列`中</li>
+    <li>同步代码完成之后，轮询执行`异步队列`的函数</li>
+  </ul>
+<script>
+
+$.ajax({
+  url: './data.json',
+  success:function(data) {
+    console.log('a');
+  }
+})
+setTimeout(() => {
+  console.log('b')
+}, 100);
+setTimeout(() => {
+  console.log('c')
+});
+console.log('d')
+// 主要取决于返回数据的时间长短
+// dacb || dcba || dcab
+</script>
+</body>
+</html>

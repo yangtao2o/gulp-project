@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Deferred</title>
+  <script src="../assets/js/jquery-v3.3.1.js"></script>
+</head>
+<body>
+  <h2>$.Deferred</h2>
+  <script>
+  // $.Deferred()
+  // var wait = function() {
+  //   var task = function() {
+  //     console.log('执行完成')
+  //   }
+  //   setTimeout(task, 2000);
+  // }
+  // wait()
+
+
+  // dtd 的API可分为两类，最好分开使用
+  // 1. dtd.resolve()  dtd.reject()
+  // 2. dtd.done dtd.fail dtd.then
+  function waitHandle() {
+    var dtd = $.Deferred()
+    var wait = function(dtd) {
+      var task = function() {
+        console.log('执行完成')
+        dtd.resolve()  // 成功
+        // dtd.reject()  // 失败 
+      }
+      setTimeout(task, 1000)
+      return dtd
+    }
+    return wait(dtd)
+  }
+  var w = waitHandle()
+  // w.reject()  // 这里会导致状态立马更新
+  w.then(function() {
+    console.log('ok 1')
+  }, function() {
+    console.log('error 1')
+  })
+  w.then(function() {
+    console.log('ok 2')
+  }, function() {
+    console.log('error 2')
+  })
+
+  // 开放封闭原则！！！
+  
+  function waitHandle2() {
+    var dtd = $.Deferred()
+    var wait = function(dtd) {
+      var task = function() {
+        console.log('执行完成')
+        dtd.resolve()  // 成功
+        // dtd.reject()  // 失败 
+      }
+      setTimeout(task, 1000)
+      return dtd.promise()
+    }
+    return wait(dtd)
+  }
+  var w2 = waitHandle2()
+  // w2.reject()   // 这里会报错
+  $.when(w2).then(function() {
+    console.log('okk 1')
+  }, function() {
+    console.log('error-r 1')
+  })
+
+  /**
+   * 总结
+   * Deferred 有 done faile then被动监听函数，还有resolve reject主动调用函数，容易修改状态
+   * Promise 只可以监听不能篡改函数
+  **/
+  </script>
+</body>
+</html>

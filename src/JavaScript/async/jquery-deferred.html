@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Deferred</title>
+  <script src="../assets/js/jquery-v3.3.1.js"></script>
+
+</head>
+<body>
+  <h2>deferred对象就是jQuery的回调函数解决方案</h2>
+  <h4>开放封闭原则 --- 对扩展开放，对修改封闭</h2>
+<script>
+
+  var ajax = $.ajax('./data.json');
+  console.log(ajax)
+  ajax.done(function() {
+    console.log('a')
+  }).fail(function() {
+    console.log('a-fail')
+  }).done(function() {
+    console.log('b')
+  }).fail(function() {
+    console.log('b-fail')
+  }).done(function() {
+    console.log('c')
+  }).fail(function() {
+    console.log('c-fail')
+  })
+
+  // 'a' 'b' 'c'
+
+  ajax.then(function() {
+    console.log('a-then')
+  }, function() {
+    console.log('a-then-fail')
+  }).then(function() {
+    console.log('b-then')
+  }, function() {
+    console.log('b-then-fail')
+  })
+
+  // 'a-then' 'b-then'
+  
+
+</script>
+</body>
+</html>

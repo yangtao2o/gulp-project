@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>async/await</title>
+  <script src="../assets/js/jquery-v3.3.1.js"></script>
+</head>
+<body>
+  <h2>async/await(ES7)</h2>
+  <ul>
+    <li>使用 await，函数必须用async标识</li>
+    <li>await后面跟的是一个 Promise 实例</li>
+    <li>需要 babel-polyfill</li>
+
+  </ul>
+  <script src="https://cdn.bootcss.com/babel-polyfill/7.2.5/polyfill.min.js"></script>
+  <script>
+    function loadImg(src) {
+      var promise = new Promise(function(resolve, reject) {
+        var img = document.createElement('img')
+        img.onload = function() {
+          resolve(img)
+        }
+        img.onerror = function() {
+          reject()
+        }
+        img.src = src
+      })
+      return promise
+    }
+
+    var src1 = 'https://img3.mukewang.com/5c611772085966af06000338-240-135.jpg'
+    var src2 = 'https://img2.mukewang.com/5c6b7cff08d6895906000338-240-135.jpg'
+
+    const load = async function() {
+      const result1 = await loadImg(src1)
+      console.log('1', result1)
+      const result2 = await loadImg(src2)
+      console.log('2', result1)
+    }
+    load()
+  </script>
+</body>
+</html>
