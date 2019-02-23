@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Snabbdom Demo</title>
+
+</head>
+<body>
+  <h2>Snabbdom Demo</h2>
+  <div id="container"></div>
+  <button id="btn-change">change</button>
+
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-class.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-props.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-style.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-eventlisteners.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/h.js"></script>
+  <script>
+    var snabbdom = window.snabbdom
+
+    var patch = snabbdom.init({
+      snabbdom_class,
+      snabbdom_props,
+      snabbdom_style,
+      snabbdom_eventlisteners
+    })
+
+    var h = snabbdom.h
+
+    var data = [
+      {
+        name: '张三',
+        age: 22,
+        address: '兰州'
+      },
+      {
+        name: '李四',
+        age: 28,
+        address: '宁夏'
+      },
+      {
+        name: '王五',
+        age: 20,
+        address: '郑州'
+      },
+    ]
+
+    data.unshift({
+      name: '姓名',
+      age: '年龄',
+      address: '地址'
+    })
+
+    var container = document.getElementById('container')
+
+    var vnode
+    function render(data) {
+      var newVnode = h('table', {}, data.map(function(item) {
+        var tds = []
+        var key
+        for(key in item) {
+          if(item.hasOwnProperty(key)) {
+            tds.push(h('td', {}, item[key] + ''))
+          }
+        }
+        return h('tr', {}, tds)
+      }))
+      // 更新
+      if(vnode) {
+        patch(vnode, newVnode)
+      } else {
+        // 初次渲染
+        patch(container, newVnode)
+      }
+      // 存储当前的值
+      vnode = newVnode
+    }
+
+    render(data)
+
+    var btnChange = document.getElementById('btn-change').addEventListener('click', function(e) {
+      data[1].name = 'yangtao'
+      data[2].age = 27
+
+      render(data)
+    })
+  </script>
+</body>
+</html>
