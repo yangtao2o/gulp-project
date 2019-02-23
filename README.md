@@ -72,5 +72,7 @@ Built at: 2019-02-21 09:27:39
 * 扩展：对模块化标准统一的期待
   
 ## Learning Document
-#### [Virtual Dom](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/vdom/doc.md)
-#### [MVVM框架](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/mvvm/doc.md)
+
+* [VirtualDom](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/vdom/doc.md )
+
+* [MVVM框架](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/mvvm/doc.md)
