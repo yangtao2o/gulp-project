@@ -2,9 +2,10 @@
 > 目前是为了同步 Windows 和 MacOS，直接使用了文件目录，仅仅启动了 browser-sync 插件
 
 ## Learning Document
-* [防抖、节流，原型链继承之圣杯模式](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/doc.md)
+
 * [VirtualDom](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/vdom/doc.md )
 * [MVVM框架](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/mvvm/doc.md)
+* [防抖、节流，原型链继承之圣杯模式](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/doc.md)
 
 ## Gulp(全局)
 ```bash
