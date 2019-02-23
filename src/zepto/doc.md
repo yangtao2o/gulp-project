@@ -94,3 +94,48 @@ function throtte(fn, wait, immediate) {
 
 window.addEventListener('resize', throtte(test, 1000))
 ```
+### Zepto
+* [文档](http://www.kancloud.cn/wangfupeng/zepto-design-srouce/173680)
+```javascript
+// v1.0.1
+var Zepto = (function() {
+
+})();
+
+window.Zepto = Zepto;
+'$' in window || (window.$ = Zepto);
+
+;(function($) {
+
+})(Zepto)
+
+// v1.1.6
+var Zepto = (function() {
+  var $,
+    zepto = {};
+
+  zepto.init = function(selector, context) {
+    var dom;
+    return zepto.Z(dom, selector);
+  }
+
+  $ = function(selector, context) {
+    return zepto.init(selector, context);
+  }
+
+  return $;
+})();
+
+window.Zepto = Zepto;
+window.$ = undefined && (window.$ = Zepto);
+```
+
+* [关于JavaScript的浅拷贝和深拷贝](https://www.cnblogs.com/Chen-XiaoJun/p/6217373.html)
+
+* [JavaScript instanceof 运算符深入剖析](https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/index.html)
+* [为什么用Object.prototype.toString.call(obj)检测对象类型?](https://www.cnblogs.com/youhong/p/6209054.html)
+* [apply()与call()的区别](https://www.cnblogs.com/lengyuehuahun/p/5643625.html)
+* [Debounce 和 Throttle 的原理及实现](https://www.tuicool.com/articles/YvyQRrv)
+* [JavaScript深入浅出](https://www.imooc.com/learn/277)---该课由浅入深的介绍JavaScript的语言特性，结合实际例子解析常见误区
+* [JavaScript深入之从原型到原型链](https://github.com/mqyqingfeng/Blog/issues/2)
+* [深入理解javascript原型和闭包（3）——prototype原型](https://www.cnblogs.com/wangfupeng1988/p/3978131.html)
