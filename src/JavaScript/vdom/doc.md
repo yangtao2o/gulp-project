@@ -13,10 +13,12 @@
 使用 snabbdom 的用法举例
 
 ### snabbdom核心 API
-* h('<div>', {...属性值...}, [...子元素...])
-* h('<div>', {}, '...')
-* patch(container, vnode)
-* patch(vnode, newVnode)
+
+* `h('<div>', {...属性值...}, [...子元素...])`
+* `h('<div>', {}, '...')`
+* `patch(container, vnode)`
+* `patch(vnode, newVnode)`
+  
 HTML
 ```html
 <h2>Snabbdom Demo</h2>
