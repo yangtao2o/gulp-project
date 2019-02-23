@@ -6,3 +6,8 @@
 // fn2()
 
 // [1,2,3].map(item => item + 1)
+
+import { version } from '../package.json';
+export default function() {
+  console.log('version ' + version)
+}

@@ -58,6 +58,19 @@ Built at: 2019-02-21 09:27:39
 # 配置文件
 ➜  myrollup git:(master) ✗ touch .babelrc rollup.config.js
 ```
+
+## 关于 JS 众多模块化标准
+* 没有模块化
+* AMD成为标准，require.js(也有CMD)
+* 前端打包工具，是node.js模块化可以被使用
+* ES6出现，想统一现在所有模块化标准
+* nodejs积极支持，浏览器尚未统一
+
+#### 模块化
+* 语法：import export(注意有无default)
+* 环境：babel编译 ES6 语法，模块化可用 webpack 和 rollup
+* 扩展：对模块化标准统一的期待
+  
 ## Learning Document
-#### [Virtual Dom](./src/javascript/vdom/doc.md)
-#### [MVVM框架](./src/javascript/mvvm/doc.md)
+#### [Virtual Dom](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/vdom/doc.md)
+#### [MVVM框架](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/mvvm/doc.md)
