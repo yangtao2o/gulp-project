@@ -7,6 +7,7 @@
 * [MVVM框架](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/mvvm/doc.md)
 * [Zepto源码学习一二](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/doc.md#zepto)
 * [防抖、节流，原型链继承之圣杯模式](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/doc.md)
+* [Class、继承、Promise](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/es6/doc.md )
 
 ## Gulp(全局)
 ```bash

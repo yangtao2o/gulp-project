@@ -7,6 +7,7 @@
 ### 对 MVVM 的理解
 * [什么是 MVVM 模式？](https://www.jianshu.com/p/a898ef83f38c)
 * [MVC，MVP 和 MVVM 的图示](http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html)
+
 #### MVC（Model-View-Controller）
 
 MVC 一种将业务逻辑、数据、界面分离的方法组织代码的框架。
