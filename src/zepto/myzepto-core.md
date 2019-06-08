@@ -1,6 +1,6 @@
 # Zepto对象思想与源码分析
 
-## 原型链
+## 原型对象
 
 ### `Array.prototype`
 
@@ -177,3 +177,5 @@ typeof null  //"object"
 * [js原型链基础](https://www.kancloud.cn/wangfupeng/zepto-design-srouce/173684)
 * [JavaScript深入之从原型到原型链 ](https://github.com/mqyqingfeng/Blog/issues/2)
 * [深入理解javascript原型和闭包（3）——prototype原型](https://www.cnblogs.com/wangfupeng1988/p/3978131.html)
+
+## Zepto

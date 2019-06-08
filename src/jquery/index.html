@@ -5,12 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>jQuery</title>
-  <script src="jquery.init.js"></script>
+  <!-- <script src="jquery.init.js"></script> -->
+  <script src="jquery-v3.3.1.js"></script>
+  <script src="myPlugin.js"></script>
 </head>
 <body>
-  <input id="btn" type="input" value="点击">
+  <h2>myPlugin</h2>
+  <input id="show" type="button" value="显示">
+  <input id="hide" type="button" value="隐藏">
+  <input id="getName" type="button" value="名字">
+  <input id="getAge" type="button" value="年龄">
+  <p id="testPara">我是一段测试内容</p>
   <script>
-    console.log($('#btn'));
+    $('#testPara').myPlugin()
+    $('#testPara').myPlugin({
+    'name': 'wuwang',
+    'age': '27'
+})
+
+
+    $('#hide').click(function() {
+      $('#testPara').myPlugin('hide')
+
+    })
+
+    $('#show').click(function() {
+      $('#testPara').myPlugin('show')
+    })
+
+    $('#getName').click(function() {
+      $('#testPara').myPlugin('getName')
+    })
+
+    $('#getAge').click(function() {
+      $('#testPara').myPlugin('getAge')
+    })
+
+
+
   </script>
 </body>
 </html>
