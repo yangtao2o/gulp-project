@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Class 与 Style 绑定</title>
+    <style>
+      .active {
+        font-size: 20px;
+        color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app1">
+      <span class="normal" v-bind:class="{ active: isActive, danger: isDanger }"
+        >你说是不是</span
+      >
+      <p v-bind:class="testObj">测试class绑定</p>
+      <p :class="[arrActive, arrDanger]">数组渲染</p>
+      <p :class="[{active: isActive}, {'text-danger': testObj.active}]">
+        数组渲染
+      </p>
+      <p v-bind:style="styleObject">绑定style属性</p>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <script>
+      var app1 = new Vue({
+        el: "#app1",
+        data: {
+          isActive: true,
+          isDanger: false,
+          testObj: {
+            active: true,
+            "text-danger": true
+          },
+          arrActive: "active",
+          arrDanger: "danger",
+          styleObject: {
+            fontSize: "16px",
+            color: "red"
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue 实例</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  </head>
+  <body>
+    <div id="watch-example">
+      <p>
+        Ask a yes/no question:
+        <input type="text" v-model="question" />
+      </p>
+      <p>{{ answer }}</p>
+    </div>
+    <!-- 因为 AJAX 库和通用工具的生态已经相当丰富，Vue 核心代码没有重复 -->
+    <!-- 提供这些功能以保持精简。这也可以让你自由选择自己更熟悉的工具。 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+      var watchExampleApp = new Vue({
+        el: "#watch-example",
+        data: {
+          question: "",
+          answer: "I cannot give you an answer until you ask a question!"
+        },
+        watch: {
+          question: function(newQ, oldQ) {
+            console.log("watch。。。");
+            this.answer = "Waiting for you to stop typing...";
+            this.debouncedGetAnswer();
+          }
+        },
+        created: function() {
+          console.log("created...");
+          this.debouncedGetAnswer = _.debounce(this.getAnswer, 1000);
+          console.log("created end.");
+        },
+        methods: {
+          getAnswer: function() {
+            console.log("methods...");
+            if (this.question.indexOf("?") === -1) {
+              this.answer = "Questions usually contain a question mark. ;-)";
+              return;
+            }
+            this.answer = "Thinking...";
+            var vm = this;
+            axios
+              .get("https://yesno.wtf/api")
+              .then(function(res) {
+                vm.answer = _.capitalize(res.data.answer);
+              })
+              .catch(function(err) {
+                vm.answer = "Error! Could not reach the API. " + error;
+              });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
