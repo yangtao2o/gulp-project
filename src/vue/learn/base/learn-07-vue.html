@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>关于Vue的一些知识点</title>
+</head>
+
+<body>
+  <h4>双向绑极简实现</h4>
+  <input type="text" id="txt">
+  <span id="para">2312</span>
+  <br><hr>
+
+  <script>
+    var txt = document.getElementById('txt')
+    var para = document.getElementById('para')
+    var myObj = {}
+    Object.defineProperty(myObj, 'msg', {
+      set: function (newValue) {
+        txt.value = newValue;
+        para.innerText = newValue;
+      },
+      // get: function (newValue, oldValue) {  }
+    });
+    txt.addEventListener('keyup', function (e) {
+      myObj.msg = e.target.value;
+    })
+  </script>
+</body>
+
+</html>

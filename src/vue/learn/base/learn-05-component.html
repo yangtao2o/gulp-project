@@ -22,6 +22,10 @@
       />
       <p>{{ message }}</p>
     </div>
+    
+    <h4>双向绑极简实现</h4>
+    <input type="text" id="txt">
+    <span id="para">2312</span>
 
     <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
     <script>
@@ -46,6 +50,21 @@
           message: "hhahhha"
         }
       });
+
+      var txt = document.getElementById('txt')
+      var para = document.getElementById('para')
+      var myObj = {}
+      Object.defineProperty(myObj, 'msg', {
+        set: function (newValue) { 
+    
+          txt.value = newValue;
+          para.innerText = newValue;
+        },
+        // get: function (newValue, oldValue) {  }
+      });
+      txt.addEventListener('keyup', function(e) {
+        myObj.msg = e.target.value;
+      })
     </script>
   </body>
 </html>
