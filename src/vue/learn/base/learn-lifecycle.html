@@ -12,6 +12,7 @@
   <div id="app">
     {{ message }}
     <button type="button" @click="change">Change</button>
+    <!-- <input type="text" :value="computedAboutA"> -->
   </div>
 
 
@@ -19,7 +20,11 @@
     new Vue({
       el: '#app',
       data: {
-        message: true
+        message: true,
+        a: 1,
+        b: {
+          age: 27
+        }
       },
       beforeCreate() {
         console.log('beforeCreate: init(事件)')
@@ -41,6 +46,9 @@
         console.log('mounted:')
         console.log(this.$el)
         console.log(this.message)
+        // setInterval(() => {
+        //   this.a += 1
+        // }, 1000)
       },
       beforeUpdate() {
         console.log('beforeUpdate:')
@@ -68,8 +76,31 @@
       methods: {
         change: function () {
           this.message = !this.message
+          this.a = '111'
+          this.b.age = 80
         }
       },
+      watch: {
+        a: function(val, oldVal) {
+          console.log('当前值：' + val + '，旧值：' + oldVal)
+        },
+        b: {
+          handler: function (val, oldVal) { 
+            console.log('当前值：' + val.age + '，旧值：' + oldVal.age)
+          },
+          deep: true   // deep : true表示是否监听对象内部属性值的变化 
+        },
+        'b.age': function(val, oldVal) {
+          console.log('当前值：' + val + '，旧值：' + oldVal)
+        }
+      },
+      computed: {
+        computedAboutA: function() {
+          console.log('aaaa', this.a)
+          return this.a
+        }
+      },
+     
     })
 
     
