@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>动态组件之多标签切换</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  <style>
+    .tab-button {
+      padding: 6px 10px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background: #f0f0f0;
+      margin-bottom: -1px;
+      margin-right: -1px;
+    }
+
+    .tab-button:hover {
+      background: #e0e0e0;
+    }
+
+    .tab-button.active {
+      background: #e0e0e0;
+    }
+
+    .tab {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <button class="tab-button" v-for="tab of tabs" v-bind:class="currentTab === tab ? 'active' : ''" v-on:click="currentTab = tab" >{{ tab }}</button> -->
+    <button
+      v-for="tab of tabs"
+      :class="['tab-button', { active: currentTab === tab }]"
+      @click="currentTab = tab"
+    >
+      {{ tab }}
+    </button>
+    <component :is="currentTabComponent"></component>
+  </div>
+  <script>
+    Vue.component('tab-home', {
+      template: `<div class="tab">Home的内容</div>`
+    });
+    Vue.component('tab-posts', {
+      template: `<div class="tab">Posts的内容</div>`
+    });
+    Vue.component('tab-archive', {
+      template: `<div class="tab">Archive的内容</div>`
+    });
+    new Vue({
+      el: '#app',
+      data: {
+        currentTab: 'Home',
+        tabs: ['Home', 'Posts', 'Archive']
+      },
+      computed: {
+        currentTabComponent: function() {
+          return 'tab-' + this.currentTab.toLowerCase();
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
