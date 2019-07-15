@@ -1,5 +1,5 @@
 # gulp-project
-> 目前是为了同步 Windows 和 MacOS，直接使用了文件目录，仅仅启动了 browser-sync 插件
+> 目前是为了同步 Windows 和 MacOS，直接使用了文件目录，仅仅启动了 browser-sync 插件，方便静态文件使用。也开起了部分练习项目，比如vue、react等
 
 ## Learning Document
 
@@ -31,9 +31,10 @@ npm run dev
 * [] 允许玩家查看游戏的历史记录，也可以查看任意一个历史版本的游戏棋盘状态
 
 ```bash
-➜  gulp-project git:(master) cd src/myreact/01-ttt 
-➜  01-ttt git:(master) npm i
-➜  01-ttt git:(master) npm start
+cd ~/Documents/GitHub/gulp-project/project/myreact/01-ttt 
+
+➜  01-ttt git:(master) ✗ npm i
+➜  01-ttt git:(master) ✗ npm start   
 ```
 ## MyWebpack
 ```bash
