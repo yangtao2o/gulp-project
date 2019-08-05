@@ -14,5 +14,7 @@ gulp.task('browser-sync', function() {
   gulp.watch("**/*.html").on('change', browserSync.reload);
 });
 
-//默认
 gulp.task('browserSync', ['browser-sync']);
+
+//默认
+gulp.task('default', ['browserSync']);

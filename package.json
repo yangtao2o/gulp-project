@@ -4,8 +4,7 @@
   "description": "this is a project",
   "main": "gulpfile.js",
   "scripts": {
-    "dev": "gulp browserSync",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp browserSync"
   },
   "author": "",
   "license": "ISC",

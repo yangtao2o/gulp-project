@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Menu, Icon } from 'antd';
-import news from './../assets/img/news-logo.svg';
+import news from '../assets/img/news-logo.svg';
 
 const { SubMenu } = Menu;
 function Header() {

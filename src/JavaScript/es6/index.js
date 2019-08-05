@@ -119,7 +119,7 @@ for(let item in obj) {
 // 箭头函数
 const myarr = [1,3,4]
 myarr.map(item => item + 1)
-myarr.map((item, index) => console.log(item, index))
+myarr.map((item, index) => console.log({item, index}))
 // 等同于
 // var myarr = [1, 3, 4];
 // myarr.map(function (item) {
@@ -136,3 +136,8 @@ function fn() {
   arr.map(item => console.log(this))  // {a: 10}
 }
 fn.call({a: 10})
+const newTestArr = [];
+const testArr = [1,2,3,4,5]
+testArr.forEach(element => {
+  newTestArr.push(element*2)
+});
