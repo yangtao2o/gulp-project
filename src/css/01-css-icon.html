@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css 世界</title>
+  <style>
+    body {
+      color: #4a4a4a;
+    }
+
+    .icon1 {
+      box-sizing: border-box;
+      width: 24px;
+      height: 20px;
+      display: inline-block;
+      padding: 4px 0;
+      background: currentColor;
+      border-top: 4px solid currentColor;
+      border-bottom: 4px solid currentColor;
+      background-clip: content-box;
+    }
+
+    .icon2 {
+      box-sizing: border-box;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      padding: 3px;
+      border: 3px solid currentColor;
+      background: currentColor;
+      background-clip: content-box;
+    }
+
+    .padding1 {
+      background: brown;
+      overflow: hidden;
+    }
+
+    .padding1>div {
+      padding: 1%;
+    }
+
+    .margin1 {
+      background: blueviolet;
+      overflow: hidden;
+    }
+
+    .margin1>div {
+      margin: 1%;
+    }
+
+    .valign {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      background: #f40;
+    }
+    .border-box {
+      margin: 20px;
+      overflow: hidden;
+    }
+    .border-box > div {
+      margin: 20px;
+      float: left;
+    }
+    .border-box > div:nth-child(1) {
+      border: 25px solid ;
+      border-color: red orange yellow green;
+    }
+    .border-box > div:nth-child(2) {
+      width: 10px;
+      height: 10px;
+      border: 20px solid;
+      border-color: red orange yellow green;
+    }
+    .border-box > div:nth-child(3) {
+      width: 10px;
+      height: 10px;
+      border: 20px solid transparent;
+      border-top-color: red;
+    }
+    .border-box > div:nth-child(4) {
+      border: 20px solid transparent;
+      border-top-color: red;
+    }
+    .border-box > div:nth-child(5) {
+      border-style: solid;
+      border-width: 40px 20px;
+      border-color: red orange yellow green;
+    }
+    .border-box > div:nth-child(6) {
+      border-style: solid;
+      border-width: 40px 20px;
+      border-color: transparent;
+      border-top-color: red;
+    }
+    .line-height-box {
+      line-height: 30px;
+      background: orange;
+    }
+    .line-height-box span {
+      line-height: 100px;
+      background: blue;
+    }
+    .valign-box {
+      line-height: 30px;
+      background: blue;
+    }
+    .valign-box span {
+      font-size: 30px;
+    }
+    .valign-box2 {
+      background: green;
+      text-align: center;
+      /* line-height: 0; */
+      /* font-size: 0; */
+      color: #fff;
+    }
+    .valign-box2 span {
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      /* display: block; */
+      background: #fff;
+    }
+    .valign-box3 {
+      line-height: 120px;
+      background: #f90;
+    }
+    .valign-box3 div {
+      width: 200px;
+      margin: 0 20px;
+      line-height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="icon1"></div>
+  <div class="icon2"></div>
+  <div class="icon1"></div>
+  <div class="padding1">
+    <div></div>
+  </div>
+  <div class="margin1">
+    <div></div>
+  </div>
+  <div class="valign"></div>
+  <div class="border-box">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="line-height-box">
+    xxxx
+    <span></span>
+  </div>
+  <div class="valign-box">
+    xxx
+    <span>你说什么x</span>
+  </div>
+  <div class="valign-box2">解决 幽灵白点的方法
+    <span></span>
+  </div>
+  <div class="valign-box3">
+    <div>垂直居中垂直居中垂直居中垂直居中垂直居中垂直居中垂直居中垂直居中垂直居中垂直居中垂直居中垂直居中</div>
+  </div>
+</body>
+
+</html>

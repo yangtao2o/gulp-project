@@ -11,14 +11,41 @@
 * [Class、继承、Promise](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/es6/doc.md )
 
 ## Gulp(全局)
+
+#### 文档
+* [Gulp](https://gulpjs.com/docs/en/getting-started/quick-start)
+* [Browsersync + Gulp.js](https://www.browsersync.io/docs/gulp)
 ```bash
-// Update
+# 克隆
 git clone https://github.com/yangtao2o/gulp-project.git
 
-npm install
+cd gulp-project
 
-// Gulp start
+# 安装
+yarn install
+
+# 启动
 npm run dev
+```
+gulpfile.js配置：只使用了 `browser-sync` 插件来监控 html/css/js 文件的变化，并自动刷新浏览器页面。
+```javascript
+var gulp = require('gulp');
+var browserSync = require('browser-sync').create();
+
+gulp.task('browser-sync', function() {
+  browserSync.init({
+    server: {
+      baseDir: './src',
+      directory: true
+    },
+    notify: false
+  });
+  gulp.watch("src/**/*.js").on('change', browserSync.reload);
+  gulp.watch("src/**/*.css").on('change', browserSync.reload);
+  gulp.watch("src/**/*.html").on('change', browserSync.reload);
+});
+
+gulp.task('default', ['browser-sync']);
 ```
 ## MyReact
 

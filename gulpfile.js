@@ -1,20 +1,18 @@
-//导入工具包 require('node_modules里对应模块')
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 
 gulp.task('browser-sync', function() {
   browserSync.init({
     server: {
-      baseDir: ['./src'],
+      baseDir: './src',
       directory: true
     },
     notify: false // 开启静默模式
   });
   //修改html后刷新页面
-  gulp.watch("**/*.html").on('change', browserSync.reload);
+  gulp.watch("src/**/*.js").on('change', browserSync.reload);
+  gulp.watch("src/**/*.css").on('change', browserSync.reload);
+  gulp.watch("src/**/*.html").on('change', browserSync.reload);
 });
 
-gulp.task('browserSync', ['browser-sync']);
-
-//默认
-gulp.task('default', ['browserSync']);
+gulp.task('default', ['browser-sync']);
