@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Flex - 弹性布局</title>
+  <style>
+    p {
+      font-size: 18px;
+    }
+
+    .wrap {
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    .outer {
+      width: 22%;
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+    }
+
+    .box-wrap {
+      display: flex;
+    }
+
+    .box-wrap-2 {
+      flex-direction: row-reverse;
+    }
+
+    .box-wrap-3 {
+      flex-direction: column;
+    }
+
+    .box-wrap-4 {
+      flex-direction: column-reverse;
+    }
+
+    .box {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      background: orange;
+      color: #fff;
+      font-size: 30px;
+      line-height: 50px;
+      text-align: center;
+    }
+
+    .box.sm {
+      width: 25px;
+    }
+
+    .box.lg {
+      width: 100px;
+    }
+
+    .justify-box {
+      display: flex;
+      padding: 10px 0;
+      background: #f3f3f3;
+    }
+
+    .justify-box.end {
+      justify-content: flex-end;
+    }
+
+    .justify-box.center {
+      justify-content: center;
+    }
+
+    .justify-box.space-between {
+      justify-content: space-between;
+    }
+
+    .justify-box.space-around {
+      justify-content: space-around;
+    }
+    .align-box {
+      display: flex;
+      background: #89479b;
+      justify-content: space-between;
+    }
+    .align-box.flex-start {
+      align-items: flex-start;
+    }
+    .align-box.flex-end {
+      align-items: flex-end;
+    }
+    .align-box.center {
+      align-items: center;
+    }
+    .align-box.stretch {
+      align-items: stretch;
+    }
+    .align-box.baseline {
+      align-items: baseline;
+    }
+    .align-box .box {
+      margin: 0;
+    }
+    .box.h1 {
+      height: 80px;
+    }
+    .box.h2 {
+      height: 100px;
+    }
+    .box.h3 {
+      height: 50px;
+    }
+    .box.h4 {
+      height: 70px;
+    }
+    .center-box {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      background: #89479b;
+      align-items: center;
+      justify-content: center;
+    }
+    .align-box-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-end;
+      background: #89479b;
+      flex-shrink: 1;
+    }
+    .align-box-content .box {
+      min-width: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="outer">
+      <p>row</p>
+      <div class="box-wrap box-wrap-1">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+      </div>
+    </div>
+    <div class="outer">
+      <p>row-reverse</p>
+      <div class="box-wrap box-wrap-2">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+      </div>
+    </div>
+    <div class="outer">
+      <p>column</p>
+      <div class="box-wrap box-wrap-3">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+      </div>
+    </div>
+    <div class="outer">
+      <p>column-reverse</p>
+      <div class="box-wrap box-wrap-4">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+      </div>
+    </div>
+    <div class="outer">
+      <p>flex-start</p>
+      <div class="justify-box">
+        <div class="box">1</div>
+        <div class="box sm">2</div>
+        <div class="box lg">3</div>
+      </div>
+      <p>flex-end</p>
+      <div class="justify-box end">
+        <div class="box">1</div>
+        <div class="box sm">2</div>
+        <div class="box lg">3</div>
+      </div>
+      <p>center</p>
+      <div class="justify-box center">
+        <div class="box">1</div>
+        <div class="box sm">2</div>
+        <div class="box lg">3</div>
+      </div>
+      <p>space-between</p>
+      <div class="justify-box space-between">
+        <div class="box">1</div>
+        <div class="box sm">2</div>
+        <div class="box lg">3</div>
+      </div>
+      <p>space-around</p>
+      <div class="justify-box space-around">
+        <div class="box">1</div>
+        <div class="box sm">2</div>
+        <div class="box lg">3</div>
+      </div>
+    </div>
+    <div class="outer">
+      <p>flex-start</p>
+      <div class="align-box flex-start">
+        <div class="box h1">1</div>
+        <div class="box h2">2</div>
+        <div class="box h3">3</div>
+        <div class="box h4">4</div>
+      </div>
+      <p>flex-end</p>
+      <div class="align-box flex-end">
+        <div class="box h1">1</div>
+        <div class="box h2">2</div>
+        <div class="box h3">3</div>
+        <div class="box h4">4</div>
+      </div>
+      <p>center</p>
+      <div class="align-box center">
+        <div class="box h1">1</div>
+        <div class="box h2">2</div>
+        <div class="box h3">3</div>
+        <div class="box h4">4</div>
+      </div>
+      <p>stretch 默认</p>
+      <div class="align-box stretch">
+        <div class="box h1">1</div>
+        <div class="box h2">2</div>
+        <div class="box h3">3</div>
+        <div class="box h4">4</div>
+      </div>
+      <p>baseline</p>
+      <div class="align-box baseline">
+        <div class="box h1">1</div>
+        <div class="box h2" style="font-size: 6em;">x</div>
+        <div class="box h3">y</div>
+        <div class="box h4">哈</div>
+      </div>
+    </div>
+    <div class="outer">
+      <div class="center-box">
+        <div class="box"></div>
+      </div>
+      <p>stretch 默认</p>
+      <div class="align-box-content">
+        <div class="box h1">1</div>
+        <div class="box h2">2</div>
+        <div class="box h3">3</div>
+        <div class="box h4">4</div>
+        <div class="box h4">5</div>
+        <div class="box h4">6</div>
+        <div class="box h4">7</div>
+        <div class="box h4">8</div>
+        <div class="box h4">9</div>
+        <div class="box h4">10</div>
+        <div class="box h4">11</div>
+        <div class="box h4">12</div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
