@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>布局</title>
+  <style>
+    .box {
+      display: flex;
+      flex: auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .box-1 .left,
+    .box-2 .left,
+    .box-3 .left {
+      width: 100px;
+      background-color: #999;
+    }
+
+    .right {
+      background: #eee;
+    }
+
+    .box-1 .left {
+      float: left;
+      height: 50px;
+    }
+
+    .box-1 .right-fix {
+      float: right;
+      width: 100%;
+      margin-left: -100px;
+    }
+
+    .box-1 .right {
+      margin-left: 100px;
+      height: 50px;
+    }
+
+    .box-2 .parent {
+      display: flex;
+      width: 100%;
+      height: 50px;
+    }
+
+    .box-2 .right {
+      flex: 1;
+    }
+
+    .box-3 .parent {
+      display: grid;
+      width: 100%;
+      height: 50px;
+      grid-template-columns: 100px auto;
+    }
+
+    .box-4 .parent {
+      width: 100%;
+      height: 50px;
+      padding-left: 100px;
+    }
+
+    .box-4 .left {
+      width: 100%;
+      height: 50px;
+      float: left;
+      margin-left: -100px;
+      background: #eee;
+    }
+
+    .box-4 .right {
+      width: 100px;
+      height: 50px;
+      float: right;
+      background: #999;
+    }
+
+    .box-5 .parent {
+      width: 100%;
+      height: 50px;
+      display: grid;
+      grid-template-columns: 100px 200px auto;
+    }
+
+    .box-6 .parent {
+      width: 100%;
+      height: 50px;
+      display: flex;
+    }
+
+    .box-6 .right {
+      flex: 1;
+    }
+
+    .box-5 .left,
+    .box-6 .left {
+      width: 100px;
+      background: #eee;
+    }
+
+    .box-5 .center,
+    .box-6 .center {
+      width: 200px;
+      background: #aaa;
+    }
+
+    .box-5 .right,
+    .box-6 .right {
+      background: #999;
+    }
+
+    .box-7 .parent {
+      width: 100%;
+      height: 50px;
+      padding-left: 100px;
+      padding-right: 200px;
+    }
+
+    .box-7 .center {
+      width: 100%;
+      height: 100%;
+      float: left;
+      background: #f90;
+    }
+
+    .box-7 .left {
+      width: 100px;
+      height: 100%;
+      margin-left: -100%;
+      position: relative;
+      right: 100px;
+      float: left;
+      background: #f30;
+    }
+
+    .box-7 .right {
+      width: 200px;
+      height: 100%;
+      float: left;
+      margin-right: -200px;
+      background: #f30;
+    }
+
+    .box-8 .parent {
+      width: 100%;
+      height: 100px;
+      display: flex;
+    }
+
+    .box-8 .center {
+      order: 2;
+      flex: 1 0 auto;
+      background: #f90;
+    }
+
+    .box-8 .left {
+      order: 1;
+      flex: 0 0 100px;
+      background: #f30;
+    }
+
+    .box-8 .right {
+      order: 3;
+      flex: 0 0 200px;
+      background: #f30;
+    }
+    .box-9 .parent {
+      display: grid;
+      background: #f90;
+      width: 100%;
+      height: 100px;
+      grid-template-columns: 100px 1fr 200px;
+    }
+    .box-9 .left {
+      background: #f30;
+    }
+
+    .box-9 .right {
+      background: #f30;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box box-1">
+    <div class="left">左列定宽</div>
+    <div class="right-fix">
+      <div class="right">右列自适应：利用 float+margin(fix) 实现</div>
+    </div>
+  </div>
+  <div class="box box-2">
+    <div class="parent">
+      <div class="left">左侧定宽</div>
+      <div class="right">右侧自适应： 使用 flex 实现</div>
+    </div>
+  </div>
+  <div class="box box-3">
+    <div class="parent">
+      <div class="left">左侧定宽</div>
+      <div class="right">右侧自适应： 使用 gird 实现</div>
+    </div>
+  </div>
+  <div class="box box-4">
+    <div class="parent">
+      <div class="left">左侧自适应</div>
+      <div class="right">右侧固定</div>
+    </div>
+  </div>
+  <div class="box box-5">
+    <div class="parent">
+      <div class="left">左列定宽</div>
+      <div class="center">中间定宽</div>
+      <div class="right">右列自适应: grid</div>
+    </div>
+  </div>
+  <div class="box box-6">
+    <div class="parent">
+      <div class="left">左列定宽</div>
+      <div class="center">中间定宽</div>
+      <div class="right">右列自适应: flex</div>
+    </div>
+  </div>
+  <div class="box box-7">
+    <div class="parent">
+      <div class="center">中间自适应：圣杯布局方法</div>
+      <div class="left">左列定宽</div>
+      <div class="right">右侧定宽</div>
+    </div>
+  </div>
+  <div class="box box-8">
+    <div class="parent">
+      <div class="center">
+        <div class="center-content">中间自适应：圣杯布局方法(flex)</div>
+      </div>
+      <div class="left">左列定宽</div>
+      <div class="right">右侧定宽</div>
+    </div>
+  </div>
+  <div class="box box-9">
+    <div class="parent">
+      <div class="left">左列定宽</div>
+      <div class="center">
+          中间自适应：圣杯布局方法(grid)
+      </div>
+      <div class="right">右侧定宽</div>
+    </div>
+  </div>
+</body>
+
+</html>
