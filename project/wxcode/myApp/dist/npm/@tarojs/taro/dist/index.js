@@ -14,6 +14,7 @@ function _typeof(obj) {
   }
 
   return _typeof(obj);
+}
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
