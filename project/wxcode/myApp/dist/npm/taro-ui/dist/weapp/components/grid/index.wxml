@@ -1,0 +1,22 @@
+<block wx:if="{{$taroCompReady}}">
+    <block wx:if="{{anonymousState__temp12}}">
+        <view></view>
+    </block>
+    <view class="{{anonymousState__temp}}" wx:else>
+        <view class="at-grid__flex" wx:key="i" wx:for="{{loopArray0}}" wx:for-item="item" wx:for-index="i">
+            <view wx:key="index" class="{{childItem.$loopState__temp3}}" bindtap="handleClick" style="{{childItem.$loopState__temp5}}" wx:for="{{item.$anonymousCallee__0}}" wx:for-item="childItem" wx:for-index="index" data-e-tap-so="this" data-e-tap-a-a="{{childItem.$original}}" data-e-tap-a-b="{{index}}" data-e-tap-a-c="{{i}}">
+                <view class="at-grid-item__content">
+                    <view class="at-grid-item__content-inner">
+                        <view class="content-inner__icon">
+                            <block wx:if="{{childItem.$original.image}}">
+                                <image class="content-inner__img" src="{{childItem.$original.image}}" mode="scaleToFill"></image>
+                            </block>
+                            <block wx:if="{{childItem.$loopState__temp11}}"><text class="{{childItem.$loopState__temp7}}" style="{{childItem.$loopState__temp9}}"></text>
+                            </block>
+                        </view><text class="content-inner__text">{{childItem.$original.value}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</block>

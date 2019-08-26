@@ -1,0 +1,9 @@
+<block wx:if="{{$taroCompReady}}">
+    <view>
+        <at-message></at-message>
+        <at-button compid="{{$compid__71}}">普通消息</at-button>
+        <at-button compid="{{$compid__72}}">成功消息</at-button>
+        <at-button compid="{{$compid__73}}">错误消息</at-button>
+        <at-button compid="{{$compid__74}}">警告消息</at-button>
+    </view>
+</block>

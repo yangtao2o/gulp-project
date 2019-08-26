@@ -1,0 +1,211 @@
+<html>
+<title>考勤时间统计工具：</title>
+<meta charset="utf-8">
+
+<body>
+  <div style="padding: 20px; width: 45%; height: auto; float: left; overflow: hidden;">
+    <div style="float: left; width: 100%; margin-bottom: 20px">
+      考勤时间统计工具：<input type="button" value="开始统计" onclick="todo();"><br>
+      <textarea wrap="off" style="width: 100%; height: 500px; margin-top: 10px; font-size: 14px;" id="input_data"
+        placeholder="填入每天的考勤记录，格式例如:'09:0018:00 08:3017:59',每个统计周期写在同一行"></textarea>
+    </div>
+  </div>
+  <div id="results" style="padding: 20px; width: 45%; height: auto; float: left; overflow: hidden; margin-left: 20px;">
+  </div>
+</body>
+
+</html>
+<script>
+  var cacheIds = ['input_data', 'qj_data', 'jb-data'];
+  Cache = {
+    type: 'local',
+    setType: function () {
+      if (this.type == 'session') {
+        return window.sessionStorage;
+      }
+      if (this.type == 'local') {
+        return window.localStorage;
+      }
+      console.log('类型错误！');
+    },
+    set: function ($key, $value) {
+      this.setType().setItem($key, $value);
+    },
+    get: function ($key) {
+      return this.setType().getItem($key)
+    }
+  };
+
+  if (cacheIds) {
+    for (var k in cacheIds) {
+      var input_id = cacheIds[k],
+        tmp = Cache.get(input_id);
+
+      if (tmp && document.getElementById(input_id)) {
+        document.getElementById(input_id).value = tmp;
+      }
+    }
+  }
+
+  function todo() {
+    if (cacheIds) {
+      for (var k in cacheIds) {
+        var input_id = cacheIds[k];
+
+        if (document.getElementById(input_id)) {
+          Cache.set(input_id, document.getElementById(input_id).value);
+        }
+      }
+    }
+
+    var data = document.getElementById("input_data").value.replace(/：/g, ':'),
+      rows = [],
+      lines = [],
+      results = "";
+    if (data) {
+      rows = data.split(/\n/);
+      for (var k in rows) {
+        var row = rows[k].replace(/^\s+|\s+$/g, ""),
+          cols = row.split(/\s+/),
+          days = 0,
+          worktime = 0,
+          worktime_ori = 0,
+          lastDayStartTime = '',
+          lastDayEndTime = '',
+          details = [];
+
+        if (row && cols && cols.length && cols) {
+          for (var j in cols) {
+            if (cols[j].length > 5) {
+              worktime += getworktime(cols[j]);
+              details.push(min2hour(getworktime(cols[j])));
+            } else if (cols[j].length == 5 && j == (cols.length - 1)) {
+              lastDayStartTime = str2min(cols[j]);
+            }
+            console.log(j, cols.length - 1, cols[j].length, cols[j].length == 5 && j == (cols.length - 1));
+            days++;
+          }
+          worktime_ori = 480 * days;
+          if (lastDayStartTime) {
+            lastDayEndTime = lastDayStartTime + worktime_ori - worktime;
+            if (lastDayStartTime < str2min("11:30")) {
+              lastDayEndTime += 60;
+            }
+            if (lastDayEndTime < str2min("16:00")) {
+              lastDayEndTime = str2min("16:00");
+            }
+            if (lastDayEndTime > str2min("23:59")) {
+              lastDayEndTime = min2time(str2min("23:59")) + ',还需补足' + min2hour(lastDayEndTime - str2min("23:59"));
+            } else {
+              lastDayEndTime = min2time(lastDayEndTime);
+            }
+
+
+          }
+
+          lines.push({
+            details: details,
+            days: days,
+            worktime: worktime,
+            worktime_ori: worktime_ori,
+            start: lastDayStartTime || '',
+            end: lastDayEndTime || ''
+          });
+        }
+      }
+      for (var k in lines) {
+        line = lines[k];
+        console.log(line);
+        results += '<br><br>第' + (k * 1 + 1) + '行, 共' + line.days + '天:';
+        results += '<br>应到<span style="color: #007eff;">' + min2hour(line.worktime_ori) + '</span>, 实到<span style="color: #007eff;">' + min2hour(line.worktime) + "</span>,";
+        if (line.worktime_ori > line.worktime) {
+          results += '缺少 <span style="color: #ff0000;">' + min2hour(line.worktime_ori - line.worktime) + '</span>';
+        } else if (line.worktime_ori < line.worktime) {
+          results += '超过标准时间 <span style="color: #007eff;">' + min2hour(line.worktime - line.worktime_ori) + '</span>';
+        } else {
+          results += "分秒不差";
+        }
+        results += '<br>打卡明细：' + line.details.join(" / ");
+        if (line.end) {
+          results += '<br>今日最早下班时间<span style="color: #007eff; font-weight: bold; font-size: 18px;">' + line.end + '</span>';
+        }
+      }
+      showRs(results);
+    }
+  }
+
+  function showRs(str) {
+    document.getElementById("results").innerHTML = str;
+  }
+
+  function str2min(timStr) {
+    if (timStr.length != 5) {
+      return 0
+    }
+    var tmp = timStr.split(":");
+    return tmp[0] * 60 + tmp[1] * 1;
+  }
+
+  function getworktime(str) {
+    if (str.length >= 10) {
+      var s_time = str.substr(0, 5),
+        e_time = str.substr(str.length - 5, 5);
+
+      if (str2min(e_time) < str2min('11:30') || str2min(s_time) > str2min('12:30') || ((str2min(e_time) - str2min(s_time)) == 0)) {
+        return str2min(e_time) - str2min(s_time);
+      } else {
+        return str2min(e_time) - str2min(s_time) - 60;
+      }
+
+
+    } else {
+      return 0;
+    }
+  }
+
+  function min2hour(min) {
+    var rs = '',
+      h = Math.floor(min / 60);
+    m = parseInt(min) % 60;
+
+    if (h > 0) {
+      rs += h + '小时';
+    }
+    if (m > 0) {
+      rs += m + '分';
+    }
+
+    if (rs == '') {
+      rs = '0分';
+    }
+    return rs;
+  }
+
+  function min2time(min) {
+    var rs = '',
+      h = Math.floor(min / 60);
+    m = parseInt(min) % 60;
+
+    if (h > 0) {
+      if (h < 10) {
+        rs += '0';
+      }
+      rs += h + ':';
+    } else {
+      rs += '00:';
+    }
+    if (m > 0) {
+      if (m < 10) {
+        rs += '0';
+      }
+      rs += m;
+    } else {
+      rs += '00';
+    }
+
+    if (rs == '') {
+      rs = '00:00';
+    }
+    return rs;
+  }
+</script>

@@ -1,0 +1,11 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="index">
+        <at-nav-bar compid="{{$compid__79}}">
+            <view>Taro UI</view>
+        </at-nav-bar>
+        <at-avatar compid="{{$compid__80}}"></at-avatar><text>Hello world!</text>
+        <grid-layout></grid-layout>
+        <at-button compid="{{$compid__81}}">按钮文案</at-button>
+        <at-tab-bar compid="{{$compid__82}}"></at-tab-bar>
+    </view>
+</block>

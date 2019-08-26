@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "at-grid": "../../npm/taro-ui/dist/weapp/components/grid/index"
+  }
+}

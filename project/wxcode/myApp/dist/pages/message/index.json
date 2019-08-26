@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "at-message": "../../npm/taro-ui/dist/weapp/components/message/index"
+  }
+}
