@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件委托</title>
+</head>
+
+<body>
+  <ul id="todoApp">
+    <li class="item">我爱笑</li>
+    <li class="item">我爱笑234</li>
+    <li class="item">4321我爱234笑1</li>
+    <li class="item">我二分爱笑</li>
+    <li class="item">我爱笑</li>
+    <li class="item">我爱笑234</li>
+    <li class="item">4321我爱234笑1</li>
+    <li class="item">我二分爱笑</li>
+    <li class="item">我爱笑</li>
+    <li class="item">我爱笑234</li>
+    <li class="item">4321我爱234笑1</li>
+    <li class="item">我二分爱笑</li>
+    <li class="item">我爱笑</li>
+    <li class="item">我爱笑234</li>
+    <li class="item">4321我爱234笑1</li>
+    <li class="item">我二分爱笑</li>
+  </ul>
+  <script>
+    // 1
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   let app = document.getElementById('todoApp');
+    //   let items = app.getElementsByClassName('item');
+    //   for (let item of items) {
+    //     item.addEventListener('click', function() {
+    //       console.log('You clicked on item: ' + item.innerHTML);
+    //     })
+    //   }
+    // })
+
+    // 2
+    let app = document.getElementById('todoApp');
+    app.addEventListener('click', function (e) {
+      console.log(this, e)
+      if (e.target && e.target.nodeName === 'LI') {
+        console.log('You clicked on item: ' + e.target.innerHTML);
+      }
+    });
+
+    // const arr = [10, 12, 15, 21];
+    // for(var i=0, l=arr.length; i < l; i++) {
+    //     (function(index) {
+    //       setTimeout(function() {
+    //         console.log(index)
+    //       }, 3000);
+    //     })(i)
+    // }
+    // for(var i = 0, l = arr.length; i < l; i++) {
+    //   setTimeout(function(index) {
+    //     return function () { 
+    //       console.log(index)
+    //     }
+    //   }(i), 3000);
+    // }
+    // for(let i = 0, l = arr.length; i < l; i++) {
+    //   setTimeout(function() {
+    //     console.log(i)
+    //   }, 3000)
+    // }
+
+    // function throttle(fn, interval) {
+    //   let last = 0;
+    //   return function() {
+    //     let context = this;
+    //     let args = arguments;
+    //     let now = +new Date();
+    //     if(now - last >= interval) {
+    //       last = now;
+    //       fn.apply(context, args);
+    //     }
+    //   }
+    // }
+
+    // function debounce(fn, delay) {
+    //   let timer = null;
+    //   return function() {
+    //     let context = this;
+    //     let args = arguments;
+    //     if(timer) {
+    //       clearTimeout(timer);
+    //     }
+    //     timer = setTimeout(function() {
+    //       fn.apply(context, args);
+    //     }, delay);
+    //   }
+    // }
+
+    // function throttle(fn, delay) {
+    //   let timer = null;
+    //   let last = 0;
+    //   return function() {
+    //     let context = this;
+    //     let args = arguments;
+    //     let now = +new Date();
+    //     if(timer) {
+    //       clearTimeout(timer);
+    //     }
+    //     if(now - last < delay) {
+    //       timer = setTimeout(function() {
+    //         fn.apply(context, args);
+    //       }, delay);
+    //     } else {
+    //       last = now;
+    //       fn.apply(context, args);
+    //     }
+    //   }
+    // }
+    // function debounce(event, delay, flag) {
+    //   let timer = null;
+    //   return function (...args) {
+    //     clearTimeout(timer);
+    //     if(flag && !timer) {
+    //       event.apply(this, args);
+    //     }
+    //     timer = setTimeout(() => {
+    //       event.apply(this, args);
+    //     }, delay);
+    //   }
+    // }
+
+    // function throttle(event, delay) {
+    //   let pre = 0;
+    //   return function (...args) {
+    //     let now = Date.now();
+    //     if(now - pre > delay) {
+    //       pre = now;
+    //       event.apply(this, args);
+    //     }
+    //   }
+    // } 
+    // function throttle(event, delay) {
+    //   let timer = null;
+    //   return function(...args) {
+    //     if(!timer) {
+    //       timer = setTimeout(() => {
+    //         timer = null;
+    //         event.apply(this, args);
+    //       }, delay)
+    //     }
+    //   }
+    // }
+
+    // function throttle(event, delay) {
+    //   let pre = 0;
+    //   let timer = null;
+    //   return function(...args) {
+    //     let now = Date.now();
+    //     if(now - pre > delay) {
+    //       clearTimeout(timer);
+    //       timer = null;
+    //       pre = now;
+    //       event.apply(this, args);
+    //     } else if(!timer) {
+    //       timer = setTimeout(() => {
+    //         event.apply(this, args);
+    //       }, delay);
+    //     }
+    //   }
+    // }
+
+    // 默认的（有头有尾），设置 { leading: false } 的，以及设置 { trailing: false } 的
+    // const throttle = function(func, wait, options) {
+    //   var timeout, context, args, result;
+    //   var previous = 0;
+
+    //   if(!options) options = {};
+
+    //   var later = function() {
+    //     previous = options.leading === false ? 0 : _.now();
+
+    //     timeout = null;
+
+    //     result = func.apply(context, args);
+    //     if(!timeout) context = args = null;
+    //   };
+
+    //   var throttled = function() {
+    //     var now = _.now();
+    //     if(!previous && options.leading === false) previous = now;
+
+    //     var remaining = wait - (now - previous);
+    //     context = this;
+    //     args = arguments;
+
+    //     if(remaining <= 0 || remaining > wait) {
+    //       if(timeout) {
+    //         clearTimeout(timeout);
+    //         timeout = null;
+    //       }
+    //       previous = now;
+    //       result = func.apply(context, args);
+    //       if(!timeout) context = args = null;
+    //     } else if(!timeout && options.trailing !== false) {
+    //       timeout = setTimeout(later, ramaining);
+    //     }
+    //     return result;
+    //   };
+
+    //   throttle.cancel = function() {
+    //     clearTimeout(timeout);
+    //     previous = 0;
+    //     timeout = context = args = null;
+    //   };
+    //   return throttled;
+    // }
+
+    // const better_scroll = throttle(function() {
+    //   console.log('滚动了')
+    // }, 3000);
+    // document.addEventListener('scroll', better_scroll);
+
+    // function clone(target) {
+    //   if (typeof target === 'Object') {
+    //     let cloneTarget;
+    //     if (Array.isArray(target)) {
+    //       cloneTarget = [];
+    //       for (let i = 0; i < target.length; i++) {
+    //         cloneTarget[i] = clone(target[i]);
+    //       }
+    //     } else {
+    //       cloneTarget = {};
+    //       for (const key in target) {
+    //         cloneTarget[key] = clone(target[key]);
+    //       }
+    //     }
+    //     return cloneTarget;
+    //   } else {
+    //     return target;
+    //   }
+    // }
+    // let arr = [1, 3, 2, 4, 5];
+    // let obj = {
+    //   name: 'yangtap',
+    //   age: 20,
+    //   love: {
+    //     book: 'hahah',
+    //     car: 'heihe'
+    //   }
+    // }
+
+    // function currying(fn, ...args) {
+    //   if (args.length >= fn.length) {
+    //     return fn(...args);
+    //   } else {
+    //     return (...args2) => currying(fn, ...args, ...args2);
+    //   }
+    // }
+    // function getUrl(protocol, domain, path) {
+    //   return protocol + "://" + domain + "/" + path;
+    // }
+    // let conardliSite = currying(getUrl)('http', 'www.conardli.top');
+    // let page1 = conardliSite('page1.html');
+
+    // function myInstanceof(target, origin) {
+    //   const proto = target.__proto__;
+    //   if (proto) {
+    //     if (origin.prototype === proto) {
+    //       return true;
+    //     } else {
+    //       return myInstanceof(proto, origin);
+    //     }
+    //   } else {
+    //     return false;
+    //   }
+    // }
+    // let aaa = {};
+    // let myObj = { a: 1, b: 2 };
+    // console.log(myInstanceof(myObj, aaa))
+    // console.log(aaa instanceof Object)
+
+    // const tasks = [];
+    // const output = (i) => {
+    //   return new Promise((resolve) => {
+    //     setTimeout(() => {
+    //       console.log(i)
+    //       resolve();
+    //     }, i * 1000);
+    //   })
+    // }
+    // for (var i = 0; i < 5; i++) {
+    //   tasks.push(output(i));
+    // }
+
+    // Promise.all(tasks).then(() => {
+    //   setTimeout(() => {
+    //     console.log(i)
+    //   }, 1000);
+    // });
+
+    const sleep = (timeountMS) => new Promise((resolve) => {
+      setTimeout(resolve, timeountMS);
+    });
+    (async () => {
+      for (var i = 0; i < 5; i++) {
+        if(i>0) {
+          await sleep(1000)
+        }
+        console.log(i)
+      }
+      await sleep(1000)
+      console.log(i)
+    })();
+  </script>
+</body>
+
+</html>
