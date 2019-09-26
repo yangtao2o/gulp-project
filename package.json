@@ -10,6 +10,12 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.18.2",
+    "cz-conventional-changelog": "^3.0.2",
     "gulp": "^3.9.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
