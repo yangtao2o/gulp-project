@@ -17,5 +17,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "underscore": "^1.9.1",
+    "zepto": "^1.2.0"
   }
 }
