@@ -1,4 +1,4 @@
-# javscript
+# Zepto init
 
 ### typeof 运算符
 

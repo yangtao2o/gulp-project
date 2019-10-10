@@ -99,7 +99,13 @@ var Zepto = (function() {
     temp && tempParent.removeChild(element);
     return match;
   };
-
+  // 判断 obj 的数据类型
+  // $.each(
+  //   "Boolean Number String Function Array Date RegExp Object Error".split(" "),
+  //   function(i, name) {
+  //     class2type["[object " + name + "]"] = name.toLowerCase();
+  //   }
+  // );
   function type(obj) {
     return obj == null
       ? String(obj)
@@ -118,6 +124,7 @@ var Zepto = (function() {
   function isObject(obj) {
     return type(obj) == "object";
   }
+  // 判断是否是由字面量形式 {} 或者是构造函数 new Object 创建的对象 
   function isPlainObject(obj) {
     return (
       isObject(obj) &&
