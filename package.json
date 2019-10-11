@@ -19,6 +19,7 @@
     }
   },
   "dependencies": {
+    "benchmark": "^2.1.4",
     "lodash": "^4.17.15",
     "underscore": "^1.9.1",
     "zepto": "^1.2.0"

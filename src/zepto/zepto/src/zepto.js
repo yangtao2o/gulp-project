@@ -159,6 +159,7 @@ var Zepto = (function() {
       return chr ? chr.toUpperCase() : "";
     });
   };
+  // 转换成 css 
   function dasherize(str) {
     return str
       .replace(/::/g, "/")
@@ -167,9 +168,13 @@ var Zepto = (function() {
       .replace(/_/g, "-")
       .toLowerCase();
   }
+  console.log(dasherize('width: 100px, height: 200px'));  // 'width: 100px, height: 200px'
+  console.log(dasherize('paddingTop: 10px, backgroundColor: #ccc'));  // 'padding-top: 10px, background-color: #ccc'
+
+  // 数组去重
   uniq = function(array) {
     return filter.call(array, function(item, idx) {
-      return array.indexOf(item) == idx;
+      return array.indexOf(item) == idx;  // 当获取对象的所在位置与已有索引相等，则返回唯一值
     });
   };
 
@@ -178,26 +183,30 @@ var Zepto = (function() {
       ? classCache[name]
       : (classCache[name] = new RegExp("(^|\\s)" + name + "(\\s|$)"));
   }
-
+  // 是否需要增加 'px'
+  // maybeAddPx('paddingTop', 10) -> '10px'
   function maybeAddPx(name, value) {
     return typeof value == "number" && !cssNumber[dasherize(name)]
       ? value + "px"
       : value;
   }
-
+  // 获取一个元素的默认 display 样式值
   function defaultDisplay(nodeName) {
     var element, display;
     if (!elementDisplay[nodeName]) {
       element = document.createElement(nodeName);
       document.body.appendChild(element);
-      display = getComputedStyle(element, "").getPropertyValue("display");
+      // Window.getComputedStyle()方法返回一个对象，该对象在应用活动样式表并解析这些值可能包含的任何基本计算后报告元素的所有CSS属性的值
+      // getPropertyValue()方法可以获取CSS样式申明对象上的属性值（直接属性名称）
+      // https://www.zhangxinxu.com/wordpress/2012/05/getcomputedstyle-js-getpropertyvalue-currentstyle/
+      display = getComputedStyle(element, "").getPropertyValue("display");  // getComputedStyle(element, "")["display"]
       element.parentNode.removeChild(element);
       display == "none" && (display = "block");
       elementDisplay[nodeName] = display;
     }
     return elementDisplay[nodeName];
   }
-
+  //返回一个元素的子元素，数组形式
   function children(element) {
     return "children" in element
       ? slice.call(element.children)
@@ -206,6 +215,7 @@ var Zepto = (function() {
         });
   }
 
+  // 大 Z 构造函数，构建数组对象
   function Z(dom, selector) {
     var i,
       len = dom ? dom.length : 0;
@@ -248,6 +258,11 @@ var Zepto = (function() {
     return dom;
   };
 
+
+  // 上文定义 zepto = {}
+  // 上文定义 zepto.matches = function(element, selector) { /* 判断elem是否符合selector的要求 */ }
+  // 上文定义 zepto.fragment = function(html, name, properties) { /* 通过html字符串获取文档碎片 */ }
+  
   // `$.zepto.Z` swaps out the prototype of the given `dom` array
   // of nodes with `$.fn` and thus supplying all the Zepto functions
   // to the array. This method can be overridden in plugins.

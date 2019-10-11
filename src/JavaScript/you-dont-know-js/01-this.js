@@ -22,3 +22,17 @@ var bar = function() {
 
 var b = bar(3)
 console.log({b})
+
+function getArticleTags() {
+  var parent = document.getElementsByClassName('new-tags')[0];
+  var tags = parent.getElementsByTagName('a');
+  var contents = [];
+  for(var i = 0; i < tags.length; i++) {
+    var self = tags[i];
+    var txt = tags[i].innerText;
+    if(txt) {
+      contents.push(txt)
+    }
+  }
+  return contents;
+}
