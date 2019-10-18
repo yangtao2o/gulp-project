@@ -1,5 +1,5 @@
-# gulp-project
-> 目前是为了同步 Windows 和 MacOS，直接使用了文件目录，仅仅启动了 browser-sync 插件，方便静态文件使用。也开起了部分练习项目，比如vue、react等
+# Gulp 
+* [文档](https://www.gulpjs.com.cn/docs/getting-started/creating-tasks/)
 
 ## Learning Document
 
@@ -12,6 +12,7 @@
 
 ## Gulp(全局)
 
+### Gulp-v3
 #### 文档
 * [Gulp](https://gulpjs.com/docs/en/getting-started/quick-start)
 * [Browsersync + Gulp.js](https://www.browsersync.io/docs/gulp)
@@ -47,6 +48,9 @@ gulp.task('browser-sync', function() {
 
 gulp.task('default', ['browser-sync']);
 ```
+### Gulp-v4
+
+
 ## MyReact
 
 #### 学习「井字游戏」
