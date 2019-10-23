@@ -1,0 +1,26 @@
+{
+  "name": "mygulp-project",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "license": "MIT",
+  "author": "yangtao <istaotao@aliyun.com>",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build",
+    "serve": "gulp serve"
+  },
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "bulma": "^0.8.0",
+    "lodash": "^4.17.15",
+    "riot": "^4.6.5",
+    "underscore": "^1.9.1",
+    "zepto": "^1.2.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.2",
+    "gulp": "^4.0.2",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}

@@ -48,8 +48,9 @@ gulp.task('browser-sync', function() {
 
 gulp.task('default', ['browser-sync']);
 ```
-### Gulp-v4
 
+### Gulp-v4
+* [Gulp-v4总结](https://github.com/yangtao2o/gulp-project/blob/master/doc/gulp-v4.md)
 
 ## MyReact
 
@@ -127,3 +128,7 @@ Built at: 2019-02-21 09:27:39
 * 环境：babel编译 ES6 语法，模块化可用 webpack 和 rollup
 * 扩展：对模块化标准统一的期待
   
+## Riot
+* [Riot.js 框架深入解析](http://eux.baidu.com/blog/fe/riot-js-%E6%A1%86%E6%9E%B6%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90)
+* [riot.js教程【一】简介](https://cloud.tencent.com/developer/article/1019472)
+* [RIOT](https://riot.js.org/documentation/)文档
