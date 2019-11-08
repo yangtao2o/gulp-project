@@ -22,6 +22,18 @@ const javascript = function(cb) {
   cb();
 };
 
+const dev = function(cb) {
+  browserSync.init({
+    server: {
+      baseDir: './',
+      // https: true,
+      index: "index.html"  //从应用程序目录中提供文件，指定特定文件名为索引
+    },
+    port: 8080,
+    notify: false // 开启静默模式
+  });
+}
+
 const serve = function(cb) {
   browserSync.init({
     server: {
@@ -56,6 +68,7 @@ exports.build = function() {
     .pipe(dest("output/"));
 };
 
+exports.dev = dev;
 exports.serve = serve;
 
 exports.default = series(clean, parallel(css, javascript));

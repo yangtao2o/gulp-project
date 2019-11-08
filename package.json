@@ -4,7 +4,7 @@
   "description": "myself projects",
   "main": "gulpfile.js",
   "scripts": {
-    "dev": "gulp",
+    "dev": "gulp dev",
     "build": "gulp build",
     "serve": "gulp serve"
   },
