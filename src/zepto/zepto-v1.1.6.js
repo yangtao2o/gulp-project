@@ -443,7 +443,7 @@ var Zepto = (function() {
       // is thrown if the fragment doesn't begin with <
 
       // 上文定义：
-      // // 取出html代码中第一个html标签（或注释），如取出 <p>123</p><h1>345</h1> 中的 <p>
+      // 取出html代码中第一个html标签（或注释），如取出 <p>123</p><h1>345</h1> 中的 <p>
       // fragmentRE = /^\s*<(\w+|!)[^>]*>/,
       if (selector[0] == "<" && fragmentRE.test(selector))
         // 第一，RegExp.$1取出来的就是第一个标签名称，即正则中 (\w+|!) 对应的内容
