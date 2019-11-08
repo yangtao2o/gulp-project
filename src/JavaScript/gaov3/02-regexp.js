@@ -15,4 +15,3 @@ const text2 = '000-00-0000';
 const pattern2 = /\d{3}-\d{2}-\d{4}/;
 
 console.log(pattern2.test(text2))  // true
-console.log(RegExp.left_content)
