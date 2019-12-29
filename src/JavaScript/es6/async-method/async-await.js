@@ -20,10 +20,10 @@ const light = (timmer, cb) => {
 };
 
 async function step() {
-  const red = light(3000, red);
-  const green = light(1000, green);
-  const yellow = light(3000, yellow);
+  await light(3000, red);
+  await light(1000, green);
+  await light(3000, yellow);
+  step();
 }
 
-
-
+step();
