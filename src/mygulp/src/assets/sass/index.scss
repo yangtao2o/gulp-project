@@ -1,0 +1,10 @@
+$bg-color: #f90;
+$font-color: #444;
+$highlight-color: #666;
+body {
+  background: $bg-color;
+  color: $font-color;
+}
+.selected {
+  border: 1px solid $highlight-color;
+}

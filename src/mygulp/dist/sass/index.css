@@ -1,0 +1,8 @@
+body {
+  background: #f90;
+  color: #444;
+}
+
+.selected {
+  border: 1px solid #666;
+}
