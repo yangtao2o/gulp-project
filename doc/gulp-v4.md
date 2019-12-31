@@ -1,15 +1,20 @@
 # Gulp-v4
+
 ## 导出
+
 项目根目录创建`gulpfile.js`:
+
 ```js
 function defaultTask(cb) {
-  console.log('success')
+  console.log("success");
   cb();
 }
 
 exports.default = defaultTask;
 ```
-gulp命令：
+
+gulp 命令：
+
 ```bash
 ➜  gulp-project git:(master) ✗ gulp
 [17:06:29] Using gulpfile ~/Documents/GitHub/gulp-project/gulpfile.js
@@ -19,16 +24,18 @@ success
 ```
 
 ## Gulpfile 分割
+
 > Node 的模块解析功能允许你将 gulpfile.js' 文件替换为同样命名为 gulpfile.js 的目录，该目录中包含了一个名为 index.js 的文件，该文件被当作 gulpfile.js 使用。并且，该目录中还可以包含各个独立的任务（task）模块。 --- 官方文档
 
 创建 `gulpfile.js`目录，`gulpfile.js`目录下新建 `index.js`
 
 ## 组合任务
-* series() 允许将多个独立的任务组合为一个更大的操作
-* 对于希望以最大并发来运行的任务（tasks），可以使用 parallel() 方法将它们组合起来
+
+- series() 允许将多个独立的任务组合为一个更大的操作
+- 对于希望以最大并发来运行的任务（tasks），可以使用 parallel() 方法将它们组合起来
 
 ```js
-const { series, parallel } = require('gulp');
+const { series, parallel } = require("gulp");
 
 function clean(cb) {
   cb();
@@ -64,15 +71,14 @@ function build(cb) {
 
 exports.default = series(
   clean,
-  parallel(
-    cssTranspile,
-    series(jsTranspile, jsBundle)
-  ),
+  parallel(cssTranspile, series(jsTranspile, jsBundle)),
   parallel(cssMinify, jsMinify),
   publish
 );
 ```
+
 输出：
+
 ```bash
 [16:50:36] Starting 'default'...
 [16:50:36] Starting 'clean'...
@@ -96,7 +102,7 @@ exports.default = series(
 
 ```js
 // This is INCORRECT
-const { series, parallel } = require('gulp');
+const { series, parallel } = require("gulp");
 
 const clean = function(cb) {
   // body omitted
@@ -117,6 +123,7 @@ exports.default = parallel(css, javascript);
 ```
 
 输出：
+
 ```bash
 [17:02:45] Starting 'default'...
 [17:02:45] Starting 'clean'...
@@ -131,9 +138,10 @@ exports.default = parallel(css, javascript);
 ```
 
 重构：
+
 ```js
 // This is INCORRECT
-const { series, parallel } = require('gulp');
+const { series, parallel } = require("gulp");
 
 const clean = function(cb) {
   // body omitted
@@ -152,7 +160,9 @@ const javascript = function(cb) {
 
 exports.default = series(clean, parallel(css, javascript));
 ```
+
 再次输出：
+
 ```bash
 [17:04:48] Starting 'default'...
 [17:04:48] Starting 'clean'...
@@ -174,19 +184,19 @@ exports.default = series(clean, parallel(css, javascript));
 const { src, dest } = require("gulp");
 
 function streamTask() {
-  return src('*.js')
-  .pipe(dest('output'));
+  return src("*.js").pipe(dest("output"));
 }
 
 exports.default = streamTask;
 ```
+
 然后发现，根目录下会看到 output 目录，及根目录下所有以 `*js`结尾的文件，包括目录。
 
 ### 返回 promise
 
 ```js
 function promiseTask() {
-  return Promise.resolve('the value is ignored');
+  return Promise.resolve("the value is ignored");
 }
 
 exports.default = promiseTask;
@@ -223,9 +233,9 @@ exports.default = callbackTask;
 const fs = require("fs");
 
 async function asyncAwaitTask() {
-  const { version } = fs.readFileSync('package.json');
-  console.log('version');
-  await Promise.resolve('some result');
+  const { version } = fs.readFileSync("package.json");
+  console.log("version");
+  await Promise.resolve("some result");
 }
 
 exports.default = asyncAwaitTask;
@@ -234,27 +244,30 @@ exports.default = asyncAwaitTask;
 ## 使用插件
 
 ```js
-const { src, dest } = require('gulp');
-const uglify = require('gulp-uglify');
-const rename = require('gulp-rename');
+const { src, dest } = require("gulp");
+const uglify = require("gulp-uglify");
+const rename = require("gulp-rename");
 
 exports.default = function() {
-  return src('src/assets/**/*.js')
-  .pipe(uglify())
-  .pipe(rename({ extname: '.min.js' }))
-  .pipe(dest('output/'));
-}
+  return src("src/assets/**/*.js")
+    .pipe(uglify())
+    .pipe(rename({ extname: ".min.js" }))
+    .pipe(dest("output/"));
+};
 ```
 
 ## browsersync
 
-* [Browsersync + Gulp.js](http://www.browsersync.cn/docs/gulp/#gulp-install)
+- [Browsersync + Gulp.js](http://www.browsersync.cn/docs/gulp/#gulp-install)
 
 下载：
+
 ```bash
 npm install browser-sync gulp --save-dev
 ```
+
 使用：
+
 ```js
 const { task, watch } = require("gulp");
 const browserSync = require("browser-sync").create();
@@ -262,22 +275,23 @@ const reload = browserSync.reload;
 const serve = function(cb) {
   browserSync.init({
     server: {
-      baseDir: './src',
+      baseDir: "./src",
       https: true,
-      directory: true,   //从与目录列表的应用程序目录中的文件即成
+      directory: true //从与目录列表的应用程序目录中的文件即成
       // index: "index.html"  //从应用程序目录中提供文件，指定特定文件名为索引
     },
     port: 8080,
     notify: false // 开启静默模式
   });
 
-  watch("src/*.html").on('change', reload);
-}
+  watch("src/*.html").on("change", reload);
+};
 
 task(serve);
 ```
 
 本地使用：
+
 ```js
 const { src, dest, watch, series, parallel } = require("gulp");
 const uglify = require("gulp-uglify");
@@ -306,28 +320,28 @@ const javascript = function(cb) {
 const serve = function(cb) {
   browserSync.init({
     server: {
-      baseDir: './src',
+      baseDir: "./src",
       // https: true,
-      directory: true,   //从与目录列表的应用程序目录中的文件即成，如果要指定文件，可注释掉
+      directory: true //从与目录列表的应用程序目录中的文件即成，如果要指定文件，可注释掉
       // index: "index.html"  //从应用程序目录中提供文件，指定特定文件名为索引
     },
     port: 8080,
     notify: false // 开启静默模式
   });
-}
+};
 
 // 监听 globs 并在发生更改时运行任务
-jsWatcher.on('change', function(path, stats) {
+jsWatcher.on("change", function(path, stats) {
   console.log(`File ${path} was changed`);
 });
 
-cssWatcher.on('change', function(path, stats) {
+cssWatcher.on("change", function(path, stats) {
   console.log(`File ${path} was changed`);
 });
 
-htmlWatcher.on('change', function(path, stats) {
+htmlWatcher.on("change", function(path, stats) {
   console.log(`File ${path} was changed`);
-  reload();  // Reloading Browsers
+  reload(); // Reloading Browsers
 });
 
 exports.build = function() {
@@ -353,8 +367,7 @@ exports.default = series(clean, parallel(css, javascript));
 ```
 
 启动：
+
 ```bash
 npm run serve
 ```
-
-
