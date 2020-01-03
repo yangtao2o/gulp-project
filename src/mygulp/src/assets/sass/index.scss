@@ -1,10 +1,326 @@
+@import "header";
+@import "footer";
+
 $bg-color: #f90;
 $font-color: #444;
-$highlight-color: #666;
 body {
   background: $bg-color;
   color: $font-color;
 }
 .selected {
-  border: 1px solid $highlight-color;
+  border: 1px solid $font-color;
+}
+
+// 嵌套
+
+ul {
+  li {
+    a {
+      color: $font-color;
+      &:hover {
+        color: red;
+      }
+      &::after {
+        content: "...";
+      }
+      #container & {
+        color: red;
+      }
+    }
+  }
+}
+
+nav a {
+  color: $font-color;
+  &:hover {
+    /* Dad after */
+    color: red;
+  }
+  .header & {
+    /* Dad before */
+    color: #000;
+  }
+}
+.main {
+  color: black;
+  &-sidebar {
+    border: 1px solid;
+  }
+}
+/*群组嵌套*/
+.container,
+.header {
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 0.8em;
+  }
+}
+
+.header,
+.acticle,
+.footer {
+  color: $font-color;
+  a {
+    color: #999;
+    &:hover {
+      color: red;
+    }
+  }
+}
+/* 子选择器和同级选择器 */
+article {
+  ~ article {
+    border-top: 1px dashed #ccc;
+  }
+  > section {
+    background: #eee;
+  }
+  dl > {
+    dt {
+      color: #333;
+    }
+    dd {
+      color: #555;
+    }
+  }
+  nav + & {
+    margin-top: 0;
+  }
+}
+
+/* 属性嵌套 */
+
+nav {
+  border: {
+    style: solid;
+    width: 1px;
+    color: #ccc;
+  }
+}
+
+nav {
+  border: 1px solid #ccc {
+    left: 0px;
+    right: 0px;
+  }
+}
+
+.blue-theme {
+  @import "blue-theme";
+}
+$fancybox-width: 400px;
+.fancybox1 {
+  // $fancybox-width: 200px;
+  width: $fancybox-width;
+}
+.fancybox2 {
+  $fancybox-width: 100px;
+  width: $fancybox-width;
+}
+/* @media */
+.sidebar {
+  width: 300px;
+  @media screen and (orientation: landscape) {
+    width: 500px;
+  }
+}
+/* 拼接 and */
+@media screen {
+  .sidebar {
+    @media (max-width: 1140px) {
+      width: 960px;
+    }
+  }
+  .other {
+    @media (max-width: 640px) {
+      width: 100%;
+    }
+  }
+}
+
+/* @extend */
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.error.intrusion {
+  background-image: url("/image/hacked.png");
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+
+$type: monster;
+p {
+  @if $type == ocean {
+    color: blue;
+  } @else if $type == monster {
+    color: green;
+  } @else {
+    color: black;
+  }
+}
+
+@for $i from 1 to 3 {
+  .list-#{$i} {
+    width: 1em * $i;
+  }
+}
+@for $i from 1 through 3 {
+  .item-#{$i} {
+    width: 2rem * $i;
+  }
+}
+
+@each $kind in small, middle, large {
+  .#{$kind}-icon {
+    background-image: url("/images/#{$kind}-icon.png");
+  }
+}
+
+/* 混合器 */
+
+@mixin clearfix {
+  display: inline-block;
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  * html & {
+    height: 1px;
+  }
+}
+
+.clearfix {
+  @include clearfix;
+}
+
+@mixin border-value($width: 1px, $color: #333, $style: solid) {
+  border-width: $width;
+  border-color: $color;
+  border-style: $style;
+}
+/*不传参*/
+h1 {
+  @include border-value;
+}
+/*传参*/
+h2 {
+  @include border-value(2px, #666, dashed);
+}
+/*关键词传参*/
+h3 {
+  @include border-value($style: dashed, $width: 3px, $color: #999);
+}
+
+/* @function */
+$grid-width: 40px;
+$gutter-width: 10px;
+
+@function grid-width($n) {
+  @return $n * $grid-width + ($n - 1) * $gutter-width;
+}
+
+.sidebar1 {
+  width: grid-width(5);
+}
+.sidebar2 {
+  width: grid-width($n: 10);
+}
+
+/*** Bootstrap ***/
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    576px
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    "-sm"
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .float#{$infix}-left {
+      float: left !important;
+    }
+    .float#{$infix}-right {
+      float: right !important;
+    }
+    .float#{$infix}-none {
+      float: none !important;
+    }
+  }
+}
+@each $breakpoint in map-keys($grid-breakpoints) {
+  .#{$breakpoint} {
+    color: red;
+  }
+}
+
+$min-num: breakpoint-min(sm, $grid-breakpoints);
+
+@media (min-width: $min-num) {
+  p {
+    color: #444;
+  }
+}
+
+$min-value-sm: breakpoint-infix(sm, $grid-breakpoints);
+$min-value-xs: breakpoint-infix(xs, $grid-breakpoints);
+
+
+.float#{$min-value-sm}-left {
+  float: left;
+}
+.float#{$min-value-xs}-left {
+  float: left;
+}
+
+
+$color: white;
+@mixin colors($color: blue) {
+  background-color: $color;
+  @content;
+  border-color: $color;
+}
+.colors {
+  @include colors { color: $color; }
 }

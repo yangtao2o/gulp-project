@@ -1,8 +1,353 @@
+@charset "UTF-8";
+/** Header **/
+a {
+  color: red;
+}
+
+/** Footer **/
 body {
   background: #f90;
   color: #444;
 }
 
 .selected {
-  border: 1px solid #666;
+  border: 1px solid #444;
+}
+
+ul li a {
+  color: #444;
+}
+
+ul li a:hover {
+  color: red;
+}
+
+ul li a::after {
+  content: "...";
+}
+
+#container ul li a {
+  color: red;
+}
+
+nav a {
+  color: #444;
+}
+
+nav a:hover {
+  /* Dad after */
+  color: red;
+}
+
+.header nav a {
+  /* Dad before */
+  color: #000;
+}
+
+.main {
+  color: black;
+}
+
+.main-sidebar {
+  border: 1px solid;
+}
+
+/*群组嵌套*/
+.container h1,
+.container h2,
+.container h3,
+.header h1,
+.header h2,
+.header h3 {
+  margin-bottom: 0.8em;
+}
+
+.header,
+.acticle,
+.footer {
+  color: #444;
+}
+
+.header a,
+.acticle a,
+.footer a {
+  color: #999;
+}
+
+.header a:hover,
+.acticle a:hover,
+.footer a:hover {
+  color: red;
+}
+
+/* 子选择器和同级选择器 */
+article ~ article {
+  border-top: 1px dashed #ccc;
+}
+
+article > section {
+  background: #eee;
+}
+
+article dl > dt {
+  color: #333;
+}
+
+article dl > dd {
+  color: #555;
+}
+
+nav + article {
+  margin-top: 0;
+}
+
+/* 属性嵌套 */
+nav {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+}
+
+nav {
+  border: 1px solid #ccc;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+.blue-theme {
+  /** blue-theme **/
+}
+
+.blue-theme section {
+  background-color: blue;
+}
+
+.fancybox1 {
+  width: 400px;
+}
+
+.fancybox2 {
+  width: 100px;
+}
+
+/* @media */
+.sidebar {
+  width: 300px;
+}
+
+@media screen and (orientation: landscape) {
+  .sidebar {
+    width: 500px;
+  }
+}
+
+/* 拼接 and */
+@media screen and (max-width: 1140px) {
+  .sidebar {
+    width: 960px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .other {
+    width: 100%;
+  }
+}
+
+/* @extend */
+.error, .seriousError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+
+.error.intrusion, .intrusion.seriousError {
+  background-image: url("/image/hacked.png");
+}
+
+.seriousError {
+  border-width: 3px;
+}
+
+p {
+  color: green;
+}
+
+.list-1 {
+  width: 1em;
+}
+
+.list-2 {
+  width: 2em;
+}
+
+.item-1 {
+  width: 2rem;
+}
+
+.item-2 {
+  width: 4rem;
+}
+
+.item-3 {
+  width: 6rem;
+}
+
+.small-icon {
+  background-image: url("/images/small-icon.png");
+}
+
+.middle-icon {
+  background-image: url("/images/middle-icon.png");
+}
+
+.large-icon {
+  background-image: url("/images/large-icon.png");
+}
+
+/* 混合器 */
+.clearfix {
+  display: inline-block;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+* html .clearfix {
+  height: 1px;
+}
+
+/*不传参*/
+h1 {
+  border-width: 1px;
+  border-color: #333;
+  border-style: solid;
+}
+
+/*传参*/
+h2 {
+  border-width: 2px;
+  border-color: #666;
+  border-style: dashed;
+}
+
+/*关键词传参*/
+h3 {
+  border-width: 3px;
+  border-color: #999;
+  border-style: dashed;
+}
+
+/* @function */
+.sidebar1 {
+  width: 240px;
+}
+
+.sidebar2 {
+  width: 490px;
+}
+
+/*** Bootstrap ***/
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+.float-none {
+  float: none !important;
+}
+
+@media (min-width: 576px) {
+  .float-sm-left {
+    float: left !important;
+  }
+  .float-sm-right {
+    float: right !important;
+  }
+  .float-sm-none {
+    float: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .float-md-left {
+    float: left !important;
+  }
+  .float-md-right {
+    float: right !important;
+  }
+  .float-md-none {
+    float: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .float-lg-left {
+    float: left !important;
+  }
+  .float-lg-right {
+    float: right !important;
+  }
+  .float-lg-none {
+    float: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .float-xl-left {
+    float: left !important;
+  }
+  .float-xl-right {
+    float: right !important;
+  }
+  .float-xl-none {
+    float: none !important;
+  }
+}
+
+.xs {
+  color: red;
+}
+
+.sm {
+  color: red;
+}
+
+.md {
+  color: red;
+}
+
+.lg {
+  color: red;
+}
+
+.xl {
+  color: red;
+}
+
+@media (min-width: 576px) {
+  p {
+    color: #444;
+  }
+}
+
+.float-sm-left {
+  float: left;
+}
+
+.float-left {
+  float: left;
+}
+
+.colors {
+  background-color: blue;
+  color: white;
+  border-color: blue;
 }

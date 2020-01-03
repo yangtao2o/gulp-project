@@ -99,5 +99,5 @@ exports.html = html;
 if (process.env.NODE_ENV === "production") {
   exports.serve = serve;
   exports.build = series(clean, scss, parallel(css, js));
-  exports.default = series(clean, scss, parallel(css, js), serve);
+  exports.default = series(scss, parallel(css, js), serve);
 }

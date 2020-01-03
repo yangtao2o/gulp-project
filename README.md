@@ -42,7 +42,7 @@ gulp.task("default", ["browser-sync"]);
 - [Zepto 源码学习一二](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/doc.md#zepto)
 - [Zepto 对象思想及源码学习](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/myzepto-core.md)
 - [防抖、节流，原型链继承之圣杯模式](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/doc.md)
-- [Class、继承、Promise](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/es6/doc.md)
+- [Class、继承、Promise](https://github.com/yangtao2o/gulp-project/blob/master/doc/es6.md)
 
 ## MyReact
 

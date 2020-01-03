@@ -5,3 +5,5 @@ db.json
 node_modules/
 package-lock.json
 .deploy*/
+src/Bootstrap/_bootstrap@4.4.1@bootstrap/
+src/Bootstrap/_jquery@3.4.1@jquery/
