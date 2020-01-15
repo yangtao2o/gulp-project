@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>AJAX</title>
+  </head>
+  <body>
+    <h1>hello</h1>
+    <!-- <script src="./ajax.js"></script> -->
+
+    <script>
+      const URL = 'https://api.github.com/search/repositories?q=javascript&sort=stars';
+      let req = new Request(URL, { method: "GET", cache: "reload" });
+      fetch(req)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(json) {
+          console.log(json);
+        }).catch(function(err) {
+          console.log(err);
+        }
+    </script>
+  </body>
+</html>

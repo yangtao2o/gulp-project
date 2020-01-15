@@ -10,6 +10,8 @@ const babel = require("gulp-babel");
 const del = require("del");
 const browserSync = require("browser-sync").create();
 const reload = browserSync.reload;
+const ts = require('gulp-typescript');
+const tsProject = ts.createProject("tsconfig.json");
 
 const allGlobSrc = "src/**/*";
 const scssGlobSrc = "src/assets/sass/*.scss";
@@ -55,6 +57,12 @@ function js() {
     .pipe(dest("dist/js"));
 }
 
+function typescript() {
+  return tsProject.src()
+    .pipe(tsProject())
+    .js.pipe(dest('dist/ts'));
+}
+
 function serve(cb) {
   browserSync.init({
     server: {
@@ -95,8 +103,9 @@ exports.js = js;
 exports.css = css;
 exports.scss = scss;
 exports.html = html;
+exports.typescript = typescript;
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "dev") {
   exports.serve = serve;
   exports.build = series(clean, scss, parallel(css, js));
   exports.default = series(scss, parallel(css, js), serve);

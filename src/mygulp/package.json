@@ -5,9 +5,9 @@
   "license": "MIT",
   "author": "yangtao <istaotao@aliyun.com>",
   "scripts": {
-    "dev": "cross-env NODE_ENV=production gulp",
-    "build": "cross-env NODE_ENV=production gulp build",
-    "serve": "cross-env NODE_ENV=production gulp serve"
+    "dev": "cross-env NODE_ENV=dev gulp",
+    "build": "cross-env NODE_ENV=dev gulp build",
+    "serve": "cross-env NODE_ENV=dev gulp serve"
   },
   "dependencies": {
     "benchmark": "^2.1.4",
@@ -31,8 +31,10 @@
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
     "node-sass": "^4.13.0",
-    "source-map": "^0.7.3"
+    "source-map": "^0.7.3",
+    "typescript": "^3.7.4"
   }
 }

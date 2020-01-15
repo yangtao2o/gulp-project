@@ -3,7 +3,7 @@
 - [Gulp-v4总结](https://github.com/yangtao2o/gulp-project/blob/master/doc/gulp-v4.md)
 - [Gulp快速入门指南](https://www.gulpjs.com.cn/docs/getting-started/quick-start/)
 
-## Gulp+SASS
+## Gulp + SASS
 
 -[如何安装 Sass](https://www.sass.hk/install/)
 
@@ -29,7 +29,7 @@ exports.scss = scss;
 
 启动：`gulp scss`。
 
-## Gulp.js + Browsersync
+## Gulp + Browsersync
 
 - [Browsersync + Gulp.js](http://www.browsersync.cn/docs/gulp/)
 
@@ -62,6 +62,68 @@ const serve = function(cb) {
 }
 
 exports.serve = serve;
+```
+
+运行：
+
+```shell
+gulp serve
+```
+
+## Gulp + TypeScript
+
+根目录下初始化：`tsc --init`。
+
+安装依赖：
+
+```shell
+npm i -D typescript gulp-typescript
+```
+
+配置：
+
+```js
+const ts = require('gulp-typescript');
+const tsProject = ts.createProject("tsconfig.json");
+
+function typescript() {
+  return tsProject.src()
+    .pipe(tsProject())
+    .js.pipe(dest('dist/ts'));
+}
+
+exports.typescript = typescript;
+```
+
+src 目录下新建文件 `main.ts`：
+
+```ts
+class Student {
+  fullName: string;
+  constructor(public firstName: string, public lastName: string) {
+    this.fullName = `${firstName} ${lastName} `;
+  }
+}
+
+interface Person {
+  firstName: string;
+  lastName: string;
+}
+
+function greeter(person: Person) {
+  console.log(`hello, ${person.firstName} ${person.lastName}`);
+}
+
+let user = new Student('Yang', 'Tao');
+
+greeter(user);
+console.log(user.fullName)
+```
+
+运行：
+
+```shell
+gulp typescript
 ```
 
 ## Riot
