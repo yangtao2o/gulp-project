@@ -12,6 +12,13 @@
   <ul>
     <li v-for="(value, key, index) of object" :key="index">{{ index }} : {{ key }} : {{ value }}</li>
   </ul>
+
+  <ul>
+    <template v-for="(value, index) of array">
+      <li :key="index">{{value}}</li>
+      <li>A-{{index+1}}</li>
+    </template>
+  </ul>
 </div>
 
 <div id="todoDemo">
@@ -51,9 +58,15 @@ var vm = new Vue({
       name: 'yangtao',
       age: 26,
       job: 'font-developer'
-    }
-  }
-})
+    },
+    array: [1,2,3,4,5]
+  },
+});
+
+vm.$set(vm.object, 'me1', 100)
+vm.object = Object.assign({}, vm.object,{me2: 'hahha'})
+
+vm.$set(vm.array, 0, 100)
 
 /**
  * TodoList

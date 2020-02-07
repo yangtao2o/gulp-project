@@ -6,9 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Class 与 Style 绑定</title>
   <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
 </head>
 <body>
-  <div id="app" :class="classObj">hahha</div>
+  <div id="app">
+    <p :class="{active: isActive}">Hello world</p>
+    <p :class="[classArr]">Hello world2</p>
+    <p :style="{fontSize: '18px'}">你说什么</p>
+    <p :style="color">你说什么</p>
+    <p :style="[color, fontSize]">你说什么???</p>
+    <div :style="{display: ['-webkit-box', '-ms-flexbox', 'flex']}"></div>
+  </div>
   
   <script>
     /**
@@ -18,7 +30,14 @@
       el: '#app',
       data: {
         isActive: true,
-        error: null
+        isActive2: '',
+        color: {
+          color: 'red'
+        },
+        fontSize: {
+          fontSize: '18px'
+        },
+        error: null,
       },
       computed: {
         classObj: function () {
@@ -26,6 +45,9 @@
             active: this.isActive && !this.error,
             'text-danger': this.error && this.error.type === 'fatal'
           }
+        },
+        classArr: function () {
+          return this.isActive2 !== '' ? 'active' : '';
         }
       }
     })

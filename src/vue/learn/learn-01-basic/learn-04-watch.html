@@ -34,7 +34,9 @@
         // 如果 ‘question’ 发生变化，这个函数就会运行
         question: function (newQue, oldQue) {
           this.answer = 'Waiting for you to stop typing...'
-          this.debouncedGetAnswer()
+          if(this.question !== '') {
+            this.debouncedGetAnswer()
+          }
         }
       },
       created: function () {
