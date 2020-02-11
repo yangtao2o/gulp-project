@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Slot 插槽</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.1/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <list-item :lists="lists">
+        <template v-slot:todo="{todo}">
+          {{todo.name}}
+          <span v-if="todo.age">{{todo.age}}</span>
+        </template>
+      </list-item>
+    </div>
+
+    <script>
+      Vue.component("list-item", {
+        props: ['lists'],
+        template: `
+          <ul>
+            <li v-for="(item, index) of lists" :key="index">
+              <slot name="todo" :todo="item">
+                {{item.name}}
+              </slot>
+            </li>
+          </ul>
+        `
+      });
+
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          lists: [
+            {
+              name: 'Job',
+              age: 13
+            },
+            {
+              name: 'Bob',
+              age: 24
+            },
+            {
+              name: 'Bloue',
+              age: 40
+            },
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>
