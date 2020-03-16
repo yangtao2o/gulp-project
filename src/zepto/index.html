@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Zepto learning</title>
-  <script src="./zepto-01.js"></script>
+  <script src="./zepto-00.js"></script>
 </head>
 <body>
   <input id="btn" type="input" value="点击">
   <script>
     var $btn = $('#btn')
-    // $btn.css()
-    // $btn.html()
+    $btn.css();
 
     // 创建对象的过程
     function create() {
@@ -58,7 +57,7 @@
     function test() {
       console.log('被触发了');
     }
-    document.getElementById('btn').onfocus = debounce(test, 1000)
+    // document.getElementById('btn').onfocus = debounce(test, 1000)
 
     // 节流：降低频率，每隔一段时间后执行一次，将高频率操作优化为低频率操作，如滚动条事件，resize事件
     // 思路：每次触发事件时都判断当前是否有等待执行的延时函数
@@ -83,7 +82,7 @@
       }
     }
 
-    window.addEventListener('resize', throtte(test, 1000))
+    // window.addEventListener('resize', throtte(test, 1000))
 
 
   </script>

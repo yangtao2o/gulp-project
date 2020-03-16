@@ -1,7 +1,5 @@
 # Zepto 对象思想与源码分析
 
-> [zepto 对象思想与源码分析](http://www.kancloud.cn/wangfupeng/zepto-design-srouce/173680)
-
 ## 原型对象
 
 ### `Array.prototype`
@@ -191,22 +189,28 @@ typeof null; //"object"
 
 ## Zepto 对象设计
 
+### 主体设计
+
 ```javascript
-// v1.0.1
-var Zepto = (function() {})();
-
-window.Zepto = Zepto;
-"$" in window || (window.$ = Zepto);
-
-(function($) {})(Zepto);
-
-// v1.1.6
 var Zepto = (function() {
   var $,
     zepto = {};
 
+  // ...省略N行代码...
+
+  zepto.Z = function(dom, selector) {
+    dom = dom || [];
+    dom.__proto__ = $.fn;   // 关键位置
+    dom.selector = selector || "";
+    return dom;
+  };
+
   zepto.init = function(selector, context) {
     var dom;
+
+    // 针对参数情况，分别对dom赋值
+
+    // 最终调用 zepto.Z 返回的数据
     return zepto.Z(dom, selector);
   };
 
@@ -214,14 +218,24 @@ var Zepto = (function() {
     return zepto.init(selector, context);
   };
 
+  // 里面有若干个工具函数
+  $.fn = {
+    forEach: emptyArray.forEach,
+    // ...省略N行代码...
+    concat: function() {}
+    // ...省略N行代码...
+  };
+
+  // ...省略N行代码...
+
   return $;
 })();
 
 window.Zepto = Zepto;
-window.$ = undefined && (window.$ = Zepto);
+window.$ === undefined && (window.$ = Zepto);
 ```
 
-完整初始化：
+### 自定义模拟
 
 ```js
 (function(window) {
@@ -267,3 +281,81 @@ window.$ = undefined && (window.$ = Zepto);
   window.$ = $;
 })(window);
 ```
+
+流程：`$() -> zepto.init() -> zepto.Z() -> new Z() -> Z.prototype = $.fn;`
+
+### 最新版（v1.2.0）模拟
+
+```js
+(function(window) {
+  var Zepto = (function() {
+    var $;
+    var zepto = {};
+
+    // 大Z构造函数
+    function Z(dom, selector) {
+      var i,
+        len = dom ? dom.length : 0;
+      for (i = 0; i < len; i++) this[i] = dom[i];
+      this.length = len;
+      this.selector = selector || "";
+    }
+    // zepto.Z() 返回大Z构造函数的实例，方便实例对象的 __proto 就会指向 Z.prototype
+    zepto.Z = function(dom, selector) {
+      return new Z(dom, selector);
+    };
+
+    // 解析 DOM，并调用 zepto.Z()
+    zepto.init = function(selector, context) {
+      // 自定义模拟方法，源码并非这样简单
+      var slice = Array.prototype.slice;
+      var dom = slice.call(document.querySelectorAll(selector));
+
+      // create a new Zepto collection from the nodes found
+      return zepto.Z(dom, selector);
+    };
+
+    // 第一步初始化
+    $ = function(selector, context) {
+      return zepto.init(selector, context);
+    };
+
+    // 方法属性
+    $.fn = {
+      constructor: zepto.Z,  // 手动绑定 constructor 属性
+      length: 0,
+      push: "push method",
+      css: function() {
+        console.log("css");
+      }
+    };
+    $.fn.on = function(event, data, callback) {
+      console.log("on method");
+    };
+    $.fn.off = function(event, data, callback) {
+      console.log("off method");
+    };
+
+    $.fn.bind = function(event, data, callback) {
+      return this.on(event, data, callback);
+    };
+    $.fn.unbind = function(event, callback) {
+      return this.off(event, callback);
+    };
+
+    // 最终的方法属性等都指向了 $.fn，这里就是原型的关键使用
+    zepto.Z.prototype = Z.prototype = $.fn;
+
+    $.zepto = zepto;
+    return $;
+  })();
+
+  window.Zepto = Zepto;
+  window.$ === undefined && (window.$ = Zepto);
+})(window);
+```
+
+### 学习资料
+
+- [zepto设计和源码分析](https://www.imooc.com/learn/745) - 视频
+- [zepto 对象思想与源码分析](http://www.kancloud.cn/wangfupeng/zepto-design-srouce/173680)
