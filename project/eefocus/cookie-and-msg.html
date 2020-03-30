@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>网站提示信息及设置Cookie自用</title>
+</head>
+<body>
+  <!--网站更新提示START-->
+<style>
+ .tips-modal { display:none;position: fixed; top: 0; left: 0; width: 100%; min-height: 40px; z-index: 10000; padding: 2% 0; background-color: rgba(0, 0, 0, .8); font-size: 16px;font-weight: normal; color: #fff; text-align: center; }
+  .tips-wper{padding-left:20px;padding-right:20px;}
+  .tips-wper a { color: chartreuse}
+  .tips-close-btn { display: inline-block; font-size: 20px; color: #999; position: absolute; top: 5px; right: 10px; width: 35px; height: 35px; cursor: pointer;z-index: 10; }
+  .tips-close-btn:hover { color: #eee; text-decoration: none }
+  @media (max-width: 640px) {
+    .tips-modal { padding: 15px 0;font-size: 12px; }
+    .tips-wper{padding-left:15px;padding-right:15px;}
+    .tips-close-btn { font-size: 15px; top: 2px; right: -3px; width: 30px; height: 30px; cursor: pointer }
+  }
+</style>
+<div class="tips-modal" id="newsTipsModal">
+  <div class="tips-wper">
+      欢迎来到全新改版的电路城（<a href="https://www.cirmall.com/" target="_blank">www.cirmall.com</a>）网站，我们将原爱板网（<a href="https://www.eeboard.com/" target="_blank">www.eeboard.com</a>）中丰富的开发板资料和技术资源整合到现在的电路城网站，旨在为广大工程师朋友提供一站式的技术资源支持，助力你的技能进阶。现在就开启你的全新体验吧！
+  </div>
+  <span class="tips-close-btn" id="tipsCloseBtn">X</span>
+</div>
+<script type="text/javascript">
+
+(function() {
+  var getAndSetCookie = {
+    init: function() {
+      this.checkCookie();
+      this.closeBtnListener();
+    },
+    // 设置cookie，同一域名都可获取
+    setCookie: function(name, value, exdays) {
+      var exdays = exdays || 1;
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      document.cookie = name + "=" + escape(value) + ";path=/;expires=" + d.toGMTString();
+    },
+    // 读取cookies，判断是否存在设置的name
+    getCookie: function(name) {
+      var name = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    },
+    checkCookie: function (pc) {
+      var user = this.getCookie("msgCookie");
+      // var width = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
+      // if(width >= 1080) {
+        if (user != "") {
+          this.msgHide();
+        } else {
+          this.msgShow();
+        }
+      // }
+    },
+    closeModal: function () {
+      this.msgHide();
+      this.setCookie("msgCookie", 'msgCookie', 1);
+    },
+    msgHide: function () {
+      document.getElementById('newsTipsModal').style.display = 'none';
+    },
+    msgShow: function () {
+      document.getElementById('newsTipsModal').style.display = 'block';
+    },
+    closeBtnListener: function() {
+      var _this = this;
+      document.getElementById('tipsCloseBtn').addEventListener('click',function() {
+        _this.closeModal();
+      });
+    }
+  }
+  // init
+  getAndSetCookie.init();
+})();
+
+</script>
+<!--网站更新提示END-->  
+</body>
+</html>
