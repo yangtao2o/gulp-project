@@ -16,9 +16,11 @@
 // console.log(me.name, me.age);
 
 function _extends(child, parent) {
-  const prototype = Object.create(parent.prototype);
-  child.prototype = prototype;
+  child.prototype = Object.create(parent && parent.prototype);
   child.prototype.constructor = child;
+  Object.setPrototypeOf
+    ? Object.setPrototypeOf(child, parent)
+    : (child.__proto__ = parent);
 }
 
 function _classCallCheck(instance, Constructor) {
