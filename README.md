@@ -1,5 +1,7 @@
 # Gulp Project
 
+> 文档[阅读](https://yangtao2o.github.io/gulp-project/)
+
 ## Gulp
 
 - [Gulp](https://gulpjs.com/docs/en/getting-started/quick-start)
@@ -108,7 +110,7 @@ touch .babelrc rollup.config.js
 
 ### docsify 无需构建快速生成文档网站
 
-Github：[docsify](https://github.com/docsifyjs/docsify)
+比如：[本站](https://yangtao2o.github.io/gulp-project/)，Github：[docsify](https://github.com/docsifyjs/docsify)
 
 Quick start
 
