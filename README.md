@@ -11,7 +11,7 @@ npm i
 npm run dev
 ```
 
-Gulp@4 版本详情：[Demo](https://github.com/yangtao2o/gulp-project/tree/master/src/mygulp)。
+Gulp@4 版本详情：[Demo](https://github.com/yangtao2o/gulp-project/tree/master/src/tool/_gulp)。
 
 Gulp@3 版本`gulpfile.js` 配置：只使用了 `browser-sync` 插件来监控 `html/css/js` 文件的变化，并自动刷新浏览器页面。
 
@@ -37,19 +37,12 @@ gulp.task("default", ["browser-sync"]);
 
 ## Learning Document
 
-- [VirtualDom](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/vdom/doc.md)
-- [MVVM 框架](https://github.com/yangtao2o/gulp-project/blob/master/src/JavaScript/mvvm/doc.md)
-- [Zepto 源码学习一二](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/doc.md#zepto)
-- [Zepto 对象思想及源码学习](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/myzepto-core.md)
-- [防抖、节流，原型链继承之圣杯模式](https://github.com/yangtao2o/gulp-project/blob/master/src/zepto/doc.md)
-- [Class、继承、Promise](https://github.com/yangtao2o/gulp-project/blob/master/doc/es6.md)
-
 ## MyReact
 
 ### 学习「井字游戏」
 
 ```shell
-cd project/myreact/01-ttt
+cd myreact/01-ttt
 
 npm i
 npm start
@@ -65,7 +58,7 @@ npm start
 ## MyWebpack
 
 ```shell
-cd src/mywebpack/
+cd src/tool/_webpack/
 npm i
 npm start
 ```
@@ -110,3 +103,36 @@ touch .babelrc rollup.config.js
 - [Riot.js 框架深入解析](http://eux.baidu.com/blog/fe/riot-js-%E6%A1%86%E6%9E%B6%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90)
 - [riot.js 教程【一】简介](https://cloud.tencent.com/developer/article/1019472)
 - [RIOT](https://riot.js.org/documentation/)文档
+
+## 其他
+
+### docsify 无需构建快速生成文档网站
+
+Github：[docsify](https://github.com/docsifyjs/docsify)
+
+Quick start
+
+```shell
+npm i docsify-cli -g
+```
+
+Initialize
+
+If you want to write the documentation in the ./docs subdirectory, you can use the init command.
+
+```js
+docsify init ./docs
+```
+
+我的配置：
+
+```js
+window.$docsify = {
+  name: "project",
+  loadSidebar: true,
+  subMaxLevel: 2,
+  alias: {
+    "/.*/_sidebar.md": "/docs/_sidebar.md"
+  },
+};
+```

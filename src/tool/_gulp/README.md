@@ -1,6 +1,6 @@
 # Gulp 自动化构建
 
-- [Gulp-v4总结](https://github.com/yangtao2o/gulp-project/blob/master/doc/gulp-v4.md)
+- [Gulp-v4总结](https://github.com/yangtao2o/gulp-project/blob/master/docs/gulp-v4.md)
 - [Gulp快速入门指南](https://www.gulpjs.com.cn/docs/getting-started/quick-start/)
 
 ## Gulp + SASS

@@ -25,6 +25,7 @@
   "dependencies": {
     "benchmark": "^2.1.4",
     "bulma": "^0.8.0",
+    "docsify": "^4.11.3",
     "lodash": "^4.17.15",
     "riot": "^4.6.5",
     "underscore": "^1.9.1",
