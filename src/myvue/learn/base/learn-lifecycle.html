@@ -1,111 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vue 的生命周期</title>
-  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
-</head>
-<body>
-  <h4>Vue 的生命周期练习</h4>
-  <div id="app">
-    {{ message }}
-    <button type="button" @click="change">Change</button>
-    <!-- <input type="text" :value="computedAboutA"> -->
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue 的生命周期</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  </head>
+  <body>
+    <h4>Vue 的生命周期练习</h4>
+    <div id="app">
+      <blog-post
+        v-for="post of posts"
+        :key="post.id"
+        :post="post"
+        @getdata="getChildData"
+      ></blog-post>
+      <div>接收到的数据：{{counter}}</div>
+      <!-- <my-child @hook:mounted="getMountedData"></my-child> -->
+    </div>
 
-
-  <script>
-    new Vue({
-      el: '#app',
-      data: {
-        message: true,
-        a: 1,
-        b: {
-          age: 27
+    <script>
+      var myChild = {
+        template: `
+          <div>子组件</div>
+        `,
+        mounted() {
+          console.log('子组件触发 mounted 钩子函数 ...');
+          this.$emit('mounted')
         }
-      },
-      beforeCreate() {
-        console.log('beforeCreate: init(事件)')
-        console.log(this.$el)
-        console.log(this.message)
-        console.log('injections 注射，reactivity 反应性')
-      },
-      created() {
-        console.log('created: Has "el" option? No-> Yes->Has "template" option?')
-        console.log(this.$el)
-        console.log(this.message)
-      },
-      beforeMount() {
-        console.log('beforeMount:')
-        console.log(this.$el)
-        console.log(this.message)
-      },
-      mounted() {
-        console.log('mounted:')
-        console.log(this.$el)
-        console.log(this.message)
-        // setInterval(() => {
-        //   this.a += 1
-        // }, 1000)
-      },
-      beforeUpdate() {
-        console.log('beforeUpdate:')
-        console.log(this.$el)
-        console.log(this.message)
-      },
-      updated() {
-        console.log('updated:')
-        console.log(this.$el)
-        console.log(this.message)
-      },
-      beforeDestroy() {
-        console.log('beforeDestroy:')
-        console.log(this.$el)
-        console.log(this.message)
-      },
-      destroyed() {
-        console.log('destroyed:')
-        console.log(this.$el)
-        console.log(this.message)
-      },
-      // render(h) {
-      //   throw new Error('render error')
-      // },
-      methods: {
-        change: function () {
-          this.message = !this.message
-          this.a = '111'
-          this.b.age = 80
-        }
-      },
-      watch: {
-        a: function(val, oldVal) {
-          console.log('当前值：' + val + '，旧值：' + oldVal)
+      }
+      var blogPost = {
+        props: ["post"],
+        data: function() {
+          return {
+            counter: 0
+          };
         },
-        b: {
-          handler: function (val, oldVal) { 
-            console.log('当前值：' + val.age + '，旧值：' + oldVal.age)
+        methods: {
+          sendChildData() {
+            this.counter++;
+            this.$emit('getdata', this.counter)
+          }
+        },
+        template: `
+        <div>
+          <div class="blog-post">
+            <h3>{{ post.title }}</h3>
+            <div v-html="post.content"></div>
+          </div>
+          <button @click="sendChildData">You clicked me {{ counter }} times.</button>
+        </div>`,
+        beforeCreate() {
+          console.log("<---CHILD--->");
+          console.log("beforeCreate: init(事件)");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        created() {
+          console.log("<---CHILD--->");
+          console.log("created:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        beforeMount() {
+          console.log("<---CHILD--->");
+          console.log("beforeMount:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        mounted() {
+          console.log("<---CHILD--->");
+          console.log("mounted:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        beforeUpdate() {
+          console.log("<---CHILD--->");
+          console.log("beforeUpdate:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        updated() {
+          console.log("<---CHILD--->");
+          console.log("updated:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        beforeDestroy() {
+          console.log("<---CHILD--->");
+          console.log("beforeDestroy:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        destroyed() {
+          console.log("<---CHILD--->");
+          console.log("destroyed:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        }
+      };
+      new Vue({
+        el: "#app",
+        data: {
+          count: 0,
+          posts: [
+            { id: 1, title: "My journey with Vue" },
+            // { id: 2, title: "Blogging with Vue" },
+            // { id: 3, title: "Why Vue is so fun" }
+          ],
+          counter: 0
+        },
+        components: {
+          blogPost,
+          myChild
+        },
+        methods: {
+          getChildData(data) {
+            console.log('接收子组件的数据', data)
+            this.counter = data
           },
-          deep: true   // deep : true表示是否监听对象内部属性值的变化 
+          getMountedData() {
+            console.log('父组件监听到 mounted 钩子函数 ...')
+          }
         },
-        'b.age': function(val, oldVal) {
-          console.log('当前值：' + val + '，旧值：' + oldVal)
+        beforeCreate() {
+          console.log("<---PARETN--->");
+          console.log("beforeCreate: init(事件)");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        created() {
+          console.log("<---PARETN--->");
+          console.log("created:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        beforeMount() {
+          console.log("<---PARETN--->");
+          console.log("beforeMount:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        mounted() {
+          console.log("<---PARETN--->");
+          console.log("mounted:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        beforeUpdate() {
+          console.log("<---PARETN--->");
+          console.log("beforeUpdate:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        updated() {
+          console.log("<---PARETN--->");
+          console.log("updated:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        beforeDestroy() {
+          console.log("<---PARETN--->");
+          console.log("beforeDestroy:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
+        },
+        destroyed() {
+          console.log("<---PARETN--->");
+          console.log("destroyed:");
+          console.log("$el: ", this.$el);
+          console.log("data: ", this.$data ? '有值' : undefined);
         }
-      },
-      computed: {
-        computedAboutA: function() {
-          console.log('aaaa', this.a)
-          return this.a
-        }
-      },
-     
-    })
-
-    
-
-  
-  </script>
-</body>
+      });
+    </script>
+  </body>
 </html>
