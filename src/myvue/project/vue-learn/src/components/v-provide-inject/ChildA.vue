@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>A-attrs: {{ this.$attrs }}</p>
-    <child-b v-bind="$attrs" v-on="$listeners"></child-b>
+    <div>{{name}}</div>
+    <child-b></child-b>
   </div>
 </template>
 
@@ -10,12 +10,14 @@
 import ChildB from "./ChildB";
 export default {
   name: "child-a",
+  data: () => ({
+    name: "AAA"
+  }),
   components: {
     ChildB
   },
   created() {
-    console.log(this.$attrs);
-    console.log(this.$listeners.click());
+    console.log(this.theme);
   }
 };
 </script>

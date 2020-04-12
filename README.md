@@ -12,8 +12,80 @@ cd src/mygulp/
 npm i
 npm run dev
 ```
+### Gulp-v4
 
 Gulp@4 版本详情：[Demo](https://github.com/yangtao2o/gulp-project/tree/master/src/tool/_gulp)。
+
+比如：[Hexo 博客](https://www.yangtao.site)中压缩文件配置
+
+```js
+const path = require("path");
+const { src, dest, series } = require("gulp");
+const uglify = require("gulp-uglify");
+const htmlmin = require("gulp-htmlmin");
+const htmlclean = require("gulp-htmlclean");
+const minifyCss = require("gulp-clean-css");
+const imagemin = require("gulp-imagemin");
+const babel = require("gulp-babel");
+// const useref = require('gulp-useref');
+// const gulpif = require('gulp-if');
+
+const destPath = path.join(__dirname, "public");
+
+function minifyHtml() {
+  return (
+    src(destPath + "/**/*.html")
+      .pipe(htmlclean())
+      .pipe(
+        htmlmin({
+          collapseWhitespace: true,
+          removeComments: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          removeTagWhitespace: true,
+          removeEmptyAttributes: true,
+          minifyCSS: true,
+          minifyJS: true,
+          sortAttributes: true,
+          sortClassName: true,
+          useShortDoctype: true
+        })
+      )
+      .pipe(dest(destPath))
+  );
+}
+
+function minifyStyle() {
+  return src(destPath + "/**/*.css")
+    .pipe(minifyCss({ compatibility: "ie8" }))
+    .pipe(dest(destPath));
+}
+
+function minifyJs() {
+  return src(destPath + "/js/**/*.js")
+    .pipe(
+      babel({
+        presets: ["@babel/env"]
+      })
+    )
+    .pipe(uglify())
+    .pipe(dest(destPath + "/js"));
+}
+
+function minifyImg() {
+  return src(destPath + "/img/**/*.*")
+    .pipe(imagemin())
+    .pipe(dest(destPath + "/img"));
+}
+
+exports.html = minifyHtml;
+exports.js = minifyJs;
+exports.css = minifyStyle;
+exports.img = minifyImg;
+exports.build = series(minifyHtml, minifyStyle, minifyJs, minifyImg);
+```
+
+### Gulp-v3
 
 Gulp@3 版本`gulpfile.js` 配置：只使用了 `browser-sync` 插件来监控 `html/css/js` 文件的变化，并自动刷新浏览器页面。
 
