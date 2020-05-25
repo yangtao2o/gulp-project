@@ -53,7 +53,7 @@ function fibonacci(n) {
 // 递归性能优化版本
 function fibonacciMemoization() {
   const memo = [0, 1];
-  const fibonacci = n => {
+  const fibonacci = (n) => {
     if (memo[n] != null) return memo[n];
     return (memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo));
   };
@@ -91,21 +91,21 @@ function sum(n) {
   if (n <= 1) return n;
   var sum = 0;
   for (var i = n; i > 0; i--) {
-    sum += i
+    sum += i;
   }
   return sum;
 }
 
 function sum(n) {
   if (n <= 1) return n;
-  return n + sum(n-1);
+  return n + sum(n - 1);
 }
 function sum(n, res = 0) {
-  if(n <= 1) return n + res;
-  return sum(n-1, n + res);
-} 
+  if (n <= 1) return n + res;
+  return sum(n - 1, n + res);
+}
 
-sum(5)
+sum(5);
 
 function fibonacci(n, sum1 = 1, sum2 = 1) {
   // debugger
@@ -113,3 +113,33 @@ function fibonacci(n, sum1 = 1, sum2 = 1) {
   return fibonacci(n - 1, sum2, sum1 + sum2);
 }
 console.log(fibonacci(5));
+
+//result_callback：下载结果的回调函数
+//url：需要获取URL的内容
+function GetUrlContent(result_callback, url) {
+  let request = new XMLHttpRequest();
+
+  request.open("GET", url);
+
+  request.responseType = "text";
+
+  request.onload = function() {
+    result_callback(request.response);
+  };
+
+  request.send();
+}
+
+function IDCallback(id) {
+  console.log(id);
+
+  let new_name_url = name_url + "?id=" + id;
+
+  GetUrlContent(NameCallback, new_name_url);
+}
+
+function NameCallback(name) {
+  console.log(name);
+}
+
+GetUrlContent(IDCallback, id_url);

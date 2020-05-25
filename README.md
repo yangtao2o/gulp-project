@@ -12,6 +12,7 @@ cd src/mygulp/
 npm i
 npm run dev
 ```
+
 ### Gulp-v4
 
 Gulp@4 版本详情：[Demo](https://github.com/yangtao2o/gulp-project/tree/master/src/tool/_gulp)。
@@ -33,26 +34,24 @@ const babel = require("gulp-babel");
 const destPath = path.join(__dirname, "public");
 
 function minifyHtml() {
-  return (
-    src(destPath + "/**/*.html")
-      .pipe(htmlclean())
-      .pipe(
-        htmlmin({
-          collapseWhitespace: true,
-          removeComments: true,
-          removeScriptTypeAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          removeTagWhitespace: true,
-          removeEmptyAttributes: true,
-          minifyCSS: true,
-          minifyJS: true,
-          sortAttributes: true,
-          sortClassName: true,
-          useShortDoctype: true
-        })
-      )
-      .pipe(dest(destPath))
-  );
+  return src(destPath + "/**/*.html")
+    .pipe(htmlclean())
+    .pipe(
+      htmlmin({
+        collapseWhitespace: true,
+        removeComments: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        removeTagWhitespace: true,
+        removeEmptyAttributes: true,
+        minifyCSS: true,
+        minifyJS: true,
+        sortAttributes: true,
+        sortClassName: true,
+        useShortDoctype: true
+      })
+    )
+    .pipe(dest(destPath));
 }
 
 function minifyStyle() {
@@ -110,24 +109,6 @@ gulp.task("default", ["browser-sync"]);
 ```
 
 ## Learning Document
-
-## MyReact
-
-### 学习「井字游戏」
-
-```shell
-cd myreact/01-ttt
-
-npm i
-npm start
-```
-
-学习资料：[用 React 开发一个井字棋（tic-tac-toe）](https://react.docschina.org/tutorial/tutorial.html#before-we-start-the-tutorial)
-
-- [x] tic-tac-toe(三连棋)游戏的所有功能
-- [x] 能够判定玩家何时获胜
-- [x] 能够记录游戏进程
-- [x] 允许玩家查看游戏的历史记录，也可以查看任意一个历史版本的游戏棋盘状态
 
 ## MyWebpack
 
@@ -207,6 +188,6 @@ window.$docsify = {
   subMaxLevel: 2,
   alias: {
     "/.*/_sidebar.md": "/docs/_sidebar.md"
-  },
+  }
 };
 ```

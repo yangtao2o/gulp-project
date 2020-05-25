@@ -23,5 +23,30 @@ Object.getPrototypeOf(person1) === Person.prototype; // true
 // constructor
 // 每一个原型都有一个 constructor 属性指向关联的构造函数
 Person.prototype.constructor === Person; // true
+function Foo() {
+  getName = function() {
+    alert(1);
+  };
+  return this;
+}
+Foo.getName = function() {
+  alert(2);
+};
+Foo.prototype.getName = function() {
+  alert(3);
+};
+var getName = function() {
+  alert(4);
+};
+function getName() {
+  alert(5);
+}
 
-
+//请写出以下输出结果：
+Foo.getName();
+getName();
+Foo().getName();
+getName();
+new Foo.getName();
+new Foo().getName();
+new new Foo().getName();

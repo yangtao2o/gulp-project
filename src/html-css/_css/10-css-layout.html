@@ -24,7 +24,7 @@
     }
 
     .right {
-      background: #eee;
+      background: #666;
     }
 
     .box-1 .left {
@@ -71,7 +71,7 @@
       height: 50px;
       float: left;
       margin-left: -100px;
-      background: #eee;
+      background: #666;
     }
 
     .box-4 .right {
@@ -101,7 +101,7 @@
     .box-5 .left,
     .box-6 .left {
       width: 100px;
-      background: #eee;
+      background: #666;
     }
 
     .box-5 .center,
@@ -147,6 +147,39 @@
       background: #f30;
     }
 
+    .box-78 .parent {
+      width: 100%;
+      height: 50px;
+    }
+
+    .box-78 .center {
+      width: 100%;
+      height: 100%;
+      float: left;
+      background: #f90;
+    }
+
+    .box-78 .center-content {
+      margin-left: 100px;
+      margin-right: 200px;
+    }
+
+    .box-78 .left {
+      width: 100px;
+      height: 100%;
+      margin-left: -100%;
+      float: left;
+      background: #f30;
+    }
+
+    .box-78 .right {
+      width: 200px;
+      height: 100%;
+      float: left;
+      margin-left: -200px;
+      background: #f30;
+    }
+
     .box-8 .parent {
       width: 100%;
       height: 100px;
@@ -170,6 +203,7 @@
       flex: 0 0 200px;
       background: #f30;
     }
+
     .box-9 .parent {
       display: grid;
       background: #f90;
@@ -177,6 +211,7 @@
       height: 100px;
       grid-template-columns: 100px 1fr 200px;
     }
+
     .box-9 .left {
       background: #f30;
     }
@@ -233,6 +268,15 @@
       <div class="right">右侧定宽</div>
     </div>
   </div>
+  <div class="box box-78">
+    <div class="parent">
+      <div class="center">
+        <div class="center-content">中间自适应：双飞翼布局方法</div>
+      </div>
+      <div class="left">左列定宽</div>
+      <div class="right">右侧定宽</div>
+    </div>
+  </div>
   <div class="box box-8">
     <div class="parent">
       <div class="center">
@@ -246,11 +290,81 @@
     <div class="parent">
       <div class="left">左列定宽</div>
       <div class="center">
-          中间自适应：圣杯布局方法(grid)
+        中间自适应：圣杯布局方法(grid)
       </div>
       <div class="right">右侧定宽</div>
     </div>
   </div>
+  <style>
+    .layout {
+      margin: 20px auto;
+      box-sizing: border-box;
+    }
+
+    .layout-1 .middle {
+      box-sizing: border-box;
+      float: left;
+      width: 100%;
+      padding-left: 100px;
+      padding-right: 200px;
+      background: #f10;
+    }
+
+    .layout-1 .left {
+      float: left;
+      width: 100px;
+      margin-left: -100%;
+      background-color: #999;
+    }
+
+    .layout-1 .right {
+      float: left;
+      width: 200px;
+      margin-left: -200px;
+      background-color: #999;
+    }
+  </style>
+  <div class="layout layout-1">
+    <div class="middle">middle</div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+  </div>
+  <hr>
+  <style>
+    .layout-2 .middle {
+      box-sizing: border-box;
+      float: left;
+      width: 100%;
+      background: #f10;
+    }
+
+    .layout-2 .middle-content {
+      margin-left: 100px;
+      margin-right: 200px;
+    }
+
+    .layout-2 .left {
+      float: left;
+      width: 100px;
+      margin-left: -100%;
+      background-color: #999;
+    }
+
+    .layout-2 .right {
+      float: left;
+      width: 200px;
+      margin-left: -200px;
+      background-color: #999;
+    }
+  </style>
+  <div class="layout layout-2">
+    <div class="middle">
+      <div class="middle-content">middle</div>
+    </div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+  </div>
+
 </body>
 
 </html>

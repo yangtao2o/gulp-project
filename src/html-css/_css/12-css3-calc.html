@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    header {
+      height: 60px;
+      width: 100%;
+      background: #ffd34e;
+    }
+
+    footer {
+      height: 100px;
+      width: 100%;
+      background: rgb(210, 209, 208);
+    }
+
+    .content {
+      overflow: hidden;
+    }
+
+    .main {
+      float: left;
+      width: calc(100% - 400px);
+    }
+
+    .left {
+      float: left;
+      width: 200px;
+      height: 500px;
+      background: rgb(131, 124, 104);
+    }
+
+    .right {
+      float: left;
+      width: 200px;
+      height: 500px;
+      background: rgb(131, 124, 104);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="content">
+    <div class="left">左侧栏</div>
+    <div class="main">主要内容</div>
+    <div class="right">右侧栏</div>
+  </div>
+  <footer class="footer">底部</footer>
+
+  <div class="cell border-1px"> cell </div>
+  <div class="cell border-1px-top"> cell </div>
+
+  <style>
+    .cell {
+      width: 100px;
+      height: 100px;
+      position: relative;
+    }
+
+    .border-1px::after {
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      border: 1px solid #000;
+      border-radius: 4px;
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5);
+      -webkit-transform-origin: top left;
+    }
+
+    .border-1px-top::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid red;
+      transform: scaleY(.5);
+      transform-origin: left top;
+    }
+  </style>
+
+
+</body>
+
+</html>
