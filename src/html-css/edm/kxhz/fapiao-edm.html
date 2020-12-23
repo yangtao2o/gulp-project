@@ -1,0 +1,152 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="margin: 0; padding: 0;">
+<table border="0" width="100%" height="100%" align="center" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table border="0" width="728" align="center" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <table border="0" width="100%" align="center" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="64"></td>
+                                <td width="600">
+                                    <table border="0" width="100%" align="center" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td style="padding-top: 50px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">
+                                                <p style="margin: 0;padding: 0;font-size: 24px;color: #333 !important;font-family: 'PingFangSC-Medium, NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica,sans-serif;font-weight: 600;">
+                                                    电子发票明细
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 20px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style="margin: 0;padding: 0;font-size: 18px;color: #333 !important;font-weight: 600;font-family: 'PingFangSC-Semibold, NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica,sans-serif;">
+                                                    尊敬的用户，您好！
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 10px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style="margin: 0;padding: 0;font-size: 16px;line-height: 1.4;text-indent: 24px;color: #282829 !important;font-family: 'PingFangSC-Regular, NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica,sans-serif;">
+                                                    感谢您使用开心盒子软件并选择开票服务，发票内容请查看附件。
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 18px;border-bottom: 1px solid #173045; opacity: 0.2;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 20px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style=" margin: 0; padding: 0; font-size: 18px; color: #333 !important; font-weight: 600; font-family: 'PingFangSC-Semibold, NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                    订单明细
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 10px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table border="0" width="100%" align="left" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+                                                    <tr bgcolor="#407CF6" valign="middle" align="left">
+                                                        <td style="border: 1px solid #407CF6;padding-top: 8px;" width="50%"></td>
+                                                        <td style="border: 1px solid #407CF6;padding-top: 8px" width="50%"></td>
+                                                    </tr>
+                                                    <tr valign="middle" align="left">
+                                                        <td style="border: 1px solid #d4d9dd; padding: 10px;">
+                                                            <p style=" margin: 0; padding: 0; font-size: 16px; line-height: 1.4; color: #282829 !important; font-family: 'NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                                开票时间：<span>{$data.create_time}</span>
+                                                            </p>
+                                                        </td>
+                                                        <td style="border: 1px solid #d4d9dd; padding: 10px;">
+                                                            <p style=" margin: 0; padding: 0; font-size: 16px; line-height: 1.4; color: #282829 !important; font-family: 'NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                                开票金额：<span>{$data.amount}元</span>
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr valign="middle" align="left">
+                                                        <td style="border: 1px solid #d4d9dd; padding: 10px;">
+                                                            <p style=" margin: 0; padding: 0; font-size: 16px; line-height: 1.4; color: #282829 !important; font-family: 'NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                                订单号：<span>{$data.order_no}</span>
+                                                            </p>
+                                                        </td>
+                                                        <td style="border: 1px solid #d4d9dd; padding: 10px;">
+                                                            <p style=" margin: 0; padding: 0; font-size: 16px; line-height: 1.4; color: #282829 !important; font-family: 'NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                                商品名称：<span>{$data.product_name}</span>
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 28px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style=" margin: 0; padding: 0; font-size: 18px; color: #333 !important; font-weight: 600; font-family: 'PingFangSC-Semibold, NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                    温馨提示
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 10px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style=" margin: 0; padding: 0; font-size: 16px; line-height: 1.4; color: #282829 !important; font-family: 'PingFangSC-Regular, NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                    根据相关政策规定，发票内容仅支持开票“信息技术服务*软件服务费”。
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 20px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style=" margin: 0; padding: 0; font-size: 16px; line-height: 1.4; color: #282829 !important; font-family: 'PingFangSC-Regular, NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                    工作时间：9:00-11:30, 13:00-18:00, 19:00-22:00
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 5px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style=" margin: 0; padding: 0; font-size: 16px; line-height: 1.4; color: #282829 !important; font-family: 'PingFangSC-Regular, NotoSans CJK', Arial, 'Microsoft YaHei', Helvetica, sans-serif;">
+                                                    如有问题请联系客服：400-058-5331
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 60px;"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="64"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
