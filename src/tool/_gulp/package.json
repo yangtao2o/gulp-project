@@ -16,7 +16,7 @@
     "lodash": "^4.17.15",
     "popper": "^1.0.1",
     "riot": "^4.6.5",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "zepto": "^1.2.0"
   },
   "devDependencies": {
