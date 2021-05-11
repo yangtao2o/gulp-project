@@ -13,7 +13,7 @@
     "benchmark": "^2.1.4",
     "bulma": "^0.8.0",
     "jquery": "^3.4.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "popper": "^1.0.1",
     "riot": "^4.6.5",
     "underscore": "^1.9.1",
